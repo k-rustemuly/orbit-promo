@@ -62,6 +62,11 @@ return [
             'name' => 'name',
             'avatar' => 'avatar',
         ],
+        'user' => [
+            'username' => env('MOONSHINE_ADMIN_EMAIL', 'user@mail.kz'),
+            'password' => env('MOONSHINE_ADMIN_PASSWORD', '123456'),
+            'name' => env('MOONSHINE_ADMIN_NAME', 'Admin'),
+        ],
         'guard' => 'moonshine',
         'guards' => [
             'moonshine' => [
