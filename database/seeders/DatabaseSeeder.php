@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MoonshineRolesSeeder::class,
             MoonshineAdminsSeeder::class,
+            PrizesSeeder::class,
         ]);
     }
 }
