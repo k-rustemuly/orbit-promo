@@ -6,6 +6,7 @@ return [
         'weekly_prizes' => 'Еженедельные призы',
         'instant_prizes' => 'Моментальные призы',
         'vouchers' => 'Ваучеры',
+        'prize_drawing_calendars' => 'Календарь розыгрыша',
     ],
     'fields' => [
         'name_ru' => 'Наименование на русском',
@@ -18,9 +19,15 @@ return [
         'codes' => 'Коды',
         'winning_date' => 'Дата и время выигрыша',
         'prize' => 'Приз',
+        'prizes' => 'Призы',
         'user' => 'Пользователь',
         'spent_balls' => 'Потраченные баллы',
-        'is_approved' => 'Подтверждение выигрыша'
+        'is_approved' => 'Подтверждение выигрыша',
+        'drawing_at' => 'Дата и время проведения',
+        'started_at' => 'Начало',
+        'is_finished' => 'Проведён?',
+        'start_date' => 'Дата и время начало',
+        'repeat_weeks' => 'Сколько недель?'
     ],
     'hints' => [
         'bal' => 'Стоимость в баллах',
@@ -29,9 +36,10 @@ return [
     'buttons' => [
         'showbox_add' => 'Добавить Шоубокс',
         'balance_add' => 'Добавить Баланс',
+        'add' => 'Добавить',
     ],
     'messages' => [
         'added' => 'Добавлено',
         'added_with_count' => 'Добавлено :count записей'
-    ]
+    ],
 ];
