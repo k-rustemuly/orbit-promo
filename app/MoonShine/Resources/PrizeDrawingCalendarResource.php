@@ -120,7 +120,7 @@ class PrizeDrawingCalendarResource extends ModelResource
                                 ->fields([
                                     Position::make(),
 
-                                    Select::make(__('ui.fields.prize'), 'prize')
+                                    Select::make(__('ui.fields.prize'), 'prize_id')
                                         ->options(Prize::all()->pluck('name', 'id')->toArray()),
 
                                     Number::make(__('ui.fields.count'), 'number')
