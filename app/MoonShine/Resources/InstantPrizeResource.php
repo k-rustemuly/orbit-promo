@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\InstantPrize;
 use App\MoonShine\Controllers\InstantPrizeController;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Facades\Route;
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Resources\ModelResource;
@@ -20,6 +21,7 @@ use MoonShine\Fields\Json;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Position;
 use MoonShine\Fields\Text;
+use MoonShine\QueryTags\QueryTag;
 
 class InstantPrizeResource extends ModelResource
 {
@@ -155,6 +157,20 @@ class InstantPrizeResource extends ModelResource
         Route::post('/showbox/store', [InstantPrizeController::class, 'showboxStore'])->name('showbox.store');
         Route::post('/balance/store', [InstantPrizeController::class, 'balanceStore'])->name('balance.store');
 
+    }
+
+    public function queryTags(): array
+    {
+        return [
+            QueryTag::make(
+                __('ui.buttons.winned'),
+                fn(Builder $query) => $query->whereNotNull('winning_date')
+            ),
+            QueryTag::make(
+                __('ui.buttons.free'),
+                fn(Builder $query) => $query->whereNull('winning_date')
+            )
+        ];
     }
 
 }
