@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             MoonshineRolesSeeder::class,
             MoonshineAdminsSeeder::class,
             PrizesSeeder::class,
+            ReceiptStatusesSeeder::class,
         ]);
     }
 }
