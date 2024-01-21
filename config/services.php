@@ -31,4 +31,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'isms' => [
+        'login'  => env('ISMS_LOGIN'),
+        'password' => env('ISMS_PASSWORD'),
+        'from' => env('ISMS_FROM', '0'),
+        'wsdl' => env('ISMS_WSDL', 'https://isms.center/soap'),
+    ],
+
+    'getsms' => [
+        'login'  => env('GETSMS_LOGIN'),
+        'password' => env('GETSMS_PASSWORD'),
+        'host' => env('GETSMS_HOST', 'http://185.8.212.184/'),
+    ]
+
 ];

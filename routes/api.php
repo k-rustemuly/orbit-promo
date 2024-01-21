@@ -20,9 +20,13 @@ Route::prefix('{locale}')
     ->group(function () {
 
         Route::post('signUp', [AuthController::class, 'signUp'])->name('signUp');
+        Route::post('signIn', [AuthController::class, 'signIn'])->name('signIn');
+        Route::post('reSendSms', [AuthController::class, 'reSendSms'])->name('reSendSms');
+        Route::post('forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 
+
+        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+            return $request->user();
+        });
     });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 
-class SignUpRequest extends BaseFormRequest
+class ReSendSmsRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,33 +22,11 @@ class SignUpRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'string',
-                'min:3'
-            ],
-            'email' => [
-                'required',
-                'email:rfc,dns',
-                'unique:users'
-            ],
             'phone_number' => [
                 'required',
                 'regex:/^7[0-9]{10}$|^998[0-9]{9}$/',
-                'unique:users'
+                'exists:users'
             ],
-            'birthdate' => [
-                'required',
-                'date',
-                'before_or_equal:-16 years'
-            ]
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'before_or_equal' => __('validation.min_age')
         ];
     }
 }

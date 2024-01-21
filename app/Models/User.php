@@ -3,10 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\VerifySms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -21,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'birthdate',
+        'remember_token'
     ];
 
     /**
@@ -40,6 +46,41 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'phone_number_verified_at' => 'datetime',
+        'birthdate' => 'date',
         'password' => 'hashed',
     ];
+
+    /**
+     * Determine if the user has verified their phone number.
+     *
+     * @return bool
+     */
+    public function hasVerifiedPhoneNumber()
+    {
+        return ! is_null($this->phone_number_verified_at);
+    }
+
+    public function sendSms()
+    {
+        $this->notify(new VerifySms);
+    }
+
+    public function getCode()
+    {
+        return $this->remember_token;
+    }
+
+    public function routeNotificationForSms()
+    {
+        return $this->phone_number;
+    }
+
+    public function getHiddenEmailAttribute()
+    {
+        $email = $this->attributes['email'];
+        [$username, $domain] = explode('@', $email);
+        $hiddenUsername = Str::mask($username, '*', 3);
+        return $hiddenUsername . '@' . $domain;
+    }
 }
