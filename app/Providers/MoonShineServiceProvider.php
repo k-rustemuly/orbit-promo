@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\MoonShine\Resources\InstantPrizeResource;
 use App\MoonShine\Resources\PrizeDrawingCalendarResource;
 use App\MoonShine\Resources\PrizeResource;
+use App\MoonShine\Resources\ReceiptStatusResource;
 use App\MoonShine\Resources\VoucherResource;
 use Illuminate\Http\Request;
 use MoonShine\Menu\MenuGroup;
@@ -44,6 +45,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket'),
 
             MenuItem::make(__('ui.menu.prize_drawing_calendars'), new PrizeDrawingCalendarResource(), 'heroicons.calendar-days'),
+
+            MenuItem::make(__('ui.menu.receipt_statuses'), new ReceiptStatusResource(), 'heroicons.list-bullet'),
 
         ];
     }

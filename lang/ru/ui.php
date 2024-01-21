@@ -8,6 +8,7 @@ return [
         'instant_prizes' => 'Моментальные призы',
         'vouchers' => 'Ваучеры',
         'prize_drawing_calendars' => 'Календарь розыгрыша',
+        'receipt_statuses' => 'Статусы чеков'
     ],
     'fields' => [
         'name_ru' => 'Наименование на русском',
@@ -28,7 +29,8 @@ return [
         'started_at' => 'Начало',
         'is_finished' => 'Проведён?',
         'start_date' => 'Дата и время начало',
-        'repeat_weeks' => 'Сколько недель?'
+        'repeat_weeks' => 'Сколько недель?',
+        'color' => 'Цвет'
     ],
     'hints' => [
         'bal' => 'Стоимость в баллах',
