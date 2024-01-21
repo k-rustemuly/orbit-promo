@@ -16,25 +16,25 @@ class ReceiptStatusesSeeder extends Seeder
             'name_kk' => '',
             'name_ru' => 'Qr код не разпознано!',
             'name_uz' => '',
-            'color'
+            'color'   => '#000000'
         ]);
         ReceiptStatus::create([
             'name_kk' => '',
             'name_ru' => 'Позиция "Орбит" не найдена!',
             'name_uz' => '',
-            'color'
+            'color'   => '#000000'
         ]);
         ReceiptStatus::create([
             'name_kk' => '',
             'name_ru' => 'Отклонено',
             'name_uz' => '',
-            'color'
+            'color'   => '#000000'
         ]);
         ReceiptStatus::create([
             'name_kk' => '',
             'name_ru' => 'Принято',
             'name_uz' => '',
-            'color'
+            'color'   => '#000000'
         ]);
     }
 }
