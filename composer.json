@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.8",
         "moonshine/moonshine": "^2.6",
         "spatie/laravel-medialibrary": "^10.15",
-        "symfony/dom-crawler": "*"
+        "symfony/dom-crawler": "^6.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
