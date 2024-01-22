@@ -25,7 +25,6 @@ class Kazakhtelecom
     }
 
     /**
-     * Create a new message instance.
      *
      * @param  string $url
      *
