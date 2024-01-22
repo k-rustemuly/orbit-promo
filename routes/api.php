@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReceiptController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,15 @@ Route::prefix('{locale}')
         Route::post('reSendSms', [AuthController::class, 'reSendSms'])->name('reSendSms');
         Route::post('forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 
+        Route::middleware('auth:sanctum')
+            ->group(function() {
 
+                Route::prefix('receipts')
+                    ->name('receipts.')
+                    ->group(function () {
+                        Route::post('recognize', [ReceiptController::class, 'recognize'])->name('recognize');
+                    });
+            });
         Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             return $request->user();
         });
