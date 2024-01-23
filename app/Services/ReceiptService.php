@@ -23,7 +23,7 @@ class ReceiptService
     {
         if($result = $this->recognize($file)) {
             if($this->isOfd($result)) {
-                if($this->isUnique() && $this->isHavePosition($result, 'orbit')) {
+                if($this->isUnique() && $this->isHavePosition($result, 'banan')) {
                     $this->receipt_status_id = ReceiptStatus::ACCEPTED;
                     return true;
                 }
