@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Invitation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Vinkla\Hashids\Facades\Hashids;
 
 class BaseFormRequest extends FormRequest
 {
@@ -88,6 +90,15 @@ class BaseFormRequest extends FormRequest
             $user->phone_number_verified_at = now();
             $user->remember_token = null;
             $user->save();
+            if(request('referral')) {
+                $decoded = Hashids::decode(request('referral'));
+                if(!empty($decoded)) {
+                    Invitation::create([
+                        'owner_id' => $decoded[0],
+                        'friend_id' => $user->id
+                    ]);
+                }
+            }
         }
 
         return $user->createToken('api-token')->plainTextToken;

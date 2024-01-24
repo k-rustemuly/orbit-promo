@@ -30,6 +30,9 @@ class SignInRequest extends BaseFormRequest
             'password' => [
                 'required',
                 'string'
+            ],
+            'referral' => [
+                'nullable'
             ]
         ];
     }

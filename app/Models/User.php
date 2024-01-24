@@ -26,6 +26,10 @@ class User extends Authenticatable
         'password',
         'phone_number',
         'birthdate',
+        'referral',
+        'life',
+        'level',
+        'coin',
         'remember_token'
     ];
 
