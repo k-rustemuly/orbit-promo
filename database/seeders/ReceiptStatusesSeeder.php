@@ -25,5 +25,11 @@ class ReceiptStatusesSeeder extends Seeder
             'name_uz' => '',
             'color'   => '#000000'
         ]);
+        ReceiptStatus::create([
+            'name_kk' => '',
+            'name_ru' => 'На проверке',
+            'name_uz' => '',
+            'color'   => '#000000'
+        ]);
     }
 }

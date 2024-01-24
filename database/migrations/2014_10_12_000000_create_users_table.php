@@ -20,6 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->string('password');
+            $table->string('referral')->nullable();
+            $table->unsignedInteger('life')->default(0);
+            $table->unsignedInteger('level')->default(0);
+            $table->unsignedInteger('coin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

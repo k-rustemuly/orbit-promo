@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +34,9 @@ Route::prefix('{locale}')
                     ->group(function () {
                         Route::post('recognize', [ReceiptController::class, 'recognize'])->name('recognize');
                     });
+
+                Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+
             });
-        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-            return $request->user();
-        });
     });
 
