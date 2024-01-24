@@ -14,7 +14,8 @@
         "moonshine/moonshine": "^2.6",
         "spatie/laravel-medialibrary": "^10.15",
         "spatie/laravel-settings": "^3.2",
-        "symfony/dom-crawler": "^6.4"
+        "symfony/dom-crawler": "^6.4",
+        "vinkla/hashids": "^11.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
