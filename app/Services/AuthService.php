@@ -90,4 +90,10 @@ class AuthService
         return null;
     }
 
+    public function isVerifiedPhoneNumber(string $phone_number): bool
+    {
+        $user = User::where('phone_number', $phone_number)->first();
+        return (bool) $user && $user->hasVerifiedPhoneNumber();
+    }
+
 }

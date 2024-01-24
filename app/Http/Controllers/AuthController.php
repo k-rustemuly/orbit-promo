@@ -47,13 +47,17 @@ class AuthController extends BaseController
     public function forgotPassword(ForgotPasswordRequest $request, AuthService $service)
     {
         $request->ensureIsNotRateLimited(1);
-
-        if($email = $service->forgotPassword($request->validated()['phone_number'])) {
-            RateLimiter::clear($request->throttleKey());
-            return $this->success(['email' => $email]);
+        $phone_number = $request->validated()['phone_number'];
+        if($service->isVerifiedPhoneNumber($phone_number)) {
+            if($email = $service->forgotPassword($phone_number)) {
+                RateLimiter::clear($request->throttleKey());
+                return $this->success(['email' => $email]);
+            }
+        }else {
+            return $this->error(__('ui.messages.finish_registration'));
         }
 
         RateLimiter::hit($request->throttleKey());
-        return $this->error(__('ui.messages.sms_limit'));
+        return $this->error(__('ui.messages.email_limit'));
     }
 }
