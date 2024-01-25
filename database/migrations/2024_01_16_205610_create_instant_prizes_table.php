@@ -27,6 +27,10 @@ return new class extends Migration
             $table->string('code')
                 ->nullable();
 
+            $table->dateTime('draw_date')
+                ->nullable()
+                ->comment('После этой даты будет разыграно');
+
             $table->foreignIdFor(User::class, 'winner_id')
                 ->nullable();
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 
 class InstantPrize extends LocalizableModel
 {
@@ -18,6 +19,7 @@ class InstantPrize extends LocalizableModel
         'name_kk',
         'name_uz',
         'code',
+        'draw_date',
         'winner_id',
         'winning_date',
     ];
@@ -40,4 +42,9 @@ class InstantPrize extends LocalizableModel
     protected $casts = [
         'winning_date' => 'datetime',
     ];
+
+    public function scopeNotWon(Builder $query): void
+    {
+        $query->whereNull('winner_id');
+    }
 }

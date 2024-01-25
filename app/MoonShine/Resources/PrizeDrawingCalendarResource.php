@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use App\Http\Controllers\SettingsController;
 use App\Models\Prize;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PrizeDrawingCalendar;
@@ -145,6 +146,8 @@ class PrizeDrawingCalendarResource extends ModelResource
         parent::resolveRoutes();
 
         Route::post('/mass/store', [PrizeDrawingCalenderController::class, 'massStore'])->name('mass.store');
+
+        Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
 
     }
 }

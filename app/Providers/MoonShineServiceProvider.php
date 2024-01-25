@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Pages\SettingsPage;
 use App\MoonShine\Resources\InstantPrizeResource;
 use App\MoonShine\Resources\PrizeDrawingCalendarResource;
 use App\MoonShine\Resources\PrizeResource;
+use App\MoonShine\Resources\ReceiptResource;
 use App\MoonShine\Resources\ReceiptStatusResource;
 use App\MoonShine\Resources\VoucherResource;
 use Illuminate\Http\Request;
+use MoonShine\Menu\MenuDivider;
 use MoonShine\Menu\MenuGroup;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Menu\MenuItem;
@@ -42,11 +45,17 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             ],
             'heroicons.gift'),
 
-            MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket'),
+            MenuItem::make(__('ui.menu.settings'), new SettingsPage(), 'heroicons.cog-6-tooth'),
 
             MenuItem::make(__('ui.menu.prize_drawing_calendars'), new PrizeDrawingCalendarResource(), 'heroicons.calendar-days'),
 
             MenuItem::make(__('ui.menu.receipt_statuses'), new ReceiptStatusResource(), 'heroicons.list-bullet'),
+
+            MenuDivider::make(),
+
+            MenuItem::make(__('ui.menu.receipts'), new ReceiptResource(), 'heroicons.shopping-cart'),
+
+            MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket'),
 
         ];
     }
