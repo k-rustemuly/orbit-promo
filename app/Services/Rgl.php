@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -62,11 +63,26 @@ class Rgl
         if ($parsedUrl && isset($parsedUrl['host'])) {
             $zone = Str::afterLast($parsedUrl['host'], '.');
             if($zone == 'kz') {
-                $request = new Request('POST', 'https://api.rgl.su/v4/'.$this->promoId.'/code/register', $headers, json_encode($body));
-                $res = $this->client->sendAsync($request)->wait();
-                $body = $res->getBody()->getContents();
-                $jsonResponse = json_decode($body, true);
-                logger()->debug($jsonResponse);
+                try {
+                    $request = new Request('POST', 'https://api.rgl.su/v4/'.$this->promoId.'/code/register', $headers, json_encode($body));
+                    $res = $this->client->sendAsync($request)->wait();
+                    $body = $res->getBody()->getContents();
+                    $jsonResponse = json_decode($body, true);
+                    logger()->debug($jsonResponse);
+                } catch (RequestException $e) {
+                    if ($e->hasResponse()) {
+                        $response = $e->getResponse();
+                        $statusCode = $response->getStatusCode();
+                        $body = $response->getBody()->getContents();
+                        logger()->debug($response. ' '.$statusCode. ' ' .$body);
+                    } else {
+                        $message = $e->getMessage();
+                        logger()->debug($message);
+                    }
+                } catch (\Exception $e) {
+                    $message = $e->getMessage();
+                    logger()->debug($message);
+                }
             }
         }
         return true;
