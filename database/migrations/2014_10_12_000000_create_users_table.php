@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('life')->default(0);
             $table->unsignedInteger('level')->default(0);
             $table->unsignedInteger('coin')->default(0);
+            $table->boolean('is_won_instant_prize')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

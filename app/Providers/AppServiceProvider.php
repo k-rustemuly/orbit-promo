@@ -8,6 +8,7 @@ use App\Models\Voucher;
 use App\Observers\InvitationObserver;
 use App\Observers\UserObserver;
 use App\Observers\VoucherObserver;
+use App\Services\Rgl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(Rgl::class, static function ($app) {
+            return new Rgl($app['config']['services.rgl']);
+        });
     }
 
     /**

@@ -47,4 +47,10 @@ class InstantPrize extends LocalizableModel
     {
         $query->whereNull('winner_id');
     }
+
+    public function scopeGift(Builder $query): void
+    {
+        $query->where('draw_date', '<=', now());
+    }
+
 }

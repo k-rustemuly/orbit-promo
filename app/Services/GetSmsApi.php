@@ -6,10 +6,12 @@ use App\Exceptions\CouldNotSendNotification;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
+use Zadarma_API\Api;
 
 class GetSmsApi
 {
-    /** @var HttpClient */
+    /** @var \Zadarma_API\Api */
     protected $client;
 
     /** @var string */
@@ -25,39 +27,19 @@ class GetSmsApi
     {
         $this->login = Arr::get($config, 'login');
         $this->password = Arr::get($config, 'password');
-        $this->endpoint = Arr::get($config, 'host').'smsgateway/';
+        $this->endpoint = Arr::get($config, 'host').'v1/sms/send';
 
-
-        $this->client = new HttpClient([
-            'timeout' => 5,
-            'connect_timeout' => 5,
-            'verify' => false
-        ]);
+        $this->client = new Api($this->login, $this->password, app()->isLocal());
     }
 
-    public function send($params)
+    public function send(string $phone_number, string $message): bool
     {
-        $base = [
-            'login' => $this->login,
-            'password' => $this->password,
-            'data' => json_encode([$params])
-        ];
-
-        try {
-            $request = new Request('POST', $this->endpoint, body: $base);
-            $response = $this->client->sendAsync($request)->wait();
-            $response = \json_decode((string) $response->getBody(), true);
-
-            if (isset($response['error'])) {
-                throw new \DomainException($response['error_text'], $response['error']);
-            }
-            // Log::debug(json_encode($response));
-
-            return $response;
-        } catch (\DomainException $exception) {
-            throw CouldNotSendNotification::smscRespondedWithAnError($exception);
-        } catch (\Exception $exception) {
-            throw CouldNotSendNotification::couldNotCommunicateWithSmsc($exception);
+        try{
+            $sms = $this->client->sendSms($phone_number, $message);
+            return true;
+        } catch (\Zadarma_API\ApiException) {
+            Log::error("Zadarma Api error: ($phone_number, $message) - ". json_encode($sms->toArray()));
         }
+        return false;
     }
 }
