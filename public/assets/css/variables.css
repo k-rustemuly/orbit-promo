@@ -1,0 +1,12 @@
+:root {
+  --font-family-primary: "Montserrat";
+  --font-color-primary: var(--color-white);
+  --font-color-secondary: var(--color-blue-dark);
+  --font-color-caption: var(--color-gray);
+  --color-white: #FFFFFF;
+  --color-blue-dark: #2A2B81;
+  --color-blue-light: #18A5DF;
+  --color-gray: #888888;
+  --color-pink: #EA2C86;
+  --color-yellow: #EFD960;
+}
