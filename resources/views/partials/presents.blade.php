@@ -1,6 +1,32 @@
 <section class="wrapper-full section-present">
 	<div class="wrapper-fix wrapper-small wrapper-present">
-		<div class="container-present">
+		<div class="container-present" x-data="{
+			data: [],
+			async init() {
+                try {
+                    this.loading = true;
+                    
+                    const response = await fetch('/api/{{ app()->getLocale() }}/prizes', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                        }
+                    });
+
+                    const result = await response.json();
+                    
+                    if(result.success) {
+						this.data = result.data;
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                } finally {
+                    this.loading = false;
+                }
+            }
+		}">
 			<h3 class="title">ВИТРИНА призов</h3>
 
 			<div class="present-block">
@@ -8,9 +34,9 @@
 					<div class="caption">
 						<div>
 							<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-							<span>350</span>
+							<span x-text="data?.[0]?.coin"></span>
 						</div>
-						<p>Колонка</p>
+						<p x-text="data?.[0]?.name"></p>
 					</div>
 					<a href="#">УЧАСТВОВАТЬ</a>
 					<div class="image image-01">
@@ -25,9 +51,9 @@
 					<div class="caption">
 						<div>
 							<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-							<span>500</span>
+							<span x-text="data?.[1]?.coin"></span>
 						</div>
-						<p>Наушники</p>
+						<p x-text="data?.[1]?.name"></p>
 					</div>
 					<a href="#">УЧАСТВОВАТЬ</a>
 					<div class="image image-02">
@@ -42,9 +68,9 @@
 					<div class="caption">
 						<div>
 							<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-							<span>1000</span>
+							<span x-text="data?.[2]?.coin"></span>
 						</div>
-						<p>Планшет</p>
+						<p x-text="data?.[2]?.name"></p>
 					</div>
 					<a href="#">УЧАСТВОВАТЬ</a>
 					<div class="image image-03">

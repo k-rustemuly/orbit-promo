@@ -8,7 +8,7 @@
     <div class="container-header">
         <div class="container-header_column-01">
             <h2 class="title">
-                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ {{ trans('front.name') }} {{ region() }}
+                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ
             </h2>
             <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image mobile">
             <h1 class="title">
@@ -126,7 +126,51 @@
 <section class="wrapper-full section-table">
     <div class="wrapper-fix wrapper-small wrapper-table">
         <div class="container-table">
-            <div class="table-block fix-width">
+            <div class="table-block fix-width" x-data="{
+                loading: false,
+                activeTab: '',
+                data: {
+                    'instant-prizes': [],
+                    'weekly': []
+                },
+                pagination: {
+                    links: {},
+                    meta: {}
+                },
+                init() {
+                    this.changeTab('instant-prizes');
+                },
+                changeTab(name) {
+                    this.activeTab = name;
+                    this.getData();
+                },
+                async getData(url = null) {
+                    <!-- if (this.data[this.activeTab].length != 0) { return; } -->
+                    try {
+                        this.loading = true;
+                        
+                        const response = await fetch(url || `/api/{{ app()->getLocale() }}/${this.activeTab}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                            }
+                        });
+
+                        const result = await response.json();
+                        
+                        if(result.success) {
+                            this.data[this.activeTab] = result.data;
+                            this.pagination.links = result.links;
+                            this.pagination.meta = result.meta;
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    } finally {
+                        this.loading = false;
+                    }
+                }
+            }">
                 <div class="table-head">
                     <h3 class="title">ПОБЕДИТЕЛИ</h3>
                     <form class="table-form">
@@ -136,12 +180,72 @@
                 <div class="table-body">
 
                     <div class="table-tabs-buttons">
-                        <a href="#" name="tab1" class="tab-button">Моментальные призы</a>
-                        <a href="#" name="tab2" class="tab-button">Еженедельные призы</a>
+                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'instant-prizes'}" @click.prevent="changeTab('instant-prizes')">Моментальные призы</a>
+                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'weekly'}" @click.prevent="changeTab('weekly')">Еженедельные призы</a>
                     </div>
                     <div class="table-tabs-content">
-                        <div class="table-block__content" id="tab1">
+                        <template x-if="loading == true"><span class="spinner"></span></template>
+                        <template x-if="loading == false">
+                            <div class="table-block__content" id="tab1" x-cloak x-show="activeTab == 'instant-prizes'">
+                            
+                                <div class="table-block__title" x-cloak x-show="data[activeTab].length == 0">
+                                    <div class="row">
+                                        <div>
+                                            <p>Нет данных</p>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="table-block__title" x-cloak x-show="data[activeTab].length != 0">
+                                    <div class="row">
+                                        <div>
+                                            <p>Дата</p>
+                                        </div>
+                                        <div>
+                                            <p>Номер телефона</p>
+                                        </div>
+                                        <div>
+                                            <p>Приз</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-block__rows" x-cloak x-show="data[activeTab].length != 0">
+                                    <template x-for="item in data[activeTab]">
+                                        <div class="row">
+                                            <div>
+                                                <p x-text="item.date"></p>
+                                            </div>
+                                            <div>
+                                                <p x-text="item.phone_number"></p>
+                                            </div>
+                                            <div>
+                                                <p x-text="item.name"></p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="table-footer center-align" x-cloak x-show="data[activeTab].length != 0">
+                                    <div>
+                                        <button type="button" class="button button-left" x-cloak x-show="pagination.links.prev" @click="getData(pagination.links.prev)">
+                                            <img src="{{ asset('assets/media/icons/arrow_left.svg') }}">
+                                        </button>
+                                        <template x-for="item in pagination.meta.links.slice(1, -1)">
+                                            <span x-text="item.label" :class="{'active': item.active}" @click="getData(item.url)"></span>
+                                        </template>
+                                        <button type="button" class="button button-right" x-cloak x-show="pagination.links.next" @click="getData(pagination.links.next)">
+                                            <img src="{{ asset('assets/media/icons/arrow_right.svg') }}">
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="button button-right" x-cloak x-show="pagination.links.last" @click="getData(pagination.links.last)">
+                                            <img src="{{ asset('assets/media/icons/arrow_duble.svg') }}">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="table-block__content" id="tab2" x-cloak x-show="activeTab == 'weekly'">
                             <div class="table-block__title">
                                 <div class="row">
                                     <div>
@@ -167,121 +271,28 @@
                                         <p>Шоу-бокс Orbit®</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div>
-                                        <p>22.12.2023</p>
-                                    </div>
-                                    <div>
-                                        <p>+7 777 ХХХ ХХ 77</p>
-                                    </div>
-                                    <div>
-                                        <p>Шоу-бокс Orbit®</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div>
-                                        <p>22.12.2023</p>
-                                    </div>
-                                    <div>
-                                        <p>+7 777 ХХХ ХХ 77</p>
-                                    </div>
-                                    <div>
-                                        <p>Шоу-бокс Orbit®</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div class="row">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
                             </div>
-                        </div>
-                        <div class="table-block__content" id="tab2">
-
-                            <div class="table-block__title">
-                                <div class="row">
-                                    <div>
-                                        <p>Дата</p>
-                                    </div>
-                                    <div>
-                                        <p>Номер телефона</p>
-                                    </div>
-                                    <div>
-                                        <p>Приз</p>
-                                    </div>
+                            <div class="table-footer center-align">
+                                <div>
+                                    <button type="button" class="button button-left">
+                                        <img src="{{ asset('assets/media/icons/arrow_left.svg') }}">
+                                    </button>
+                                    <span>1</span>
+                                    <span class="active">2</span>
+                                    <span>3</span>
+                                    <button type="button" class="button button-right">
+                                        <img src="{{ asset('assets/media/icons/arrow_right.svg') }}">
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="table-block__rows">
-                                <div class="row">
-                                    <div>
-                                        <p>22.12.2023</p>
-                                    </div>
-                                    <div>
-                                        <p>+7 777 ХХХ ХХ 77</p>
-                                    </div>
-                                    <div>
-                                        <p>Шоу-бокс Orbit®</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div>
-                                        <p>22.12.2023</p>
-                                    </div>
-                                    <div>
-                                        <p>+7 777 ХХХ ХХ 77</p>
-                                    </div>
-                                    <div>
-                                        <p>Шоу-бокс Orbit®</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div>
-                                        <p>22.12.2023</p>
-                                    </div>
-                                    <div>
-                                        <p>+7 777 ХХХ ХХ 77</p>
-                                    </div>
-                                    <div>
-                                        <p>Шоу-бокс Orbit®</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div class="row">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
+                                <div>
+                                    <button type="button" class="button button-right">
+                                        <img src="{{ asset('assets/media/icons/arrow_duble.svg') }}">
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="table-footer center-align">
-                    <div>
-                        <button type="button" class="button button-left">
-                            <img src="{{ asset('assets/media/icons/arrow_left.svg') }}">
-                        </button>
-                        <span>1</span>
-                        <span class="active">2</span>
-                        <span>3</span>
-                        <button type="button" class="button button-right">
-                            <img src="{{ asset('assets/media/icons/arrow_right.svg') }}">
-                        </button>
-                    </div>
-                    <div>
-                        <button type="button" class="button button-right">
-                            <img src="{{ asset('assets/media/icons/arrow_duble.svg') }}">
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

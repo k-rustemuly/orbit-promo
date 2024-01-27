@@ -45,32 +45,71 @@
                 </div>
                 <div class="block-profile__column-02">
                     <div class="block-profile__card block-profile__card-01">
-                        <div class="card">
-                            <div class="head">
+                        <div class="card" x-data="{
+                            loading: false,
+                            showContent: false,
+                            data: [],
+                            toggleContent() {
+                                this.showContent = !this.showContent;
+                                if(this.showContent) {
+                                    this.getData();
+                                }
+                            },
+                            async getData() {
+                                if (this.data.length != 0) { return; }
+                                try {
+                                    this.loading = true;
+                                    
+                                    const response = await fetch('/api/{{ app()->getLocale() }}/receipts', {
+                                        method: 'GET',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${$store.user.token}`,
+                                            'Accept': 'application/json',
+                                        }
+                                    });
+
+                                    const result = await response.json();
+                                    
+                                    if(result.success) {
+                                        this.data = result.data;
+                                    }
+                                } catch (error) {
+                                    console.error('Error:', error);
+                                } finally {
+                                    this.loading = false;
+                                }
+                            }
+                        }">
+                            <div class="head" @click="toggleContent()">
                                 <p>Мои чеки</p>
                                 <span>
-                                    <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}">
+                                    <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" x-cloak x-show="showContent == false">
+                                    <img src="{{ asset('assets/media/icons/arrow_up.svg') }}" x-cloak x-show="showContent == true" style="margin-top: -4px;">
                                 </span>
                             </div>
                             <div class="body">
-                                <p>Сохрани все зарегистрированные <br> чеки до конца акции</p>
-                                <div class="block hidden">
-                                    <p>Каждый зарегистрированный чек дарит 5 дополнительных жизней</p>
-                                    <div class="table">
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Номер чека</div>
-                                        </div>
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Номер чека</div>
-                                        </div>
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Номер чека</div>
-                                        </div>
+                                <template x-if="showContent == false"><p>Сохрани все зарегистрированные <br> чеки до конца акции</p></template>
+                                <template x-if="showContent == true">
+                                    <div class="block">
+                                        <p>Каждый зарегистрированный чек дарит 5 дополнительных жизней</p>
+                                        <template x-if="loading == true"><span class="spinner"></span></template>
+                                        <template x-if="loading == false">
+                                            <div class="table">
+                                                <div class="row">
+                                                    <div>Дата</div>
+                                                    <div>Номер чека</div>
+                                                </div>
+                                                <template x-for="item in data">
+                                                    <div class="row">
+                                                        <div x-text="item.date"></div>
+                                                        <div x-text="item.number"></div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
                                     </div>
-                                </div>
+                                </template>
                             </div>
                             <div class="footer">
                                 <img src="{{ asset('assets/media/profile_01.svg') }}" alt="">
@@ -79,32 +118,71 @@
                         </div>
                     </div>
                     <div class="block-profile__card block-profile__card-02">
-                        <div class="card">
-                            <div class="head">
+                    <div class="card" x-data="{
+                            loading: false,
+                            showContent: false,
+                            data: [],
+                            toggleContent() {
+                                this.showContent = !this.showContent;
+                                if(this.showContent) {
+                                    this.getData();
+                                }
+                            },
+                            async getData() {
+                                if (this.data.length != 0) { return; }
+                                try {
+                                    this.loading = true;
+                                    
+                                    const response = await fetch('/api/{{ app()->getLocale() }}/invitations', {
+                                        method: 'GET',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${$store.user.token}`,
+                                            'Accept': 'application/json',
+                                        }
+                                    });
+
+                                    const result = await response.json();
+                                    
+                                    if(result.success) {
+                                        this.data = result.data;
+                                    }
+                                } catch (error) {
+                                    console.error('Error:', error);
+                                } finally {
+                                    this.loading = false;
+                                }
+                            }
+                        }">
+                            <div class="head" @click="toggleContent()">
                                 <p>Мои друзья</p>
                                 <span>
-                                    <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}">
+                                    <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" x-cloak x-show="showContent == false">
+                                    <img src="{{ asset('assets/media/icons/arrow_up.svg') }}" x-cloak x-show="showContent == true" style="margin-top: -4px;">
                                 </span>
                             </div>
                             <div class="body">
-                                <p>Приглашай друзей и получай <br> дополнительные жизни</p>
-                                <div class="block hidden">
-                                    <p>Каждый зарегистрированный друг дарит дополнительную жизнь</p>
-                                    <div class="table">
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Имя друга</div>
-                                        </div>
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Имя друга</div>
-                                        </div>
-                                        <div class="row">
-                                            <div>Дата</div>
-                                            <div>Имя друга</div>
-                                        </div>
+                                <template x-if="showContent == false"><p>Приглашай друзей и получай <br> дополнительные жизни</p></template>
+                                <template x-if="showContent == true">
+                                    <div class="block">
+                                        <p>Каждый зарегистрированный друг дарит дополнительную жизнь</p>
+                                        <template x-if="loading == true"><span class="spinner"></span></template>
+                                        <template x-if="loading == false">
+                                            <div class="table">
+                                                <div class="row">
+                                                    <div>Дата</div>
+                                                    <div>Имя друга</div>
+                                                </div>
+                                                <template x-for="item in data">
+                                                    <div class="row">
+                                                        <div x-text="item.date"></div>
+                                                        <div x-text="item.name"></div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template>
                                     </div>
-                                </div>
+                                </template>
                             </div>
                             <div class="footer">
                                 <img src="{{ asset('assets/media/profile_02.svg') }}" alt="">

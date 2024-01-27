@@ -23,6 +23,9 @@
             filter: grayscale(100%) blur(5px);
             pointer-events: none;
         }
+        .table-footer {
+            padding-top: 16px;
+        }
         .section-modal {
             border-radius: 15px;
             position: fixed;
@@ -32,9 +35,21 @@
             top: 50dvh;
             box-shadow: 0 0 0 3000px rgb(0 0 0 / 40%);
         }
-        /* #select-year .container-form {
-            background-color: var(--color-blue-dark);
-        } */
+        .spinner {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid #3498db;
+            width: 24px;
+            height: 24px;
+            animation: spin 0.5s ease-in infinite;
+            display: block;
+            margin: 6px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
