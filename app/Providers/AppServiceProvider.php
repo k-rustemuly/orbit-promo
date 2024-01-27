@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Rgl::class, static function ($app) {
             return new Rgl($app['config']['services.rgl']);
         });
+
     }
 
     /**

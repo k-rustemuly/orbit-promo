@@ -38,6 +38,10 @@ Route::prefix('{locale}')
 
                 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 
+                Route::get('invitations', [ProfileController::class, 'invitations'])->name('invitations');
+
+                Route::get('receipts', [ProfileController::class, 'receipts'])->name('receipts');
+
                 Route::prefix('games')
                     ->name('games.')
                     ->group(function () {

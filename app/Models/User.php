@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Notifications\VerifySms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -87,5 +88,15 @@ class User extends Authenticatable
         [$username, $domain] = explode('@', $email);
         $hiddenUsername = Str::mask($username, '*', 3);
         return $hiddenUsername . '@' . $domain;
+    }
+
+    public function invitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'owner_id', 'id');
+    }
+
+    public function receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class, 'user_id', 'id');
     }
 }

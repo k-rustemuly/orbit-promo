@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InstantPrize extends LocalizableModel
 {
@@ -40,7 +41,7 @@ class InstantPrize extends LocalizableModel
      * @var array<string, string>
      */
     protected $casts = [
-        'winning_date' => 'datetime',
+        // 'winning_date' => 'datetime',
     ];
 
     public function scopeNotWon(Builder $query): void
@@ -53,4 +54,8 @@ class InstantPrize extends LocalizableModel
         $query->where('draw_date', '<=', now());
     }
 
+    public function winner(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
