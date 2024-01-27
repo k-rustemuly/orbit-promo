@@ -500,7 +500,10 @@
 <div class="section-modal modal-form" x-data="{
     login: '77782284032',
     password: '973956',
+    email: '',
     loading: false,
+    forgotPassword: false,
+    confirmPasswordForm: false,
     async signIn() {
         try {
             this.loading = true;
@@ -515,9 +518,37 @@
             this.loading = false;
         }
     },
-    showForgotPasswordModal() {
-        this.closeModal();
-        $store.modal.forgotPassword = true;
+    async forgotPasswordRequest() {
+        try {
+            this.loading = true;
+            const sendData = {
+                'phone_number': this.login
+            }
+            const response = await fetch('/api/{{ app()->getLocale() }}/forgotPassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(sendData)
+            });
+
+            const result = await response.json();
+            
+            if(result.success) {
+                this.email = result.data.email;
+                this.confirmPasswordForm = true;
+                this.startCountdown();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    showForgotPassword() {
+        this.password = '';
+        this.forgotPassword = true;
     },
     showRegistrationModal() {
         this.closeModal();
@@ -525,13 +556,32 @@
     },
     closeModal() {
         $store.modal.signIn = false;
+        this.login = '';
+        this.password = '';
+        this.email = '';
+        this.forgotPassword = false;
+        this.confirmPasswordForm = false;
+    },
+    countdown: null,
+    interval: null,
+    startCountdown() {
+        this.countdown = 60;
+        this.interval = setInterval(() => {
+            this.countdown--;
+            if (this.countdown === 0) {
+                this.clearInterval();
+            }
+        }, 1000);
+    },
+    clearInterval() {
+        clearInterval(this.interval);
     }
 }" x-cloak x-show="$store.modal.signIn" id="login-modal">
     <div class="wrapper-modal">
-        <div class="container-form">
+        <div class="container-form" x-show="!confirmPasswordForm">
             <div class="head">
                 <img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
-                <h3>ВХОД</h3>
+                <h3 x-text="forgotPassword == true ? 'Забыли пароль?' : 'ВХОД'"></h3>
                 <img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
             </div>
             <div class="body">
@@ -540,14 +590,22 @@
                         <input x-model="login" type="text" class="input" placeholder="Номер телефона или E-mail" autocomplete="username">
                         <span>Валидация</span>
                     </div>
-                    <div class="input-row">
-                        <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
-                        <span>Валидация</span>
-                    </div>
-                    <a href="#" @click.prevent="showForgotPasswordModal()">
-                        <p class="caption">Забыли пароль?</p>
-                    </a>
-                    <button type="button" class="button" @click="signIn()" :disabled="loading">Войти</button>
+                    <template x-if="forgotPassword == false">
+                        <div class="input-row">
+                            <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
+                            <span>Валидация</span>
+                        </div>
+                        <a href="#" @click.prevent="showForgotPassword()">
+                            <p class="caption">Забыли пароль?</p>
+                        </a>
+                        <button type="button" class="button" @click="signIn()" :disabled="loading">Войти</button>
+                    </template>
+                    <template x-if="forgotPassword == true">
+                        <a href="#" @click.prevent="forgotPassword = false">
+                            <p class="caption">Вход</p>
+                        </a>
+                        <button type="button" class="button" @click="forgotPasswordRequest()" :disabled="loading">Отправить</button>
+                    </template>
                 </form>
             </div>
             <div class="footer">
@@ -555,6 +613,34 @@
                 <a href="#" @click.prevent="showRegistrationModal()">Зарегистрироваться</a>
             </div>
         </div>
+        
+		<div class="container-form" x-show="confirmPasswordForm">
+			<div class="head">
+				<p>Сообщение с кодом-паролем <br>отправлено на E-mail</p>
+				<h3 x-text="email"></h3>
+				<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
+			</div>
+			<div class="body">
+				<form class="form">
+					<div class="input-row">
+						<input x-model="password" type="text" name="code" class="input" placeholder="Код-пароль ">
+						<span>Валидация</span>
+					</div>
+					<button type="button" class="button" @click="signIn()" :disabled="loading">ПОДТВЕРДИТЬ</button>
+				</form>
+			</div>
+			<div class="footer reverse">
+                <template x-if="countdown > 0">
+                    <div>
+                        <p><b>НЕ ПРИШЕЛ КОД?</b></p>
+                        <p>Повторно код-пароль на почту можно запросить через <span x-text="countdown"></span> секунд</p>
+                    </div>
+                </template>
+                <template x-if="countdown == 0">
+				    <a href="#" @click.prevent="forgotPasswordRequest()">ОТПРАВИТЬ СНОВА</a>
+                </template>
+			</div>
+		</div>
     </div>
 </div>
 
