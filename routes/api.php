@@ -5,6 +5,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\VoucherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::prefix('{locale}')
                 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 
                 Route::get('invitations', [ProfileController::class, 'invitations'])->name('invitations');
+
+                Route::post('vouchers', [VoucherController::class, 'buy'])->name('vouchers.buy');
 
                 Route::prefix('games')
                     ->name('games.')
