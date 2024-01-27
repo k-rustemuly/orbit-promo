@@ -18,7 +18,9 @@ class InvitationObserver
     public function created(Invitation $invitation)
     {
         $owner = User::find($invitation->owner_id);
-        $owner->life += $invitation->life;
-        $owner->save();
+        if($owner->invitations()->count() <= 5 ) {
+            $owner->life += $invitation->life;
+            $owner->save();
+        }
     }
 }
