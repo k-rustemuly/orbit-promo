@@ -2,7 +2,7 @@
 	<div class="wrapper-fix wrapper-middle wrapper-footer">
 		<div class="container-footer">
 			<div class="container-footer__column-01">
-				<a href="#">
+				<a href="/">
 					<img src="{{ asset('assets/media/logotype.svg') }}" alt="Logo">
 				</a>
 			</div>
@@ -14,3 +14,7 @@
 		</div>
 	</div>
 </footer>
+
+<script type="text/javascript">
+
+</script>

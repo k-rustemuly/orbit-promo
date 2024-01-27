@@ -16,11 +16,30 @@
 	<!-- Styles -->
 	<link rel="stylesheet"  href="{{ asset('assets/css/main.css') }}">
 	<link rel="stylesheet"  href="{{ asset('assets/css/media.css') }}">
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        body.disabled *:not(.section-modal, .section-modal *) {
+            filter: grayscale(100%) blur(5px);
+            pointer-events: none;
+        }
+        .section-modal {
+            border-radius: 15px;
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            top: 50dvh;
+            box-shadow: 0 0 0 3000px rgb(0 0 0 / 40%);
+        }
+        /* #select-year .container-form {
+            background-color: var(--color-blue-dark);
+        } */
+    </style>
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body class="@yield('bodyClass', '')">
-
 @include('partials.header')
-
 
 @yield('content')
 

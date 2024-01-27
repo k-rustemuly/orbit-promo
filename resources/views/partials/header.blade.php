@@ -2,7 +2,7 @@
     <div class="wrapper-fix wrapper-small wrapper-navigation">
         <div class="container-navigation">
             <div class="container-navigation_column-01">
-                <a href="#" class="navigation-logotype">
+                <a href="/" class="navigation-logotype">
                     <img src="{{ asset('assets/media/logotype.svg') }}" alt="">
                 </a>
                 <nav class="navigation-menu">

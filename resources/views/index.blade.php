@@ -8,7 +8,7 @@
     <div class="container-header">
         <div class="container-header_column-01">
             <h2 class="title">
-                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ
+                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ {{ trans('front.name') }}
             </h2>
             <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image mobile">
             <h1 class="title">
@@ -120,124 +120,7 @@
         </div>
     </section>
 
-    <section class="wrapper-full section-present">
-        <div class="wrapper-fix wrapper-small wrapper-present">
-            <div class="container-present">
-                <h3 class="title">ВИТРИНА призов</h3>
-
-                <div class="present-block">
-
-                    <div class="present-block_item">
-                        <div class="caption">
-                            <div>
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                <span>350</span>
-                            </div>
-                            <p>Колонка</p>
-                        </div>
-                        <a href="#">УЧАСТВОВАТЬ</a>
-                        <div class="image image-01">
-                            <img src="{{ asset('assets/media/present_01.png') }}" alt="">
-                        </div>
-                        <div class="decoration">
-                            <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                        </div>
-                    </div>
-
-                    <div class="present-block_item">
-                        <div class="caption">
-                            <div>
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                <span>500</span>
-                            </div>
-                            <p>Наушники</p>
-                        </div>
-                        <a href="#">УЧАСТВОВАТЬ</a>
-                        <div class="image image-02">
-                            <img src="{{ asset('assets/media/present_02.png') }}" alt="">
-                        </div>
-                        <div class="decoration">
-                            <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                        </div>
-                    </div>
-
-                    <div class="present-block_item">
-                        <div class="caption">
-                            <div>
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                <span>1000</span>
-                            </div>
-                            <p>Планшет</p>
-                        </div>
-                        <a href="#">УЧАСТВОВАТЬ</a>
-                        <div class="image image-03">
-                            <img src="{{ asset('assets/media/present_03.png') }}" alt="">
-                        </div>
-                        <div class="decoration">
-                            <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="present-block-mobile">
-                    <div class="present-slider owl-carousel owl-theme">
-                        <div class="present-block_item item">
-                            <div class="caption">
-                                <div>
-                                    <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                    <span>350</span>
-                                </div>
-                                <p>Колонка</p>
-                            </div>
-                            <a href="#">УЧАСТВОВАТЬ</a>
-                            <div class="image image-01">
-                                <img src="{{ asset('assets/media/present_01.png') }}" alt="">
-                            </div>
-                            <div class="decoration">
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                            </div>
-                        </div>
-
-                        <div class="present-block_item item">
-                            <div class="caption">
-                                <div>
-                                    <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                    <span>500</span>
-                                </div>
-                                <p>Наушники</p>
-                            </div>
-                            <a href="#">УЧАСТВОВАТЬ</a>
-                            <div class="image image-02">
-                                <img src="{{ asset('assets/media/present_02.png') }}" alt="">
-                            </div>
-                            <div class="decoration">
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                            </div>
-                        </div>
-
-                        <div class="present-block_item item">
-                            <div class="caption">
-                                <div>
-                                    <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                                    <span>1000</span>
-                                </div>
-                                <p>Планшет</p>
-                            </div>
-                            <a href="#">УЧАСТВОВАТЬ</a>
-                            <div class="image image-03">
-                                <img src="{{ asset('assets/media/present_03.png') }}" alt="">
-                            </div>
-                            <div class="decoration">
-                                <img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-</div>
-</section>
+    @include('partials.presents')
 </div>
 
 <section class="wrapper-full section-table">
@@ -566,4 +449,53 @@
         </div>
     </div>
 </section>
+
+
+<div class="section-modal modal-form" id="select-year" x-cloak x-data="{
+    showDialog: false,
+    birthYear: null,
+    init() {
+        if (!localStorage.userBirthYear) {
+            this.showDialog = true;
+            this.disableSite();
+        }
+    },
+    disableSite() {
+        document.body.classList.add('disabled');
+    },
+    enableSite() {
+        document.body.classList.remove('disabled');
+        this.showDialog = false;
+    },
+    selectYear() {
+        localStorage.setItem('userBirthYear', this.birthYear);
+        this.enableSite();
+    }
+}" x-show="showDialog">
+	<div class="wrapper-modal">
+		<div class="container-form">
+			<div class="head">
+				<span @click="showDialog = false">close</span>
+				<img src="media/icons/stars_blue.svg" alt="" class="decoration">
+				<h3>РЕГИСТРИРУЙСЯ, ИГРАЙ И ВЫИГРЫВАЙ ПРИЗЫ!</h3>
+                <p>В акции могут участвовать только пользователи старше 16 лет</p>
+			</div>
+			<div class="body noFooter">
+				<form class="form">
+					<div class="input-row">
+                        <label>Выбери год рождения</label>
+                        <select placeholder="Год рождения"  class="input" x-model="birthYear">
+                            <template x-for="n in 67" :key="n">
+                                <option x-text="2007 - n"></option>
+                            </template>
+                        </select>
+					</div>
+					<button type="button" class="button" @click="selectYear">ОТПРАВИТЬ</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 @endsection
