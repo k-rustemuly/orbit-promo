@@ -14,7 +14,6 @@ use MoonShine\Fields\Date;
 use MoonShine\Fields\Field;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Text;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 class ReceiptResource extends ModelResource
@@ -22,6 +21,8 @@ class ReceiptResource extends ModelResource
     protected string $model = Receipt::class;
 
     protected ?PageType $redirectAfterSave = PageType::INDEX;
+
+    protected array $with = ['user'];
 
     public function title(): string
     {
@@ -38,6 +39,7 @@ class ReceiptResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                BelongsTo::make(__('ui.fields.user'), 'user', fn($item) => $item->phone_number, new UserResource())->disabled(),
                 MediaLibrary::make(__('ui.fields.image'), 'images')->disabled(),
                 BelongsTo::make(__('ui.fields.status'), 'status', fn($item) => $item->name, new ReceiptStatusResource())
                     ->when(fn($field) => $field->getData()?->id != ReceiptStatus::CHECKING, fn(Field $field) => $field->disabled())
@@ -56,5 +58,13 @@ class ReceiptResource extends ModelResource
     public function rules(Model $item): array
     {
         return [];
+    }
+
+    public function search(): array
+    {
+        return [
+            'user.name',
+            'user.phone_number',
+        ];
     }
 }

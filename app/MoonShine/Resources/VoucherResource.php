@@ -43,7 +43,7 @@ class VoucherResource extends ModelResource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make(__('ui.fields.user'), 'user', fn($item) => $item->name, new UserResource()),
+            BelongsTo::make(__('ui.fields.user'), 'user', fn($item) => $item->phone_number, new UserResource()),
 
             BelongsTo::make(__('ui.fields.prize'), 'prize', fn($item) => "$item->name", new PrizeResource()),
 
