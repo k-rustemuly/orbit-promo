@@ -30,6 +30,7 @@ class User extends Authenticatable
         'life',
         'level',
         'coin',
+        'is_won_instant_prize',
         'remember_token'
     ];
 

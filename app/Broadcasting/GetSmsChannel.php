@@ -54,14 +54,8 @@ class GetSmsChannel
         return $notifiable->routeNotificationFor('sms', $notification);
     }
 
-    protected function sendMessage($recipient, SmsMessage $message)
+    protected function sendMessage($recipient, SmsMessage $message): bool
     {
-
-        $params = [
-            'phone'  => $recipient,
-            'text' => $message->content,
-        ];
-
-        return $this->getSms->send($params);
+        return $this->getSms->send($recipient, $message->content);
     }
 }

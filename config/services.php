@@ -42,6 +42,11 @@ return [
         'login'  => env('GETSMS_LOGIN'),
         'password' => env('GETSMS_PASSWORD'),
         'host' => env('GETSMS_HOST', 'http://185.8.212.184/'),
+    ],
+
+    'rgl' => [
+        'key' => env('BALANCE_KEY'),
+        'promo_id' => env('BALANCE_PROMO_ID')
     ]
 
 ];

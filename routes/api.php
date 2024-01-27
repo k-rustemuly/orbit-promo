@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
 use Illuminate\Http\Request;
@@ -37,6 +38,12 @@ Route::prefix('{locale}')
 
                 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 
+                Route::prefix('games')
+                    ->name('games.')
+                    ->group(function () {
+                        Route::get('start', [GameController::class, 'start'])->name('start');
+                        Route::post('finish', [GameController::class, 'finish'])->name('finish');
+                    });
             });
     });
 
