@@ -15,6 +15,7 @@
         "spatie/laravel-medialibrary": "^10.15",
         "spatie/laravel-settings": "^3.2",
         "symfony/dom-crawler": "^6.4",
+        "tucker-eric/eloquentfilter": "^3.2",
         "vinkla/hashids": "^11.0",
         "visual-ideas/moonshine-spatie-medialibrary": "^2.1",
         "zadarma/user-api-v1": "^1.1"

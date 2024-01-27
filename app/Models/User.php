@@ -90,6 +90,17 @@ class User extends Authenticatable
         return $hiddenUsername . '@' . $domain;
     }
 
+    public function getHiddenPhoneNumberAttribute()
+    {
+        $phoneNumber = $this->attributes['phone_number'];
+        if (substr($phoneNumber, 0, 1) === '7') {
+            return '+7 ' . substr($phoneNumber, 1, 3) . ' XXX XX ' . substr($phoneNumber, -2);
+        } elseif (substr($phoneNumber, 0, 1) === '9') {
+            return '+998 XX ' . substr($phoneNumber, 2, 3) . ' XXX XX ' . substr($phoneNumber, -2);
+        }
+        return '';
+    }
+
     public function invitations(): HasMany
     {
         return $this->hasMany(Invitation::class, 'owner_id', 'id');

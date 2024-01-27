@@ -171,6 +171,7 @@ return [
         App\Providers\MoonShineServiceProvider::class,
         App\Providers\IsmsServiceProvider::class,
         App\Providers\GetSmsServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
     ])->toArray(),
 
     /*
