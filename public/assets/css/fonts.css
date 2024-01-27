@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "GT America";
+  src: local("GT Averica Thin"), local("GT Averica Thin"), url("../fonts/GT-America-LCGV-Compressed-Thin.woff2") format("woff2"), url("../fonts/GT-America-LCGV-Compressed-Thin.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "GT America";
+  src: local("GT Averica Light"), local("GT Averica Light"), url("../fonts/GT-America-LCGV-Compressed-Light.woff2") format("woff2"), url("../fonts/GT-America-LCGV-Compressed-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Halvar";
+  src: local("Halvar Regular"), local("Halvar Regular"), url("../fonts/HalvarEng-Rg.woff2") format("woff2"), url("../fonts/HalvarEng-Rg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Halvar";
+  src: local("Halvar Light"), local("Halvar Light"), url("../fonts/HalvarEng-Lt.woff2") format("woff2"), url("../fonts/HalvarEng-Rg.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Halvar Mittel";
+  src: local("Halvar Mittel Light"), local("Halvar Mittel Light"), url("../fonts/HalvarMittel-Lt.woff2") format("woff2"), url("../fonts/HalvarMittel-Lt.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: fallback;
+}

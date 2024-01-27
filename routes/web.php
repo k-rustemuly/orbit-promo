@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('{locale}')
+    ->where(['locale' => '[a-zA-Z]{2}'])
+    ->middleware('locale')
+    ->group(function () {
+        Route::get('', function () {
+            return view('index');
+        })->name('index');
+        Route::get('profile', function () {
+            return view('profile');
+        });
+    });
 Route::get('/', function () {
-    return view('body');
+    $locale = session()->get('locale', app()->getLocale());
+
+    return redirect()->route('index', ['locale' => $locale]);
 });

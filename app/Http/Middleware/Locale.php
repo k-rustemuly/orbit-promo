@@ -15,6 +15,9 @@ class Locale
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!$request->is('api*')) {
+            $request->session()->put('locale', $request->locale);
+        }
         app()->setLocale($request->locale);
         return $next($request);
     }
