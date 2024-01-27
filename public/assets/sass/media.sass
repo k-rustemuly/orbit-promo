@@ -239,6 +239,35 @@
 
 
 
+	/* PROFILE SECTIONS STYLE SETTINGS START (922px): */
+
+	.wrapper-profile 
+		.container-profile 
+			.block-profile 
+				.block-profile__column-02 
+					.block-profile__card 
+						.card 
+							.body
+								& > div
+									p
+										br
+											display: none
+							.footer
+								justify-content: center
+
+								img
+									display: none
+
+								a
+									font-size: 16px
+									line-height: 18px
+									max-width: 220px
+									padding: 9px 23px
+
+	/* PROFILE SECTIONS STYLE SETTINGS END (922px). */
+
+
+
 
 
 
@@ -286,11 +315,23 @@
 		.section-header
 			padding: 0px 0px 45px 0px
 
+			.container-navigation-mobile
+				padding: 30px 0px 60px 0px
+
+			.decorations 
+				.decoration_01
+					height: 40px
+					bottom: 0px
+					top: 265px
+
 		.section-present
-			padding: 100px 0px 80px 0px
+			padding: 20px 0px 40px 0px
 
 		.section-table
 			margin: 0px 0px 40px 0px
+
+			.title
+				display: none
 
 		.section-footer
 			padding: 40px 0px 40px 0px
@@ -629,6 +670,118 @@
 					text-align: center
 
 	/* FOOTER SECTIONS STYLE SETTINGS END (722px). */
+
+
+
+	/* PROFILE SECTIONS STYLE SETTINGS START (722px): */
+
+	.wrapper-profile 
+		.container-profile 
+			margin: 0px 0px
+
+			.title
+				font-size: 24px
+				line-height: 26px
+				text-align: center
+
+			.block-profile 
+				flex-direction: column
+				row-gap: 20px
+
+				.block-profile__column-01
+					width: 100%
+					align-items: center
+					row-gap: 0px
+
+					p
+						font-size: 16px
+						line-height: 21px
+						text-align: center
+
+					.badge
+						max-width: 210px
+						margin: 0px 0px 50px 0px
+
+					a
+						display: none
+
+					.block-notification-mobile
+						display: flex
+
+				.block-profile__column-02 
+					width: 100%
+					flex-direction: column
+					align-items: center
+					row-gap: 20px
+
+					.block-profile__card 
+						&.block-profile__card-01
+							max-width: 290px
+							height: auto
+							padding: 0px 0px
+
+							.card
+								max-width: 290px
+
+
+						&.block-profile__card-02
+							max-width: 290px
+							height: auto
+							padding: 0px 0px
+
+							.card
+								max-width: 290px
+
+						.card 
+							position: relative
+							padding: 22px 16px 20px 16px
+
+							.head
+								p
+									font-size: 18px
+									line-height: 16px
+
+								span
+									width: 22px
+									height: 22px
+
+									img
+										max-width: 10px
+
+							.body
+								& > div:not(.block)
+									display: flex
+									justify-content: space-between
+									align-items: center
+									column-gap: 7px
+
+									img
+										max-width: 110px
+										max-height: 80px
+										display: inline-block
+
+									p
+										width: 50%
+										font-size: 12px
+										line-height: 15px
+
+								.block
+									margin: 5px 0px 0px 0px
+
+									p
+										font-size: 12px
+										line-height: 15px
+
+									.table
+										.row
+											font-size: 12px
+											line-height: 15px
+
+			.block-notification
+				display: none
+
+	/* PROFILE SECTIONS STYLE SETTINGS END (722px). */
+
 
 
 

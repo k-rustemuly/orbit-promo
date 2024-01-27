@@ -52,7 +52,7 @@
 <!-- Owl Carousel -->
 <script src="{{ asset('assets/script/owl.carousel.min.js') }}"></script>
 <!-- Custom-select.js -->
-<script src="{{ asset('assets/script/custom-select.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/script/custom-select.min.js') }}"></script> -->
 <!-- Magnific Popup -->
 <script src="{{ asset('assets/script/magnific-popup.js') }}"></script>
 <!-- jQuery.Maskedinput -->

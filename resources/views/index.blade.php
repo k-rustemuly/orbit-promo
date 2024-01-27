@@ -8,7 +8,7 @@
     <div class="container-header">
         <div class="container-header_column-01">
             <h2 class="title">
-                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ {{ trans('front.name') }}
+                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ {{ trans('front.name') }} {{ region() }}
             </h2>
             <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image mobile">
             <h1 class="title">
@@ -129,7 +129,7 @@
             <div class="table-block fix-width">
                 <div class="table-head">
                     <h3 class="title">ПОБЕДИТЕЛИ</h3>
-                    <form action="./" class="table-form">
+                    <form class="table-form">
                         <input type="text" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search">
                     </form>
                 </div>
@@ -472,30 +472,270 @@
         this.enableSite();
     }
 }" x-show="showDialog">
-	<div class="wrapper-modal">
-		<div class="container-form">
-			<div class="head">
-				<span @click="showDialog = false">close</span>
-				<img src="media/icons/stars_blue.svg" alt="" class="decoration">
-				<h3>РЕГИСТРИРУЙСЯ, ИГРАЙ И ВЫИГРЫВАЙ ПРИЗЫ!</h3>
+    <div class="wrapper-modal">
+        <div class="container-form">
+            <div class="head">
+                <span @click="showDialog = false">close</span>
+                <img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
+                <h3>РЕГИСТРИРУЙСЯ, ИГРАЙ И ВЫИГРЫВАЙ ПРИЗЫ!</h3>
                 <p>В акции могут участвовать только пользователи старше 16 лет</p>
-			</div>
-			<div class="body noFooter">
-				<form class="form">
-					<div class="input-row">
+            </div>
+            <div class="body noFooter">
+                <form class="form">
+                    <div class="input-row">
                         <label>Выбери год рождения</label>
-                        <select placeholder="Год рождения"  class="input" x-model="birthYear">
-                            <template x-for="n in 67" :key="n">
-                                <option x-text="2007 - n"></option>
+                        <select placeholder="Год рождения" class="input" x-model="birthYear">
+                            <template x-for="n in 69" :key="n">
+                                <option x-text="2009 - n"></option>
                             </template>
                         </select>
+                    </div>
+                    <button type="button" class="button" @click="selectYear">ОТПРАВИТЬ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-modal modal-form" x-data="{
+    login: '77782284032',
+    password: '973956',
+    loading: false,
+    async signIn() {
+        try {
+            this.loading = true;
+            const sendData = {
+                'phone_number': this.login,
+                'password': this.password
+            }
+            $store.service.signIn(sendData);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    showForgotPasswordModal() {
+        this.closeModal();
+        $store.modal.forgotPassword = true;
+    },
+    showRegistrationModal() {
+        this.closeModal();
+        $store.modal.registration = true;
+    },
+    closeModal() {
+        $store.modal.signIn = false;
+    }
+}" x-cloak x-show="$store.modal.signIn" id="login-modal">
+    <div class="wrapper-modal">
+        <div class="container-form">
+            <div class="head">
+                <img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
+                <h3>ВХОД</h3>
+                <img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
+            </div>
+            <div class="body">
+                <form class="form">
+                    <div class="input-row">
+                        <input x-model="login" type="text" class="input" placeholder="Номер телефона или E-mail" autocomplete="username">
+                        <span>Валидация</span>
+                    </div>
+                    <div class="input-row">
+                        <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
+                        <span>Валидация</span>
+                    </div>
+                    <a href="#" @click.prevent="showForgotPasswordModal()">
+                        <p class="caption">Забыли пароль?</p>
+                    </a>
+                    <button type="button" class="button" @click="signIn()" :disabled="loading">Войти</button>
+                </form>
+            </div>
+            <div class="footer">
+                <p>НЕ ЗАРЕГИСТРИРОВАН?</p>
+                <a href="#" @click.prevent="showRegistrationModal()">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-modal modal-form" x-data="{
+    loading: false,
+    showConfirmPage: false,
+
+    phone_number: '',
+    name: '',
+    email: '',
+    birthdate: '',
+    password: '',
+
+    async signUp() {
+        try {
+            this.loading = true;
+            
+            const response = await fetch('/api/{{ app()->getLocale() }}/signUp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    'phone_number': this.phone_number,
+                    'name': this.name,
+                    'email': this.email,
+                    'birthdate': this.birthdate
+                })
+            });
+
+            const result = await response.json();
+            
+            if(result.success) {
+                this.showConfirmPage = true;
+                this.startCountdown();
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+
+    async reSendSms() {
+        try {
+            this.loading = true;
+            
+            const response = await fetch('/api/{{ app()->getLocale() }}/reSendSms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    'phone_number': this.phone_number
+                })
+            });
+
+            const result = await response.json();
+            
+            if(result.success) {
+                this.showConfirmPage = true;
+                this.startCountdown();
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+
+    async signIn() {
+        try {
+            this.loading = true;
+            const sendData = {
+                'phone_number': this.phone_number,
+                'password': this.password
+            }
+            $store.service.signIn(sendData);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            this.loading = false;
+        }
+    },
+    
+    showSignInModal() {
+        this.closeModal();
+        $store.modal.signIn = true;
+    },
+    closeModal() {
+        $store.modal.registration = false;
+        this.clearInterval();
+    },
+    countdown: null,
+    interval: null,
+    startCountdown() {
+        this.countdown = 60;
+        this.interval = setInterval(() => {
+            this.countdown--;
+            if (this.countdown === 0) {
+                this.clearInterval();
+            }
+        }, 1000);
+    },
+    clearInterval() {
+        clearInterval(this.interval);
+    }
+}" x-cloak x-show="$store.modal.registration" id="register-modal">
+	<div class="wrapper-modal">
+		<div class="container-form" x-show="!showConfirmPage">
+			<div class="head">
+				<img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
+				<h3>РЕГИСТРАЦИЯ</h3>
+				<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
+			</div>
+			<div class="body">
+				<form class="form">
+					<!-- <p>В акции могут участвовать только <br>пользователи старше 16 лет</p> -->
+
+					<div class="input-row">
+						<input x-model="birthdate" type="date" name="name" class="input" placeholder="Дата рождения">
+						<span>Валидация</span>
 					</div>
-					<button type="button" class="button" @click="selectYear">ОТПРАВИТЬ</button>
+
+					<div class="input-row">
+						<input x-model="name" type="text" name="name" class="input" placeholder="Имя">
+						<span>Валидация</span>
+					</div>
+					<div class="input-row">
+						<input x-model="phone_number" type="number" name="phone" class="input" placeholder="Номер телефона">
+						<span>Валидация</span>
+					</div>
+					<div class="input-row">
+						<input x-model="email" type="email" name="email" class="input" placeholder="E-Mail">
+						<span>Валидация</span>
+					</div>
+					<button type="button" class="button" @click="signUp()" :disabled="loading">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+
+					<p class="caption">Нажимая кнопку “Зарегистрироваться”, <br>
+						я подтверждаю, что согласен с <br>
+						Правилами Акции и Политикой Конфидициальности
+					</p>
 				</form>
+			</div>
+			<div class="footer">
+				<p>УЖЕ ЗАРЕГИСТРИРОВАЛСЯ?</p>
+				<a href="#" @click.prevent="showSignInModal()">Войти</a>
+			</div>
+		</div>
+        
+		<div class="container-form" x-show="showConfirmPage">
+            <div class="head">
+				<p>Сообщение с код паролем отправлено на номер</p>
+				<h3 x-text="phone_number"></h3>
+				<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
+			</div>
+			<div class="body">
+				<form class="form">
+					<div class="input-row">
+						<input x-model="password" type="number" name="code" class="input" placeholder="Код из SMS">
+						<span>Валидация</span>
+					</div>
+					<button type="button" class="button" @click="signIn()" :disabled="loading">ПОДТВЕРДИТЬ</button>
+				</form>
+			</div>
+			<div class="footer reverse">
+                <template x-if="countdown > 0">
+                    <div>
+                        <p><b>НЕ ПРИШЕЛ КОД?</b></p>
+                        <p>Повторно SMS можно запросить через <span x-text="countdown"></span> секунд</p>
+                    </div>
+                </template>
+                <template x-if="countdown == 0">
+				    <a href="#" @click.prevent="reSendSms()">ОТПРАВИТЬ СНОВА</a>
+                </template>
 			</div>
 		</div>
 	</div>
 </div>
-
-
 @endsection

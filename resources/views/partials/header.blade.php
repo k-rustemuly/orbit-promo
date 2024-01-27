@@ -25,9 +25,16 @@
                     </ul>
                 </nav>
             </div>
-            <div class="container-navigation_column-02">
-                <a href="#" class="button button__outlined">Войти</a>
-            </div>
+            @if(Route::currentRouteName() == 'index')
+                <div class="container-navigation_column-02" x-data>
+                    <template x-if="$store.user.token"><a href="/{{ app()->getLocale() }}/profile" class="button button__outlined">Профиль</a></template>
+                    <template x-if="!$store.user.token"><a href="#" class="button button__outlined" @click.prevent="$store.modal.signIn = true">Войти</a></template>
+                </div>
+            @else
+                <div class="container-navigation_column-02" x-data>
+                    <a href="#" class="button button__outlined" @click.prevent="">Выйти</a>
+                </div>
+            @endif
         </div>
         <div class="container-navigation-mobile">
             <img src="{{ asset('assets/media/icons/menu.svg') }}" alt="">

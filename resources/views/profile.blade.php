@@ -5,14 +5,41 @@
 
 @section('headerContent')
     <div class="wrapper-fix wrapper-small wrapper-profile">
-        <div class="container-profile">
-            <h2 class="title">Имя Фамилия</h2>
+        <div class="container-profile" x-data="{
+            loading: false,
+            async init() {
+                try {
+                    this.loading = true;
+                    
+                    const response = await fetch('/api/{{ app()->getLocale() }}/profile', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${$store.user.token}`,
+                            'Accept': 'application/json',
+                        }
+                    });
+
+                    const result = await response.json();
+                    
+                    if(result.success) {
+                        $store.user.setInfo(result.data);
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                } finally {
+                    this.loading = false;
+                }
+            }
+        }">
+            <h2 class="title" x-text="$store.user.info?.name"></h2>
             <div class="block-profile">
                 <div class="block-profile__column-01">
                     <p>Мои коины</p>
                     <div class="badge">
                         <img src="{{ asset('assets/media/icons/star_white.svg') }}">
-                        <span>10 000</span>
+                        <span x-text="$store.user.info?.coin"></span>
                     </div>
                     <a href="#">В ИГРУ</a>
                 </div>
@@ -89,7 +116,7 @@
             </div>
             <div class="block-notification">
                 <div class="notification">
-                    <p>Ты уже на <span>25</span> уровне! Так держать! У тебя в запасе еще <span>2</span> жизни!</p>
+                    <p>Ты уже на <span x-text="$store.user.info?.level"></span> уровне! Так держать! У тебя в запасе еще <span x-text="$store.user.info?.life"></span> жизни!</p>
                 </div>
             </div>
         </div>
