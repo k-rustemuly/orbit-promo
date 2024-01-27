@@ -590,22 +590,21 @@
                         <input x-model="login" type="text" class="input" placeholder="Номер телефона или E-mail" autocomplete="username">
                         <span>Валидация</span>
                     </div>
-                    <template x-if="forgotPassword == false">
-                        <div class="input-row">
-                            <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
-                            <span>Валидация</span>
-                        </div>
-                        <a href="#" @click.prevent="showForgotPassword()">
-                            <p class="caption">Забыли пароль?</p>
-                        </a>
-                        <button type="button" class="button" @click="signIn()" :disabled="loading">Войти</button>
-                    </template>
-                    <template x-if="forgotPassword == true">
-                        <a href="#" @click.prevent="forgotPassword = false">
-                            <p class="caption">Вход</p>
-                        </a>
-                        <button type="button" class="button" @click="forgotPasswordRequest()" :disabled="loading">Отправить</button>
-                    </template>
+                    
+                    <div class="input-row" x-show="forgotPassword == false">
+                        <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
+                        <span>Валидация</span>
+                    </div>
+                    <a href="#" @click.prevent="showForgotPassword()" x-show="forgotPassword == false">
+                        <p class="caption">Забыли пароль?</p>
+                    </a>
+                    <button type="button" class="button" @click="signIn()" :disabled="loading" x-show="forgotPassword == false">Войти</button>
+                            
+
+                    <a href="#" @click.prevent="forgotPassword = false" x-show="forgotPassword == true">
+                        <p class="caption">Вход</p>
+                    </a>
+                    <button type="button" class="button" @click="forgotPasswordRequest()" :disabled="loading" x-show="forgotPassword == true">Отправить</button>
                 </form>
             </div>
             <div class="footer">
