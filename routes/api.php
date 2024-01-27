@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ Route::prefix('{locale}')
         Route::post('signIn', [AuthController::class, 'signIn'])->name('signIn');
         Route::post('reSendSms', [AuthController::class, 'reSendSms'])->name('reSendSms');
         Route::post('forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+
+        Route::get('prizes', [PrizeController::class, 'prizes'])->name('prizes');
 
         Route::middleware('auth:sanctum')
             ->group(function() {
