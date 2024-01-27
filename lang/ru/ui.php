@@ -67,7 +67,9 @@ return [
         'finish_registration' => 'Вы не завершили регистрацию!',
         'saved' => 'Сохранено!',
         'life_error' => 'У вас нет жизней!',
-        'error_finished_game' => 'Ошибка при завершение игры'
+        'error_finished_game' => 'Ошибка при завершение игры',
+        'qr_not_found' => 'Qr код не найден!',
+        'orbit_not_found' => 'Орбит не найдено в чеке!'
     ],
     'mail' => [
         'subject' => 'Ваш пароль для Orbit promo',

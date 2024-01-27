@@ -23,7 +23,8 @@ class ReceiptRecognizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => 'required|image'
+            'file' => 'required|image',
+            'is_manual' => 'required|boolean'
         ];
     }
 }

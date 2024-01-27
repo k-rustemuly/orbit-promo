@@ -31,6 +31,7 @@ class ReceiptService
         }
         return false;
     }
+
     /**
      * @param \Illuminate\Http\UploadedFile $file
      * @return null|string
