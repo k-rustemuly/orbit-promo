@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Receipt;
 use App\MoonShine\Pages\SettingsPage;
 use App\MoonShine\Resources\InstantPrizeResource;
 use App\MoonShine\Resources\PrizeDrawingCalendarResource;
@@ -53,7 +54,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
             MenuDivider::make(),
 
-            MenuItem::make(__('ui.menu.receipts'), new ReceiptResource(), 'heroicons.shopping-cart'),
+            MenuItem::make(__('ui.menu.receipts'), new ReceiptResource(), 'heroicons.shopping-cart')
+                ->badge(fn() => Receipt::checking()->count()),
 
             MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket'),
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Receipt extends Model implements HasMedia
@@ -36,6 +37,11 @@ class Receipt extends Model implements HasMedia
     public function status(): BelongsTo
     {
         return $this->belongsTo(ReceiptStatus::class, 'receipt_status_id');
+    }
+
+    public function scopeChecking(Builder $query): void
+    {
+        $query->where('receipt_status_id', ReceiptStatus::CHECKING);
     }
 
 }

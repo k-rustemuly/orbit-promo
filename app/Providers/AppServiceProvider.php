@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Invitation;
+use App\Models\Receipt;
 use App\Models\User;
 use App\Models\Voucher;
 use App\Observers\InvitationObserver;
+use App\Observers\ReceiptObserver;
 use App\Observers\UserObserver;
 use App\Observers\VoucherObserver;
 use App\Services\Rgl;
@@ -32,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         Voucher::observe(VoucherObserver::class);
         User::observe(UserObserver::class);
         Invitation::observe(InvitationObserver::class);
+        Receipt::observe(ReceiptObserver::class);
     }
 }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\InstantPrize;
 use App\MoonShine\Controllers\InstantPrizeController;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Resources\ModelResource;
