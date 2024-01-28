@@ -14,7 +14,7 @@
                 try {
                     this.loading = true;
                     const sendData = {
-                        'phone_number': this.phone_number,
+                        'phone_number': this.phone_number.replace(/\D/g, ''),
                         'password': this.password
                     }
                     Alpine.store('service').signIn(sendData).catch(error => {

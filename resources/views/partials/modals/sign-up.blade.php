@@ -23,7 +23,7 @@
                             'Accept': 'application/json',
                         },
                         body: JSON.stringify({
-                            'phone_number': this.phone_number,
+                            'phone_number': this.phone_number.replace(/\D/g, ''),
                             'name': this.name,
                             'email': this.email
                         })
@@ -63,7 +63,7 @@
                             'Accept': 'application/json',
                         },
                         body: JSON.stringify({
-                            'phone_number': this.phone_number
+                            'phone_number': this.phone_number.replace(/\D/g, '')
                         })
                     });
 

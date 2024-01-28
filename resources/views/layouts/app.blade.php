@@ -160,6 +160,9 @@
                 flex-direction: column;
                 gap: 16px;
             }
+            .section-header .container-header .container-header_column-02 .image img {
+                width: auto;
+            }
 
             .sm-hide {
                 display: none;
@@ -294,8 +297,7 @@
         jQuery(function() {
             jQuery.mask.definitions['9'] = false;
             jQuery.mask.definitions['#'] = "[0-9]";
-            jQuery('.mask_phone').mask('{{ region() == '
-                kz ' ? "+7 ### ### ## ##" : "+998 ## ### ## ##" }}');
+            jQuery('.mask_phone').mask("{{ region() == 'kz' ? '+7 ### ### ## ##' : '+998 ## ### ## ##' }}");
         });
     </script>
 </body>
