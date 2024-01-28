@@ -49,7 +49,7 @@ class AuthService
                 return false;
             }
             $code = Generate::code();
-            $user->password = $code;
+            $user->remember_token = $code;
             $user->password = $code;
             $user->save();
             event(new ReSendSms($user));
