@@ -79,7 +79,8 @@
                 Alpine.store('modal').registration = true;
             },
             closeModal() {
-
+                Alpine.store('modal').signIn = false;
+                
                 this.clearMessages();
                 this.phone_number = '';
                 this.password = '';
