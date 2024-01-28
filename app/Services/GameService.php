@@ -75,6 +75,7 @@ class GameService
             $game->after_coins = $user->coin;
             $game->after_level = $user->level;
             $game->is_finished = $finish;
+            $game->time = $time;
             $game->save();
             return true;
         }
