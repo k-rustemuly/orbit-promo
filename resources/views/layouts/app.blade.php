@@ -186,6 +186,7 @@
             }
         }
     </style>
+    <script defer src="{{ asset('assets/script/mask.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script type="text/javascript">
         document.addEventListener('alpine:init', () => {
@@ -287,19 +288,9 @@
     <script src="{{ asset('assets/script/owl.carousel.min.js') }}"></script>
     <!-- Magnific Popup -->
     <script src="{{ asset('assets/script/magnific-popup.js') }}"></script>
-    <!-- jQuery.Maskedinput -->
-    <script src="{{ asset('assets/script/jquery.maskedinput.min.js') }}"></script>
 
     <!-- JavaScript -->
     <script src="{{ asset('assets/script/javascript.js') }}"></script>
-
-    <script type="text/javascript">
-        jQuery(function() {
-            jQuery.mask.definitions['9'] = false;
-            jQuery.mask.definitions['#'] = "[0-9]";
-            jQuery('.mask_phone').mask("{{ region() == 'kz' ? '+7 ### ### ## ##' : '+998 ## ### ## ##' }}");
-        });
-    </script>
 </body>
 
 </html>

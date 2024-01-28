@@ -151,11 +151,11 @@
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="name" type="text" name="name" class="input" placeholder="{!! trans('front.sign_up.login') !!}">
+                        <input x-model="name" type="text" name="name" class="input" placeholder="{!! trans('front.sign_up.name') !!}">
                         <span x-cloak x-show="messages?.name?.[0]" x-text="messages?.name?.[0]"></span>
                     </div>
                     <div class="input-row">
-                        <input x-model="phone_number" type="number" name="phone" class="input mask_phone" placeholder="{!! trans('front.sign_up.phone_number') !!}">
+                        <input x-model="phone_number" x-mask="{{ $phoneMask }}" type="text" name="phone" class="input" placeholder="{!! trans('front.sign_up.phone_number') !!}">
                         <span x-cloak x-show="messages?.phone_number?.[0]" x-text="messages?.phone_number?.[0]"></span>
                     </div>
                     <div class="input-row">

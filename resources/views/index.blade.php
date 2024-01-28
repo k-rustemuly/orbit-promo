@@ -1,3 +1,7 @@
+@php
+    $phoneMask = region() == 'kz' ? '+7 ### ### ## ##' : '+998 ## ### ## ##';
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Orbit - Главная')
@@ -194,7 +198,7 @@
                 <div class="table-head">
                     <h3 class="title">{!! trans('front.home_header.winners') !!}</h3>
                     <form class="table-form" @submit.prevent="getData()">
-                        <input x-model="search" type="text" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search mask_phone">
+                        <input x-model="search" type="text" x-mask="{{ $phoneMask }}" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search">
                     </form>
                 </div>
                 <div class="table-body">

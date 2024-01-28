@@ -13,6 +13,7 @@
                 this.loading = true;
                 try {
                     this.loading = true;
+                    console.log(this.phone_number, this.phone_number.replace(/\D/g, ''));
                     const sendData = {
                         'phone_number': this.phone_number.replace(/\D/g, ''),
                         'password': this.password
@@ -30,6 +31,7 @@
                 this.clearMessages();
                 this.loading = true;
                 try {
+                    console.log(this.phone_number, this.phone_number.replace(/\D/g, ''));
                     const sendData = {
                         'phone_number': this.phone_number.replace(/\D/g, '')
                     }
@@ -120,7 +122,7 @@
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="phone_number" type="text" class="input mask_phone" placeholder="{!! trans('front.sign_in.login') !!}" autocomplete="username">
+                        <input x-model="phone_number" x-mask="{{ $phoneMask }}" type="text" class="input" placeholder="{!! trans('front.sign_in.login') !!}" autocomplete="username">
                         <span x-cloak x-show="messages?.phone_number?.[0]" x-text="messages?.phone_number?.[0]"></span>
                     </div>
 
