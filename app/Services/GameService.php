@@ -61,7 +61,7 @@ class GameService
             $game->score = $score;
             if($finish) {
                 $user->coin+=$coin;
-                $user->level= $level;
+                $user->level+= 1;
                 $user->save();
 
                 if($instantPrize = $game->instantPrize) {
