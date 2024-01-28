@@ -53,9 +53,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .custom-select {
-            margin-left: -50px;
-        }
+        
         .custom-select .custom-select-container.customSelect .custom-select-panel {
             background-color: rgb(212 213 231);
         }
@@ -97,6 +95,30 @@
         }
         .hidden {
             display: none !important;
+        }
+        .custom-select {
+            font-size: 19px;
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-style: italic;
+            color: var(--color-blue-dark);
+            padding: 13px 25px;
+            padding-right: 75px;
+            border-radius: 13px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+        }
+        .select_arrow {
+            display: flex;
+            background-color: var(--color-pink);
+            padding: 12px;
+            border-radius: 13px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-left: -50px;
+            pointer-events: none;
         }
     </style>
     <script src="//unpkg.com/alpinejs" defer></script>
