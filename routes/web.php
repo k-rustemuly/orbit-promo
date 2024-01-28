@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,11 @@ Route::get('/', function () {
 
     return redirect()->route('index', ['locale' => $locale]);
 });
+
+Route::get('/', function () {
+    $locale = session()->get('locale', app()->getLocale());
+
+    return redirect()->route('index', ['locale' => $locale]);
+});
+
+Route::get('/game', [GameController::class, 'gamePage'])->name('gamePage');

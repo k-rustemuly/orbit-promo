@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #66B3DE;
+}
+
+@font-face {
+    font-family: 'AVENGEANCE';
+    src: url('fonts/Montserrat-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}

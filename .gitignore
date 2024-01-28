@@ -17,3 +17,11 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+public/img/.DS_Store
+public/img/bomb/.DS_Store
+public/img/candies/.DS_Store
+public/img/frozen/.DS_Store
+public/img/lightning/.DS_Store
+public/img/rocket/.DS_Store
+public/img/ui/.DS_Store
+public/levels/.DS_Store

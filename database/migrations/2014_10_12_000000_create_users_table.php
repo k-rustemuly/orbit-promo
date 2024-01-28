@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('referral')->nullable();
             $table->unsignedInteger('life')->default(0);
-            $table->unsignedInteger('level')->default(0);
+            $table->unsignedInteger('level')->default(1);
             $table->unsignedInteger('coin')->default(0);
             $table->boolean('is_won_instant_prize')->default(false);
             $table->rememberToken();

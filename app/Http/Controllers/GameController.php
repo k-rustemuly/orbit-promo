@@ -36,4 +36,9 @@ class GameController extends BaseController
         }
         return $this->error(__('ui.messages.error_finished_game'));
     }
+
+    public function gamePage()
+    {
+            return view('game.index'); 
+    }
 }

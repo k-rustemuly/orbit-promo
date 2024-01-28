@@ -17,8 +17,8 @@ class GameResource extends JsonResource
     {
         return [
             'userId' => $this->id,
-            'userCoins' => $this->before_life,
-            'userEnergy' => $this->before_coins,
+            'userCoins' => $this->before_coins,
+            'userEnergy' => $this->before_life,
             'levelNumber' => $this->before_level,
             'coinWin' => app(GeneralSettings::class)->game_max_coins,
             'lang' => app()->getLocale(),

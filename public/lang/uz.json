@@ -1,0 +1,38 @@
+{
+    "level": "DARAJA: ",
+    "end_title": "G'ALABA!",
+
+    "gift_title": "TABRIKLAYMIZ!",
+    "gift_text": "Siz zudlik bilan sovrin yutdingiz:",
+    "gift_box": "Orbit shou boksi!",
+    "gift_mobi": "Hisobingizga 1500 so'm",
+
+    "hint_title": "MASLAHAT",
+    "hint_subtitle_energy": "Ko'proq yurish oling!",
+    "hint_text_energy": "3 yoki undan ko'proq Orbit® jajji saqichlarni qatorga terib, mumkin bo'lgan yurishlar sonini oshiring.",
+
+    "hint_subtitle_rocket": "Kuchli Orbit® raketasi yarating!",
+    "hint_text_rocket": "4 ta bir xil elementlarni qatorga tering. Raketani harakatlantirib, butun chiziqni tozalang!",
+
+    "hint_subtitle_light": "Orbit® chaqmoqini yarating!",
+    "hint_text_light": "5 ta bir xil elementlarni qatorga tering. Raketani harakatlantirib, bir rangdagi barcha elementlarni bir zumda tozalang!",
+
+    "hint_subtitle_bomb": "Sehrli portlash yarating",
+    "hint_text_bomb": "Gorizontal va vertikal bo'ylab 3 ta bir xil elementlarni qatorga tering. Atrofda portlash uchun harakatlantiring!",
+
+    "err_energy_title": "OPPOQ, XATO!",
+    "err_energy_text": "O'yinni davom ettirish uchun sizda yetarli hayotlar yo'q!",
+
+    "modal_target": "BUYUMLARNI YIG'ISH:",
+    "modal_score": "OLINGAN TANGALAR:",
+    "modal_coins": "Ishlab topilgan tangalar:",
+    "modal_coins2": "O'tish uchun tangalar:",
+
+    "score_text": "ball",
+    "moves_text": "qadam",
+
+    "btn_start": "O'YNASH",
+    "btn_end": "DAVOM ETISH",
+    "btn_check": "CHEKNI YUKLASH",
+    "btn_friend": "DO'STINGIZNI TAKLIF QILING"
+}
