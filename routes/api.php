@@ -61,6 +61,9 @@ Route::prefix('{locale}')
                         Route::get('start', [GameController::class, 'start'])->name('start');
                         Route::post('finish', [GameController::class, 'finish'])->name('finish');
                     });
+
+                Route::get('logout', [ProfileController::class, 'logout'])->name('logout');
+
             });
     });
 
