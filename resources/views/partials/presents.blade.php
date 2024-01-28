@@ -96,7 +96,7 @@
 						<div class="caption">
 							<div>
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-								<span>350</span>
+								<span x-text="data?.[0]?.coin"></span>
 							</div>
 							<p>Колонка</p>
 						</div>
@@ -113,7 +113,7 @@
 						<div class="caption">
 							<div>
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-								<span>500</span>
+								<span x-text="data?.[1]?.coin"></span>
 							</div>
 							<p>Наушники</p>
 						</div>
@@ -130,7 +130,7 @@
 						<div class="caption">
 							<div>
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
-								<span>1000</span>
+								<span x-text="data?.[2]?.coin"></span>
 							</div>
 							<p>Планшет</p>
 						</div>

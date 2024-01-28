@@ -34,6 +34,7 @@
 					if(result.success) {
 						this.page = isManual ? 6 : 5;
 					} else {
+						this.file = null;
 						this.page = 3;
 					}
 					Alpine.store('user').updateProfile();
@@ -102,7 +103,8 @@
 							</div>
 						</div>
 						<a href="#" class="button button_custom upload-btn" @click.prevent="$refs.fileInput.click()">ЗАГРУЗИТЬ<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
-						<input type="file" class="hidden" x-ref="fileInput" accept=".jpg, .jpeg, .png" @change="fileChanged" />
+						<input type="file" class="hidden" x-ref="fileInput" accept=".jpg, .jpeg, .png" @change="fileChanged" :disabled="loading" />
+						<template x-if="loading == true"><span class="spinner"></span></template>
 
 						<template x-if="page == 0 || page == 1">
 							<p class="color-white bold">или пригласить друга</p>
