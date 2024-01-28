@@ -8,19 +8,20 @@
 			</div>
 			<div class="container-footer__column-02">
 				<h4>Сроки акции: 29.01.2024 – 21.04.2024</h4>
-				<p>©2023 Mars, Incorporated. Все права защищены. ®TM ORBIT® Торговая марка Mars Incorporated и её филиалов 
-				Конфиденциальность | Владелец сайта | Для родителей | Юридические условия | Контакты</p>
+				<p>©2023 Mars, Incorporated. Все права защищены. ®TM ORBIT® Торговая марка Mars Incorporated и её филиалов
+					Конфиденциальность | Владелец сайта | Для родителей | Юридические условия | Контакты</p>
 			</div>
 		</div>
 	</div>
 </footer>
 
 <script type="text/javascript">
-    document.addEventListener('alpine:init', () => {
-        Alpine.store('modal', {
-            signIn: false,
-			registration: false
-        });
+	document.addEventListener('alpine:init', () => {
+		Alpine.store('modal', {
+			signIn: false,
+			registration: false,
+			receipt: false
+		});
 		Alpine.store('user', {
 			token: localStorage.getItem('token') || null,
 			setToken(token) {
@@ -45,12 +46,12 @@
 				});
 
 				const result = await response.json();
-				
-				if(result.success) {
-					Alpine.store('user').setToken(result.data.token);
-					window.location.href = `/{{ app()->getLocale() }}/profile`;
+				if (!result.success) {
+					throw result.errors || { message: [result.message] };
 				}
+				Alpine.store('user').setToken(result.data.token);
+				window.location.href = `/{{ app()->getLocale() }}/profile`;
 			},
 		});
-    });
+	});
 </script>
