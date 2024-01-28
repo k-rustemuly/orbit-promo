@@ -59,7 +59,7 @@
         .custom-select .custom-select-container.customSelect .custom-select-panel {
             background-color: rgb(212 213 231);
         }
-        #select-year .button {
+        .custom-button {
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
@@ -84,6 +84,20 @@
         .section-table .container-table .table-block .table-body .table-tabs-content .table-block__content .row > div {
             text-align: center;
         }
+        .upload-btn {
+            display: flex;
+            font-size: 22px;
+            font-weight: 700;
+            font-style: italic;
+            background-color: #fff;
+            border-radius: 50px;
+            padding: 10px 60px;
+            gap: 8px;
+            color: var(--color-blue-dark);
+        }
+        .hidden {
+            display: none !important;
+        }
     </style>
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
@@ -91,6 +105,7 @@
 @include('partials.header')
 
 @include('partials.modals.receipt')
+@include('partials.modals.voucher')
 
 @yield('content')
 
