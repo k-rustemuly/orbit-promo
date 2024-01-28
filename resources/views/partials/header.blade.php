@@ -8,7 +8,7 @@
                 <nav class="navigation-menu">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="#game">
                                 Игра
                             </a>
                         </li>

@@ -113,7 +113,7 @@
                             </div>
                             <div class="footer">
                                 <img src="{{ asset('assets/media/profile_01.svg') }}" alt="">
-                                <a href="#">ЗАГРУЗИ ЧЕК</a>
+                                <a href="#" @click.prevent="$store.modal.receipt = true">ЗАГРУЗИ ЧЕК</a>
                             </div>
                         </div>
                     </div>
@@ -211,158 +211,161 @@
     @include('partials.presents')
 
     <section class="wrapper-full section-table">
-        <div class="wrapper-fix wrapper-small wrapper-table">
-            <div class="container-table">
-                <div class="table-block">
-                    <div class="table-head">
-                        <h2 class="title">МОИ РОЗЫГРЫШИ</h2>
-                    </div>
-                    <div class="table-body">
-                        <div class="table-tabs-buttons">
-                            <a href="#" name="tab1" class="tab-button">Моментальные призы</a>
-                            <a href="#" name="tab2" class="tab-button">Еженедельные призы</a>
-                        </div>
-                        <div class="table-tabs-content">
-                            <div class="table-block__content" id="tab1">
-                                <div class="table-block__title">
-                                    <div class="row">
-                                        <div>
-                                            <p>Дата</p>
-                                        </div>
-                                        <div>
-                                            <p>Количество потраченных баллов</p>
-                                        </div>
-                                        <div>
-                                            <p>Приз</p>
-                                        </div>
-                                        <div>
-                                            <p>Статус</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-block__rows">
-                                    <div class="row">
-                                        <div>
-                                            <p>22.12.2023</p>
-                                        </div>
-                                        <div>
-                                            <p>1000</p>
-                                        </div>
-                                        <div>
-                                            <p>Колонка</p>
-                                        </div>
-                                        <div>
-                                            <p>Продолжает участие </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div>
-                                            <p>22.12.2023</p>
-                                        </div>
-                                        <div>
-                                            <p>1000</p>
-                                        </div>
-                                        <div>
-                                            <p>Колонка</p>
-                                        </div>
-                                        <div>
-                                            <p>Продолжает участие </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                    <div class="row">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-block__content" id="tab2">
+    <div class="wrapper-fix wrapper-small wrapper-table">
+        <div class="container-table">
+            <div class="table-block fix-width" x-data="{
+                loading: false,
+                activeTab: '',
+                data: {
+                    'my-instant-prizes': [],
+                    'my-vouchers': []
+                },
+                pagination: {
+                    links: {},
+                    meta: {}
+                },
+                init() {
+                    this.changeTab('my-vouchers');
+                },
+                changeTab(name) {
+                    this.activeTab = name;
+                    this.getData();
+                },
+                async getData(url = null) {
+                    try {
+                        this.loading = true;
+                        const baseUrl = url || `/api/{{ app()->getLocale() }}/${this.activeTab}`;
+                        
+                        const response = await fetch(baseUrl, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${$store.user.token}`,
+                                'Accept': 'application/json',
+                            }
+                        });
 
-                                <div class="table-block__title">
+                        const result = await response.json();
+                        
+                        if(result.success) {
+                            this.data[this.activeTab] = result.data;
+                            this.pagination.links = result.links;
+                            this.pagination.meta = result.meta;
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    } finally {
+                        this.loading = false;
+                    }
+                }
+            }">
+                <div class="table-head">
+                    <h3 class="title">МОИ РОЗЫГРЫШИ</h3>
+                </div>
+                <div class="table-body">
+
+                    <div class="table-tabs-buttons">
+                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'my-instant-prizes'}" @click.prevent="changeTab('my-instant-prizes')">Моментальные призы</a>
+                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'my-vouchers'}" @click.prevent="changeTab('my-vouchers')">Еженедельные призы</a>
+                    </div>
+                    <div class="table-tabs-content">
+                        <template x-if="loading == true"><span class="spinner"></span></template>
+                        <template x-if="loading == false">
+                            <div class="table-block__content 1" id="tab1">
+                                <div class="table-block__title" x-cloak x-show="data[activeTab].length == 0">
                                     <div class="row">
                                         <div>
-                                            <p>Дата</p>
-                                        </div>
-                                        <div>
-                                            <p>Количество потраченных баллов</p>
-                                        </div>
-                                        <div>
-                                            <p>Приз</p>
-                                        </div>
-                                        <div>
-                                            <p>Статус</p>
+                                            <p>Нет данных</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-block__rows">
-                                    <div class="row">
-                                        <div>
-                                            <p>22.12.2023</p>
+                                
+                                <div class="table-block__title" x-cloak x-show="data[activeTab].length != 0">
+                                    <template x-if="activeTab == 'my-instant-prizes'">
+                                        <div class="row">
+                                            <div>
+                                                <p>Дата</p>
+                                            </div>
+                                            <div>
+                                                <p>Приз</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p>1000</p>
+                                    </template>
+                                    <template x-if="activeTab == 'my-vouchers'">
+                                        <div class="row">
+                                            <div>
+                                                <p>Дата</p>
+                                            </div>
+                                            <div>
+                                                <p>Количество потраченных баллов</p>
+                                            </div>
+                                            <div>
+                                                <p>Приз</p>
+                                            </div>
+                                            <div>
+                                                <p>Статус</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p>Колонка</p>
-                                        </div>
-                                        <div>
-                                            <p>Продолжает участие </p>
-                                        </div>
+                                    </template>
+                                </div>
+                                <div class="table-block__rows" x-cloak x-show="data[activeTab].length != 0">
+                                    <template x-if="activeTab == 'my-instant-prizes'">
+                                        <template x-for="item in data[activeTab]">
+                                            <div class="row">
+                                                <div>
+                                                    <p x-text="item.date"></p>
+                                                </div>
+                                                <div>
+                                                    <p x-text="item.name"></p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template x-if="activeTab == 'my-vouchers'">
+                                        <template x-for="item in data[activeTab]">
+                                            <div class="row">
+                                                <div>
+                                                    <p x-text="item.date"></p>
+                                                </div>
+                                                <div>
+                                                    <p x-text="item.spent_bal"></p>
+                                                </div>
+                                                <div>
+                                                    <p x-text="item.prize"></p>
+                                                </div>
+                                                <div>
+                                                    <p x-text="item.is_winned ? 'Ты победил!' : 'Продолжает участие в розыгрыше'"></p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </div>
+
+                                <div class="table-footer center-align" x-cloak x-show="data[activeTab].length != 0">
+                                    <div>
+                                        <button type="button" class="button button-left" x-cloak x-show="pagination.links.prev" @click="getData(pagination.links.prev)">
+                                            <img src="{{ asset('assets/media/icons/arrow_left.svg') }}">
+                                        </button>
+                                        <template x-for="item in pagination.meta.links.slice(1, -1)">
+                                            <span x-text="item.label" :class="{'active': item.active}" @click="getData(item.url)"></span>
+                                        </template>
+                                        <button type="button" class="button button-right" x-cloak x-show="pagination.links.next" @click="getData(pagination.links.next)">
+                                            <img src="{{ asset('assets/media/icons/arrow_right.svg') }}">
+                                        </button>
                                     </div>
-                                    <div class="row">
-                                        <div>
-                                            <p>22.12.2023</p>
-                                        </div>
-                                        <div>
-                                            <p>1000</p>
-                                        </div>
-                                        <div>
-                                            <p>Колонка</p>
-                                        </div>
-                                        <div>
-                                            <p>Продолжает участие </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                    <div class="row">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
+                                    <div>
+                                        <button type="button" class="button button-right" x-cloak x-show="pagination.links.last && pagination.meta.last_page > 2" @click="getData(pagination.links.last)">
+                                            <img src="{{ asset('assets/media/icons/arrow_duble.svg') }}">
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="table-footer right-align">
-                        <div>
-                            <button type="button" class="button button-left">
-                                <img src="{{ asset('assets/media/icons/arrow_left.svg') }}">
-                            </button>
-                            <span>1</span>
-                            <span class="active">2</span>
-                            <span>3</span>
-                            <button type="button" class="button button-right">
-                                <img src="{{ asset('assets/media/icons/arrow_right.svg') }}">
-                            </button>
-                        </div>
-                        <div>
-                            <button type="button" class="button button-right">
-                                <img src="{{ asset('assets/media/icons/arrow_duble.svg') }}">
-                            </button>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     
 @endsection

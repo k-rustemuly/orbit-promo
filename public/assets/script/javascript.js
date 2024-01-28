@@ -27,6 +27,10 @@ jQuery('.question-item').click(function() {
 //     jQuery(this).siblings('.body').find(' > p').toggleClass('hidden');
 // })
 
+/* QUESTIONS CODE SETTINGS END. */
+
+
+/* SLIDERS CODE SETTINGS START: */
 
 jQuery('.present-slider').owlCarousel({
     loop: true,
@@ -68,3 +72,8 @@ jQuery('.logotype-slider').owlCarousel({
 
 let owlLogotypeSlider = jQuery('.logotype-slider');
 owlLogotypeSlider.owlCarousel();
+
+/* SLIDERS CODE SETTINGS END. */
+
+
+// customSelect('.date-select select');

@@ -1,4 +1,4 @@
-<section class="wrapper-full section-present">
+<section class="wrapper-full section-present" id="prizes">
 	<div class="wrapper-fix wrapper-small wrapper-present">
 		<div class="container-present" x-data="{
 			data: [],
