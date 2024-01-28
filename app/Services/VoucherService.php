@@ -35,7 +35,9 @@ class VoucherService
 
         if($user) {
             $voucher->where('user_id', $user->id);
-
+        }
+        else{
+            $voucher->whereNotNull('winned_date')->where('is_approved', true);
         }
         return VouchersResource::collection(
                 $voucher
