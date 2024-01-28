@@ -36,11 +36,6 @@ class SignUpRequest extends BaseFormRequest
                 'required',
                 'regex:/^7[0-9]{10}$|^998[0-9]{9}$/',
                 'unique:users'
-            ],
-            'birthdate' => [
-                'required',
-                'date',
-                'before_or_equal:-16 years'
             ]
         ];
     }

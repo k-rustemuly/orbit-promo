@@ -26,7 +26,6 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'birthdate',
         'referral',
         'life',
         'level',
@@ -53,7 +52,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'phone_number_verified_at' => 'datetime',
-        'birthdate' => 'date',
         'password' => 'hashed',
     ];
 
