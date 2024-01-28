@@ -14,6 +14,9 @@ class GeneralSettings extends Settings
     /** @var int Количество жизней при загрузке чека */
     public int $receipt_life;
 
+    /** @var int Количество жизней по умолчанию */
+    public int $default_life;
+
     /** @var int Количество жизней для рефералки */
     public int $referal_life;
 

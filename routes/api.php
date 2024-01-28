@@ -49,6 +49,8 @@ Route::prefix('{locale}')
 
                 Route::get('invitations', [ProfileController::class, 'invitations'])->name('invitations');
 
+                Route::post('mail', [ProfileController::class, 'mail'])->name('mail');
+
                 Route::post('vouchers', [VoucherController::class, 'buy'])->name('vouchers.buy');
 
                 Route::get('my-instant-prizes', [PrizeController::class, 'instantPrizes'])->name('my.prizes');

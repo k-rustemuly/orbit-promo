@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Invitation;
+use App\Settings\GeneralSettings;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Auth\Events\Lockout;
@@ -89,6 +90,7 @@ class BaseFormRequest extends FormRequest
         if(! $user->hasVerifiedPhoneNumber()) {
             $user->phone_number_verified_at = now();
             $user->remember_token = null;
+            $user->life = app(GeneralSettings::class)->default_life;
             $user->save();
             if(request('referral')) {
                 $decoded = Hashids::decode(request('referral'));

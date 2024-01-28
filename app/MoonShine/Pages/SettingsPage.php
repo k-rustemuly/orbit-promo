@@ -57,6 +57,11 @@ class SettingsPage extends Page
                 ->buttons()
                 ->min(0)
                 ->required(),
+            Number::make(__('ui.fields.default_life'), 'default_life')
+                ->buttons()
+                ->min(0)
+                ->required(),
+
             DateRange::make(__('ui.fields.promotion_date'), 'promotion')
                 ->fromTo('start_date', 'end_date')
                 ->format('Y-m-d')
@@ -70,6 +75,7 @@ class SettingsPage extends Page
             'game_max_coins' => $this->settings->game_max_coins,
             'receipt_life' => $this->settings->receipt_life,
             'referal_life' => $this->settings->referal_life,
+            'default_life' => $this->settings->default_life,
             'start_date' => $this->settings->start_date,
             'end_date' => $this->settings->end_date,
         ];

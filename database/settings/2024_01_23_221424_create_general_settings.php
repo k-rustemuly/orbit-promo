@@ -11,5 +11,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.referal_life', 2);
         $this->migrator->add('general.start_date', null);
         $this->migrator->add('general.end_date', null);
+        $this->migrator->add('general.default_life', 3);
+
     }
 };

@@ -13,6 +13,8 @@ return [
         'ofd.soliq.uz' => Soliq::class,
     ],
 
+    'work_mail' => env('WORK_MAIL'),
+
     /*
      * Each settings class used in your application must be registered, you can
      * put them (manually) here.
