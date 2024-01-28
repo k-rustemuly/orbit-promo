@@ -5,6 +5,7 @@ namespace App\Models;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Voucher extends Model
@@ -43,4 +44,10 @@ class Voucher extends Model
     {
         return $this->belongsTo(Prize::class);
     }
+
+    public function scopeNotVerified(Builder $query): void
+    {
+        $query->whereNotNull('winned_date')->where('is_approved', false);
+    }
+
 }

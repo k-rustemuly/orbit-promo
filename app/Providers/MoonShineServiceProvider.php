@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Receipt;
+use App\Models\Voucher;
 use App\MoonShine\Pages\SettingsPage;
 use App\MoonShine\Resources\InstantPrizeResource;
 use App\MoonShine\Resources\PrizeDrawingCalendarResource;
 use App\MoonShine\Resources\PrizeResource;
 use App\MoonShine\Resources\ReceiptResource;
 use App\MoonShine\Resources\ReceiptStatusResource;
+use App\MoonShine\Resources\UserResource;
 use App\MoonShine\Resources\VoucherResource;
 use Illuminate\Http\Request;
 use MoonShine\Menu\MenuDivider;
@@ -57,7 +59,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuItem::make(__('ui.menu.receipts'), new ReceiptResource(), 'heroicons.shopping-cart')
                 ->badge(fn() => Receipt::checking()->count()),
 
-            MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket'),
+            MenuItem::make(__('ui.menu.vouchers'), new VoucherResource(), 'heroicons.ticket')
+                ->badge(fn() => Voucher::notVerified()->count()),
+
+            MenuItem::make(__('ui.menu.users'), new UserResource(), 'heroicons.user-circle'),
 
         ];
     }

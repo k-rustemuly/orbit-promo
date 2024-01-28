@@ -108,4 +108,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Receipt::class, 'user_id', 'id');
     }
+
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class, 'user_id', 'id');
+    }
 }

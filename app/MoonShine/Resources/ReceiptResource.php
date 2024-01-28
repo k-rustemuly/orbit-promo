@@ -20,7 +20,6 @@ use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
-use Illuminate\Support\Str;
 
 class ReceiptResource extends ModelResource
 {
