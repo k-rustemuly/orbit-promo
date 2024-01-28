@@ -23,7 +23,7 @@ class ReceiptController extends BaseController
         }
         else if($result = $service->recognize($file)) {
             if($service->isOfd($result)) {
-                if($service->isUnique() && $this->isHavePosition($result, 'banan')) {
+                if($service->isUnique() && $this->isHavePosition($result, 'orbit')) {
                     $service->receipt_status_id = ReceiptStatus::ACCEPTED;
                     $service->store(Auth::user());
                     return $this->success();
