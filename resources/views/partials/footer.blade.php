@@ -21,6 +21,7 @@
 			signIn: false,
 			registration: false,
 			receipt: false,
+			receiptPage: 0,
 			voucher: false,
 			voucherData: {}
 		});
@@ -34,6 +35,12 @@
 			setInfo(info) {
 				this.info = info;
 				localStorage.setItem('userInfo', JSON.stringify(info)); // stringify the info object
+			},
+			updateProfile() {
+				const profile = document.getElementById('profile-block');
+				if (profile) {
+					profile.dispatchEvent(new CustomEvent('update-data'));
+				}
 			},
 			logOut() {
 				localStorage.removeItem('token');

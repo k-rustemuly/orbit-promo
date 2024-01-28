@@ -42,7 +42,7 @@
 							@endfor
 					</select>
 				</div>
-				<button type="button" class="button" @click="selectYear">ПОДТВЕРДИТЬ</button>
+				<button type="button" class="custom-button" @click="selectYear">ПОДТВЕРДИТЬ</button>
 				<div class="decorations">
 					<img src="{{ asset('assets/media/date_01.svg') }}" alt="" class="decor_01">
 					<img src="{{ asset('assets/media/date_01.svg') }}" alt="" class="decor_02">

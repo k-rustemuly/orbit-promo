@@ -79,6 +79,10 @@
                                 } finally {
                                     this.loading = false;
                                 }
+                            },
+                            showReceiptModal() {
+                                this.$store.modal.receiptPage = 1;
+                                this.$store.modal.receipt = true;
                             }
                         }">
                         <div class="head" @click="toggleContent()">
@@ -115,7 +119,7 @@
                         </div>
                         <div class="footer">
                             <img src="{{ asset('assets/media/profile_01.svg') }}" alt="">
-                            <a href="#" @click.prevent="$store.modal.receipt = true">ЗАГРУЗИ ЧЕК</a>
+                            <a href="#" @click.prevent="showReceiptModal()">ЗАГРУЗИ ЧЕК</a>
                         </div>
                     </div>
                 </div>

@@ -25,10 +25,7 @@
 						this.page = 3;
 					} else {
 						this.page = 2;
-						const profile = document.getElementById('profile-block');
-						if (profile) {
-							profile.dispatchEvent(new CustomEvent('update-data'));
-						}
+						Alpine.store('user').updateProfile();
 					}
 
 				} catch (error) {
