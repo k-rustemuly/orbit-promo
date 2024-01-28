@@ -3,24 +3,49 @@
 		Alpine.data('receipt', () => ({
 			page: 0,
 			file: null,
+			loading: false,
 			fileChanged(event) {
 				const fileInput = event.target;
 				if (fileInput.files.length > 0) {
 					this.file = fileInput.files[0];
-					this.uploadFile(this.page == 0 || this.page == 1 ? 0 : 1);
+					this.uploadFile();
 				} else {
 					this.file = null;
 				}
 			},
-			async uploadFile(isManual = 0) {
-				this.file = null;
+			async uploadFile() {
+				const isManual = this.page == 0 || this.page == 1 ? 0 : 1;
+				const formData = new FormData();
+				formData.append('file', this.file);
+				formData.append('is_manual', isManual);
 
-				this.page = isManual == 0 ? 3 : 5;
+				this.loading = true;
+				try {
+					const response = await fetch('/api/{{ app()->getLocale() }}/receipts/recognize', {
+						method: 'POST',
+						headers: {
+							// 'Content-Type': 'application/json',
+							'Authorization': `Bearer ${ Alpine.store('user').token }`,
+							'Accept': 'application/json',
+						},
+						body: formData
+					});
+					const result = await response.json();
+					if(result.success) {
+						this.page = isManual ? 6 : 5;
+					} else {
+						this.page = 3;
+					}
+					Alpine.store('user').updateProfile();
+				} catch (error) {
+					console.error('Error:', error);
+				} finally {
+					this.loading = false;
+				}
 			},
 			closeModal() {
 				this.page = 1;
 				Alpine.store('modal').receipt = false;
-				Alpine.store('user').updateProfile();
 			},
 		}))
 	});
@@ -129,16 +154,23 @@
 						<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon">
 					</div>
 					<div class="body">
-						<p>
-							Скорей отправляйся <br>
-							в <span>ИГРУ</span> для сбора <br>
-							предметов
-						</p>
+						<template x-if="page == 5">
+							<p>
+								Скорей отправляйся <br>
+								в <span>ИГРУ</span> для сбора <br>
+								предметов
+							</p>
+						</template>
 						<img src="{{ asset('assets/media/form_01.svg') }}" alt="" class="warning">
-						<a href="#" class="custom-button" @click.prevent="closeModal()">ПРОДОЛЖИТЬ ИГРУ</a>
+						<template x-if="page == 5">
+							<a href="#" class="custom-button" @click.prevent="closeModal()">ПРОДОЛЖИТЬ ИГРУ</a>
+						</template>
+						<template x-if="page == 6">
+							<a href="#" class="custom-button" @click.prevent="closeModal()">вернуться</a>
+						</template>
 					</div>
 					<div class="footer">
-						<p>Нажимая кнопку “Назад”, <br>
+						<p>Нажимая кнопку “ПРОДОЛЖИТЬ ИГРУ”, <br>
 							я подтверждаю, что согласен с Правилами Акции <br>
 							и Политикой Конфидециальности</p>
 					</div>
