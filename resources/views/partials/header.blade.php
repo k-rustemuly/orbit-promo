@@ -31,8 +31,8 @@
                     <template x-if="!$store.user.token"><a href="#" class="button button__outlined" @click.prevent="$store.modal.signIn = true">Войти</a></template>
                 </div>
             @else
-                <div class="container-navigation_column-02" x-data>
-                    <a href="#" class="button button__outlined" @click.prevent="">Выйти</a>
+                <div class="container-navigation_column-02">
+                    <a href="#" class="button button__outlined" x-data @click.prevent="$store.service.logOut()">Выйти</a>
                 </div>
             @endif
         </div>

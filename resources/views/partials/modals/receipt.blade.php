@@ -1,4 +1,16 @@
-<div class="section-modal modal-receipt" id="receipt-add" x-data x-cloak x-show="$store.modal.receipt">
+<script type="text/javascript">
+	document.addEventListener('alpine:init', () => {
+		Alpine.data('receipt', () => ({
+			page: 1,
+			file: '',
+			closeModal() {
+				Alpine.store('modal').receipt = false;
+			},
+		}))
+	});
+</script>
+
+<div class="section-modal modal-receipt" id="receipt-add" x-data="receipt" x-cloak x-show="$store.modal.receipt">
 	<div class="wrapper-modal">
 		<div class="receipt-container">
 			<div class="head">
@@ -8,7 +20,7 @@
 					чтобы продолжить <br>
 					игру!
 				</h4>
-				<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon">
+				<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon" @click="closeModal()">
 			</div>
 			<div class="body">
 				<div class="table">
@@ -22,7 +34,9 @@
 						<img src="{{ asset('assets/media/receipt.png') }}" alt="" class="receipt">
 					</div>
 				</div>
-				<a class="button button_custom">ЗАГРУЗИТЬ<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
+				<a href="#" class="button button_custom upload-btn">ЗАГРУЗИТЬ<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
+				<input type="file" x-model="file" class="hidden" />
+
 				<p class="color-white bold">или пригласить друга</p>
 			</div>
 			<div class="footer">

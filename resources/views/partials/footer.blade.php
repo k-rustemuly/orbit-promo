@@ -20,7 +20,9 @@
 		Alpine.store('modal', {
 			signIn: false,
 			registration: false,
-			receipt: false
+			receipt: false,
+			voucher: false,
+			voucherData: {}
 		});
 		Alpine.store('user', {
 			token: localStorage.getItem('token') || null,
@@ -32,6 +34,12 @@
 			setInfo(info) {
 				this.info = info;
 				localStorage.setItem('userInfo', JSON.stringify(info)); // stringify the info object
+			},
+			logOut() {
+				localStorage.removeItem('token');
+				localStorage.removeItem('userInfo');
+				this.token = null;
+				this.info = {};
 			}
 		});
 		Alpine.store('service', {
@@ -52,6 +60,21 @@
 				Alpine.store('user').setToken(result.data.token);
 				window.location.href = `/{{ app()->getLocale() }}/profile`;
 			},
+			async logOut() {
+				const response = await fetch('/api/{{ app()->getLocale() }}/logout', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${ Alpine.store('user').token }`,
+						'Accept': 'application/json',
+					}
+				});
+
+				const result = await response.json();
+				
+				Alpine.store('user').logOut();
+				window.location.href = `/{{ app()->getLocale() }}`;
+			}
 		});
 	});
 </script>

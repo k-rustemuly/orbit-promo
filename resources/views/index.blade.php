@@ -292,6 +292,7 @@
     </div>
 </section>
 
+@if(region() == 'kz')
 <section class="wrapper-full section-logotype">
     <div class="container-logotype">
         <div class="container-logotype__row-01">
@@ -342,6 +343,7 @@
         </div>
     </div>
 </section>
+@endif
 
 <section class="wrapper-full section-questions">
     <div class="wrapper-fix wrapper-middle wrapper-questions">

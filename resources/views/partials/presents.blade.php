@@ -25,7 +25,15 @@
                 } finally {
                     this.loading = false;
                 }
-            }
+            },
+			showVoucherModal(data) {
+				if($store.user.token) {
+					$store.modal.voucherData = data;
+					$store.modal.voucher = true;
+				} else {
+					$store.modal.signIn = true;
+				}
+			}
 		}">
 			<h3 class="title">ВИТРИНА призов</h3>
 
@@ -38,7 +46,7 @@
 						</div>
 						<p x-text="data?.[0]?.name"></p>
 					</div>
-					<a href="#">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[0])">УЧАСТВОВАТЬ</a>
 					<div class="image image-01">
 						<img src="{{ asset('assets/media/present_01.png') }}" alt="">
 					</div>
@@ -55,7 +63,7 @@
 						</div>
 						<p x-text="data?.[1]?.name"></p>
 					</div>
-					<a href="#">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[1])">УЧАСТВОВАТЬ</a>
 					<div class="image image-02">
 						<img src="{{ asset('assets/media/present_02.png') }}" alt="">
 					</div>
@@ -72,9 +80,9 @@
 						</div>
 						<p x-text="data?.[2]?.name"></p>
 					</div>
-					<a href="#">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[2])">УЧАСТВОВАТЬ</a>
 					<div class="image image-03">
-						<img src="{{ asset('assets/media/present_03.png') }}" alt="">
+						<img src="{{ asset( region() == 'kz' ? 'assets/media/present_03.png' : 'assets/media/present_03_uz.png') }}" alt="">
 					</div>
 					<div class="decoration">
 						<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
@@ -92,7 +100,7 @@
 							</div>
 							<p>Колонка</p>
 						</div>
-						<a href="#">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[0])">УЧАСТВОВАТЬ</a>
 						<div class="image image-01">
 							<img src="{{ asset('assets/media/present_01.png') }}" alt="">
 						</div>
@@ -109,7 +117,7 @@
 							</div>
 							<p>Наушники</p>
 						</div>
-						<a href="#">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[1])">УЧАСТВОВАТЬ</a>
 						<div class="image image-02">
 							<img src="{{ asset('assets/media/present_02.png') }}" alt="">
 						</div>
@@ -126,9 +134,9 @@
 							</div>
 							<p>Планшет</p>
 						</div>
-						<a href="#">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[2])">УЧАСТВОВАТЬ</a>
 						<div class="image image-03">
-							<img src="{{ asset('assets/media/present_03.png') }}" alt="">
+							<img src="{{ asset( region() == 'kz' ? 'assets/media/present_03.png' : 'assets/media/present_03_uz.png') }}" alt="">
 						</div>
 						<div class="decoration">
 							<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
