@@ -33,6 +33,8 @@ Route::prefix('{locale}')
 
         Route::get('instant-prizes', [PrizeController::class, 'instantPrizes'])->name('instant.prizes');
 
+        Route::get('vouchers', [VoucherController::class, 'vouchers'])->name('vouchers');
+
         Route::middleware('auth:sanctum')
             ->group(function() {
 
@@ -49,7 +51,9 @@ Route::prefix('{locale}')
 
                 Route::post('vouchers', [VoucherController::class, 'buy'])->name('vouchers.buy');
 
-                Route::get('my-instant-prizes', [PrizeController::class, 'instantPrizes'])->name('instant.prizes');
+                Route::get('my-instant-prizes', [PrizeController::class, 'instantPrizes'])->name('my.prizes');
+
+                Route::get('my-vouchers', [VoucherController::class, 'myVouchers'])->name('my.vouchers');
 
                 Route::prefix('games')
                     ->name('games.')

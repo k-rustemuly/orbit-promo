@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\VouchersResource;
 use App\Models\User;
 use App\Models\Prize;
 use App\Models\Voucher;
@@ -25,5 +26,22 @@ class VoucherService
             }
         }
         return false;
+    }
+
+    public function all($search, ?User $user = null)
+    {
+        $voucher = Voucher::filter($search)
+            ->with(['user', 'prize']);
+
+        if($user) {
+            $voucher->where('user_id', $user->id);
+
+        }
+        return VouchersResource::collection(
+                $voucher
+                    ->paginateFilter()
+        )
+        ->response()
+        ->getData(true);
     }
 }
