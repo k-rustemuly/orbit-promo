@@ -13,16 +13,16 @@ class GameService
 
     public function __construct(public Rgl $rgl){}
 
-    public function start(User $user): ?Game
+    public function start(User $user): Game
     {
+        $payload = [
+            'id' => Str::uuid(),
+            'user_id' => $user->id,
+            'before_life' => $user->life,
+            'before_coins' => $user->coin,
+            'before_level' => $user->level,
+        ];
         if($user->life > 0) {
-            $payload = [
-                'id' => Str::uuid(),
-                'user_id' => $user->id,
-                'before_life' => $user->life,
-                'before_coins' => $user->coin,
-                'before_level' => $user->level,
-            ];
             if(!$user->is_won_instant_prize) {
                 $gift = InstantPrize::notWon()->gift()->orderBy('draw_date')->first();
                 if($gift) {
@@ -39,7 +39,7 @@ class GameService
                 return $game;
             }
         }
-        return null;
+        return Game::make($payload);
     }
 
     /**
