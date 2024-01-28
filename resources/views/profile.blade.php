@@ -41,7 +41,7 @@
                     <img src="{{ asset('assets/media/icons/star_white.svg') }}">
                     <span x-text="$store.user.info?.coin"></span>
                 </div>
-                <a href="#">В ИГРУ</a>
+                <a href="/game">В ИГРУ</a>
             </div>
             <div class="block-profile__column-02">
                 <div class="block-profile__card block-profile__card-01">
