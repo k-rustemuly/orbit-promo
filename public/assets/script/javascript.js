@@ -1,16 +1,16 @@
 /* TABS CODE SETTINGS START: */
 
-jQuery(".table-block .table-tabs-content > div").hide();
-jQuery(".table-block .table-tabs-buttons a:first").toggleClass("active");
-jQuery(".table-block .table-tabs-content div:first").fadeIn();
+// jQuery(".table-block .table-tabs-content > div").hide();
+// jQuery(".table-block .table-tabs-buttons a:first").toggleClass("active");
+// jQuery(".table-block .table-tabs-content div:first").fadeIn();
 
-jQuery('.table-block .table-tabs-buttons a').click(function(e) {
-    e.preventDefault();        
-    jQuery(".table-block .table-tabs-content > div").hide();
-    jQuery(".table-block .table-tabs-buttons a").removeClass("active");
-    jQuery(this).toggleClass("active");
-    jQuery('#' + jQuery(this).attr('name')).fadeIn();
-});
+// jQuery('.table-block .table-tabs-buttons a').click(function(e) {
+//     e.preventDefault();        
+//     jQuery(".table-block .table-tabs-content > div").hide();
+//     jQuery(".table-block .table-tabs-buttons a").removeClass("active");
+//     jQuery(this).toggleClass("active");
+//     jQuery('#' + jQuery(this).attr('name')).fadeIn();
+// });
 
 /* TABS CODE SETTINGS END. */
 
@@ -22,10 +22,10 @@ jQuery('.question-item').click(function() {
     jQuery(this).find('p').slideToggle();
 })
 
-jQuery('.card .head').click(function(){
-    jQuery(this).siblings('.body').find('.block').toggleClass('hidden');
-    jQuery(this).siblings('.body').find(' > p').toggleClass('hidden');
-})
+// jQuery('.card .head').click(function(){
+//     jQuery(this).siblings('.body').find('.block').toggleClass('hidden');
+//     jQuery(this).siblings('.body').find(' > p').toggleClass('hidden');
+// })
 
 
 jQuery('.present-slider').owlCarousel({
