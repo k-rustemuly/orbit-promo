@@ -2048,7 +2048,7 @@ class Modal extends Phaser.GameObjects.Container {
                     this.hideModal()
                     scene.goToNextLevel();
                 } else if (callbackButton === 'err') {
-                    window.location.href = 'https://orbit-promo.kz/ru/profile';
+                    // window.location.href = 'https://orbit-promo.kz/ru/profile';
                 } else {
                     this.hideModal()
                 }
@@ -2062,7 +2062,7 @@ class Modal extends Phaser.GameObjects.Container {
 
         if (callbackButton === 'err') {
             const button2 = new ButtonBorder(scene, scene.cameras.main.width / 2, button.y + 120, scene.langdata.btn_friend, () => {
-                window.location.href = 'https://orbit-promo.kz/ru/profile';
+                // window.location.href = 'https://orbit-promo.kz/ru/profile';
             }, 'border');
             button2.elementId = 'button'; // Добавляем пользовательское свойство
             button2.setScale(.9);
@@ -2408,7 +2408,7 @@ class ModalEnergy extends Phaser.GameObjects.Container {
         this.animatedElements.push(subtitle);
 
         var button = new Button(scene, scene.cameras.main.width / 2, subtitle.y + 180, textButton, () => {
-            window.location.href = 'http://www.example.com';
+            window.location.href = '/ru/profile';
         }, 'normal');
         button.elementId = 'button'; // Добавляем пользовательское свойство
         button.setScale(.9);
@@ -2417,7 +2417,7 @@ class ModalEnergy extends Phaser.GameObjects.Container {
         this.animatedElements.push(button);
 
         const button2 = new ButtonBorder(scene, scene.cameras.main.width / 2, button.y + 120, scene.langdata.btn_friend, () => {
-            window.location.href = 'http://www.example.com';
+            window.location.href = '/ru/profile';
         }, 'border');
         button2.elementId = 'button'; // Добавляем пользовательское свойство
         button2.setScale(.9);
