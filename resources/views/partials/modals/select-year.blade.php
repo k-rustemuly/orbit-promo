@@ -34,18 +34,19 @@
 				<img src="{{ asset('assets/media/icons/star_purple.svg') }}" alt="" class="decoration">
 			</div>
 			<div class="body">
-				<h4>РЕГИСТРИРУЙСЯ, <br> ИГРАЙ И ВЫИГРЫВАЙ <br> ПРИЗЫ!</h4>
+				<h4>{!! trans('front.modal_select_year.title') !!}</h4>
 				<img src="{{ asset('assets/media/icons/star_purple.svg') }}" alt="" class="decoration">
-				<p>В акции могут участвовать <br>только пользователи старше 16 лет</p>
+				<p>{!! trans('front.modal_select_year.description') !!}</p>
+				<div style="color: white; margin-bottom: -20px">{!! trans('front.modal_select_year.select_date') !!}</div>
 				<div style="display: flex;">
-					<select placeholder="Год рождения" class="custom-select" x-model="birthYear" id="date-select">
-						<option value="0">ВЫБЕРИ ГОД:</option>
+					<select placeholder="{!! trans('front.modal_select_year.select_year') !!}" class="custom-select" x-model="birthYear" id="date-select">
+						<option value="0">{!! trans('front.modal_select_year.select_year') !!}:</option>
 						@for ($n = 0; $n < 69; $n++) <option value="{{ 2008 - $n }}">{{ 2008 - $n }}</option>
 							@endfor
 					</select>
 					<span class="select_arrow"><img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" alt=""></span>
 				</div>
-				<button type="button" class="custom-button" @click="selectYear">ПОДТВЕРДИТЬ</button>
+				<button type="button" class="custom-button" @click="selectYear">{!! trans('front.modal_select_year.approve') !!}</button>
 				<div class="decorations">
 					<img src="{{ asset('assets/media/date_01.svg') }}" alt="" class="decor_01">
 					<img src="{{ asset('assets/media/date_01.svg') }}" alt="" class="decor_02">

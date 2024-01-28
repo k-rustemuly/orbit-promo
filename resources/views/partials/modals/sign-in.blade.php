@@ -31,7 +31,7 @@
                 this.loading = true;
                 try {
                     const sendData = {
-                        'phone_number': this.phone_number
+                        'phone_number': this.phone_number.replace(/\D/g, '')
                     }
                     const response = await fetch('/api/{{ app()->getLocale() }}/forgotPassword', {
                         method: 'POST',
@@ -114,18 +114,18 @@
         <div class="container-form" x-show="!confirmPasswordForm">
             <div class="head">
                 <img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
-                <h3 x-text="forgotPassword == true ? 'Забыли пароль?' : 'ВХОД'"></h3>
+                <h3 x-text="forgotPassword == true ? '{!! trans('front.sign_in.forgot') !!}' : '{!! trans('front.sign_in.title') !!}'"></h3>
                 <img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
             </div>
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="phone_number" type="text" class="input" placeholder="Номер телефона или E-mail" autocomplete="username">
+                        <input x-model="phone_number" type="text" class="input mask_phone" placeholder="{!! trans('front.sign_in.login') !!}" autocomplete="username">
                         <span x-cloak x-show="messages?.phone_number?.[0]" x-text="messages?.phone_number?.[0]"></span>
                     </div>
 
                     <div class="input-row" x-show="forgotPassword == false">
-                        <input x-model="password" type="password" class="input" placeholder="Пароль" autocomplete="current-password">
+                        <input x-model="password" type="password" class="input" placeholder="{!! trans('front.sign_in.password') !!}" autocomplete="current-password">
                         <span x-cloak x-show="messages?.password?.[0]" x-text="messages?.password?.[0]"></span>
                     </div>
 
@@ -133,47 +133,47 @@
                         <span x-cloak x-show="messages?.message?.[0]" x-text="messages?.message?.[0]"></span>
                     </div>
                     <a href="#" @click.prevent="showForgotPasswordForm()" x-show="forgotPassword == false">
-                        <p class="caption">Забыли пароль?</p>
+                        <p class="caption">{!! trans('front.sign_in.forgot') !!}</p>
                     </a>
-                    <button type="button" class="button" @click="signIn()" :disabled="loading" x-show="forgotPassword == false">Войти</button>
+                    <button type="button" class="button" @click="signIn()" :disabled="loading" x-show="forgotPassword == false">{!! trans('front.sign_in.enter') !!}</button>
 
 
                     <a href="#" @click.prevent="showLoginForm()" x-show="forgotPassword == true">
-                        <p class="caption">Вход</p>
+                        <p class="caption">{!! trans('front.sign_in.enter') !!}</p>
                     </a>
-                    <button type="button" class="button" @click="forgotPasswordRequest()" :disabled="loading" x-show="forgotPassword == true">Отправить</button>
+                    <button type="button" class="button" @click="forgotPasswordRequest()" :disabled="loading" x-show="forgotPassword == true">{!! trans('front.sign_in.send') !!}</button>
                 </form>
             </div>
             <div class="footer">
-                <p>НЕ ЗАРЕГИСТРИРОВАН?</p>
-                <a href="#" @click.prevent="showRegistrationModal()">Зарегистрироваться</a>
+                <p>{!! trans('front.sign_in.not_reg') !!}</p>
+                <a href="#" @click.prevent="showRegistrationModal()">{!! trans('front.sign_in.reg') !!}</a>
             </div>
         </div>
 
         <div class="container-form" x-show="confirmPasswordForm">
             <div class="head">
-                <p>Сообщение с кодом-паролем <br>отправлено на E-mail</p>
+                <p>{!! trans('front.sign_in.email_sent') !!}</p>
                 <h3 x-text="email"></h3>
                 <img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
             </div>
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="password" type="text" name="code" class="input" placeholder="Код-пароль ">
+                        <input x-model="password" type="text" name="code" class="input" placeholder="{!! trans('front.sign_in.code') !!}">
                         <span x-cloak x-show="messages?.password?.[0]" x-text="messages?.password?.[0]"></span>
                     </div>
-                    <button type="button" class="button" @click="signIn()" :disabled="loading">ПОДТВЕРДИТЬ</button>
+                    <button type="button" class="button" @click="signIn()" :disabled="loading">{!! trans('front.sign_in.approve') !!}</button>
                 </form>
             </div>
             <div class="footer reverse">
                 <template x-if="countdown > 0">
                     <div>
-                        <p><b>НЕ ПРИШЕЛ КОД?</b></p>
-                        <p>Повторно код-пароль на почту можно запросить через <span x-text="countdown"></span> секунд</p>
+                        <p><b>{!! trans('front.sign_in.no_code') !!}</b></p>
+                        <p>{!! trans('front.sign_in.resend_coundown') !!}</p>
                     </div>
                 </template>
                 <template x-if="countdown == 0">
-                    <a href="#" @click.prevent="forgotPasswordRequest()">ОТПРАВИТЬ СНОВА</a>
+                    <a href="#" @click.prevent="forgotPasswordRequest()">{!! trans('front.sign_in.resend') !!}</a>
                 </template>
             </div>
         </div>

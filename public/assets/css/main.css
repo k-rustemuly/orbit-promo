@@ -193,6 +193,7 @@ h3.title {
 }
 .section-header .container-header .container-header_column-01 h1 {
   color: rgb(23, 165, 222);
+  text-transform: uppercase;
   text-shadow: 0px 1px 0 #fff, 0px -1px 0 #fff, 1px 0px 0 #fff, -1px 0px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 0px 2px 0 #fff, 0px -2px 0 #fff, 2px 0px 0 #fff, -2px 0px 0 #fff, 2px 2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, -2px -2px 0 #fff;
 }
 .section-header .container-header .container-header_column-01 h1, .section-header .container-header .container-header_column-01 h2 {

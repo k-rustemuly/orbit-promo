@@ -81,8 +81,8 @@
                                 }
                             },
                             showReceiptModal() {
-                                this.$store.modal.receiptPage = 1;
-                                this.$store.modal.receipt = true;
+                                $store.modal.receiptPage = 1;
+                                $store.modal.receipt = true;
                             }
                         }">
                         <div class="head" @click="toggleContent()">
@@ -375,5 +375,11 @@
         </div>
     </div>
 </section>
-
+<script type="text/javascript">
+    document.addEventListener('alpine:init', () => {
+        if(!Alpine.store('user')?.token) {
+            window.location.href = `/{{ app()->getLocale() }}`;
+        }
+    });
+</script>
 @endsection

@@ -8,12 +8,11 @@
     <div class="container-header">
         <div class="container-header_column-01">
             <h2 class="title">
-                ОТКРОЙ ВТОРОЕ ДЫХАНИЕ
+                {!! trans('front.home_header.title') !!}
             </h2>
             <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image mobile">
             <h1 class="title">
-                ПОКУПАЙ ORBIT®, <br>
-                ИГРАЙ И ВЫИГРЫВАЙ
+                {!! trans('front.home_header.subtitle') !!}
             </h1>
             <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image desktop">
             <div class="decorations">
@@ -30,29 +29,47 @@
 
     <div class="container-notes">
         <div class="container-notes_column-01">
-            <a href="#game" class="block-notes block-01">
-                <img src="{{ asset('assets/media/note_01.svg') }}" alt="Играть">
+            <a href="/game" class="block-notes block-01" x-data @click="$store.nav.play">
+                <img src="{{ asset('assets/media/note_01.svg') }}">
             </a>
         </div>
         <div class="container-notes_column-02">
-            <a href="#" class="block-notes block-02">
-                <img src="{{ asset('assets/media/note_02.svg') }}" alt="Загрузить чек">
+            <a href="#" class="block-notes block-02" x-data="{
+                showReceiptModal() {
+                    if($store.user.token) {
+                        $store.modal.receiptPage = 1;
+                        $store.modal.receipt = true;
+                    } else {
+                        $store.modal.signIn = true;
+                    }
+                }
+            }" @click.prevent="showReceiptModal()">
+                <img src="{{ asset('assets/media/note_02.svg') }}">
             </a>
             <a href="#prizes" class="block-notes block-03">
-                <img src="{{ asset('assets/media/note_03.svg') }}" alt="Призы">
+                <img src="{{ asset('assets/media/note_03.svg') }}">
             </a>
         </div>
     </div>
 
     <div class="container-notes-mobile">
-        <a href="#game" class="block-notes block-01">
-            <img src="{{ asset('assets/media/note_01.svg') }}" alt="Играть">
+        <a href="/game" class="block-notes block-01" x-data @click="$store.nav.play">
+            <img src="{{ asset('assets/media/note_01.svg') }}">
         </a>
-        <a href="#" class="block-notes block-02">
-            <img src="{{ asset('assets/media/note_02.svg') }}" alt="Загрузить чек">
+        <a href="#" class="block-notes block-02" x-data="{
+                showReceiptModal() {
+                    if($store.user.token) {
+                        $store.modal.receiptPage = 1;
+                        $store.modal.receipt = true;
+                    } else {
+                        $store.modal.signIn = true;
+                    }
+                }
+            }" @click.prevent="showReceiptModal()">
+            <img src="{{ asset('assets/media/note_02.svg') }}">
         </a>
         <a href="#prizes" class="block-notes block-03">
-            <img src="{{ asset('assets/media/note_03.svg') }}" alt="Призы">
+            <img src="{{ asset('assets/media/note_03.svg') }}">
         </a>
     </div>
 
@@ -70,23 +87,23 @@
             <div class="container-game">
                 <div class="container-game_column-01">
                     <div>
-                        <h2 class="title">ИГРА</h2>
-                        <p>Готов сыграть в простую, <br>но залипательную игру?</p>
+                        <h2 class="title">{!! trans('front.home_header.game') !!}</h2>
+                        <p>{!! trans('front.home_header.game_subtitle') !!}</p>
                     </div>
-                    <img src="{{ asset('assets/media/image_03.png') }}" alt="Game Image">
+                    <img src="{{ asset('assets/media/image_03.png') }}">
                 </div>
                 <div class="container-game_column-02">
-                    <h2 class="title">ИГРА</h2>
-                    <p>Готов сыграть в простую, <br>но залипательную игру?</p>
+                    <h2 class="title">{!! trans('front.home_header.game') !!}</h2>
+                    <p>{!! trans('front.home_header.game_subtitle') !!}</p>
                     <div class="game-caption_block">
                         <div class="game-caption_block-item">
                             <div class="image">
-                                <img src="{{ asset('assets/media/game_01.svg') }}" alt="Image">
+                                <img src="{{ asset('assets/media/game_01.svg') }}">
                             </div>
                             <span>
                                 <img src="{{ asset('assets/media/icons/line.svg') }}" alt="">
                             </span>
-                            <p>Объединяй одинаковые <br> предметы в ряд </p>
+                            <p>{!! trans('front.home_header.instr1') !!}</p>
                         </div>
                         <div class="game-caption_block-item">
                             <div class="image">
@@ -95,7 +112,7 @@
                             <span>
                                 <img src="{{ asset('assets/media/icons/line.svg') }}" alt="">
                             </span>
-                            <p>Качайся на уровнях <br> и копи коины</p>
+                            <p>{!! trans('front.home_header.instr2') !!}</p>
                         </div>
                         <div class="game-caption_block-item">
                             <div class="image">
@@ -104,15 +121,15 @@
                             <span>
                                 <img src="{{ asset('assets/media/icons/line.svg') }}" alt="">
                             </span>
-                            <p>Меняй коины на участие <br> в еженедельном розыгрыше</p>
+                            <p>{!! trans('front.home_header.instr3') !!}</p>
                         </div>
                     </div>
                     <div class="game-action_block">
                         <div>
-                            <a href="#" class="button filled">
-                                Играть
+                            <a href="/game" class="button filled" x-data @click="$store.nav.play">
+                            {!! trans('front.home_header.play') !!}
                             </a>
-                            <a href="#" class="button link">Правила акции</a>
+                            <a href="#" class="button link">{!! trans('front.home_header.rules') !!}</a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +167,7 @@
                     try {
                         this.loading = true;
                         const baseUrl = url || `/api/{{ app()->getLocale() }}/${this.activeTab}`;
-                        const fullUrl = this.search ? `${baseUrl}?phone_number=${encodeURIComponent(this.search)}` : baseUrl;
+                        const fullUrl = this.search ? `${baseUrl}?phone_number=${encodeURIComponent(this.search.replace(/\D/g, ''))}` : baseUrl;
 
                         const response = await fetch(fullUrl, {
                             method: 'GET',
@@ -175,9 +192,9 @@
                 }
             }">
                 <div class="table-head">
-                    <h3 class="title">ПОБЕДИТЕЛИ</h3>
+                    <h3 class="title">{!! trans('front.home_header.winners') !!}</h3>
                     <form class="table-form" @submit.prevent="getData()">
-                        <input x-model="search" type="text" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search">
+                        <input x-model="search" type="text" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search mask_phone">
                     </form>
                 </div>
                 <div class="table-body">
@@ -296,7 +313,7 @@
 <section class="wrapper-full section-logotype">
     <div class="container-logotype">
         <div class="container-logotype__row-01">
-            <h2 class="title">КУПИТЬ ОНЛАЙН</h2>
+            <h2 class="title">{!! trans('front.home_header.buy_online') !!}</h2>
         </div>
         <div class="container-logotype__row-02">
             <div class="wrapper-fix wrapper-logotype">
@@ -348,109 +365,101 @@
 <section class="wrapper-full section-questions">
     <div class="wrapper-fix wrapper-middle wrapper-questions">
         <div class="container-questions">
-            <h2 class="title">ОТВЕТЫ НА ВОПРОСЫ</h2>
+            <h2 class="title">{!! trans('front.faq.title') !!}</h2>
             <div class="block-questions">
                 <div class="block-questions__column-01">
                     <div class="questions-accordeons">
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Сколько длится акция?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest1') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans1') !!}</p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Кто может участвовать в акции?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest2') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans2') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Как принять участие в акции?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest3') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans3') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Какие продукты принимают участие в акции?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest4') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans4') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Где я могу узнать подробные правила акции?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest5') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans5') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Какие призы разыгрываются?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest6') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans6') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Какое количество призов я могу выиграть?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest7') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans7') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Когда и как будет проходить розыгрыш еженедельных призов?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest8') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans8') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Когда и как будет проходить розыгрыш главного приза?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest9') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans9') !!} </p>
                         </div>
 
                         <div class="question-item">
                             <div class="question-title">
-                                <h4>Нужно ли сохранять упаковки и чеки?</h4>
-                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="" alt="Открыть/закрыть вопрос">
+                                <h4>{!! trans('front.faq.quest10') !!}</h4>
+                                <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. </p>
+                            <p>{!! trans('front.faq.ans10') !!} </p>
                         </div>
+
+                        
 
                     </div>
                 </div>
-                <div class="block-questions__column-02">
+                <!-- <div class="block-questions__column-02">
                     <div class="question-form">
                         <img src="{{ asset('assets/media/questions.svg') }}" alt="">
-                        <p>НЕ НАШЕЛ ОТВЕТ <br> НА СВОЙ ВОПРОС?</p>
-                        <a href="#">ЗАДАТЬ ВОПРОС</a>
+                        <p>{!! trans('front.faq.no_answer') !!}</p>
+                        <a href="#">{!! trans('front.faq.ask') !!}</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

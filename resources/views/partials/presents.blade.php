@@ -35,7 +35,7 @@
 				}
 			}
 		}">
-			<h3 class="title">ВИТРИНА призов</h3>
+			<h3 class="title">{!! trans('front.home_header.prizes') !!}</h3>
 
 			<div class="present-block">
 				<div class="present-block_item">
@@ -46,7 +46,7 @@
 						</div>
 						<p x-text="data?.[0]?.name"></p>
 					</div>
-					<a href="#" @click.prevent="showVoucherModal(data?.[0])">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[0])">{!! trans('front.home_header.participate') !!}</a>
 					<div class="image image-01">
 						<img src="{{ asset('assets/media/present_01.png') }}" alt="">
 					</div>
@@ -63,7 +63,7 @@
 						</div>
 						<p x-text="data?.[1]?.name"></p>
 					</div>
-					<a href="#" @click.prevent="showVoucherModal(data?.[1])">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[1])">{!! trans('front.home_header.participate') !!}</a>
 					<div class="image image-02">
 						<img src="{{ asset('assets/media/present_02.png') }}" alt="">
 					</div>
@@ -80,7 +80,7 @@
 						</div>
 						<p x-text="data?.[2]?.name"></p>
 					</div>
-					<a href="#" @click.prevent="showVoucherModal(data?.[2])">УЧАСТВОВАТЬ</a>
+					<a href="#" @click.prevent="showVoucherModal(data?.[2])">{!! trans('front.home_header.participate') !!}</a>
 					<div class="image image-03">
 						<img src="{{ asset( region() == 'kz' ? 'assets/media/present_03.png' : 'assets/media/present_03_uz.png') }}" alt="">
 					</div>
@@ -98,9 +98,9 @@
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
 								<span x-text="data?.[0]?.coin"></span>
 							</div>
-							<p>Колонка</p>
+							<p x-text="data?.[0]?.name"></p>
 						</div>
-						<a href="#" @click.prevent="showVoucherModal(data?.[0])">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[0])">{!! trans('front.home_header.participate') !!}</a>
 						<div class="image image-01">
 							<img src="{{ asset('assets/media/present_01.png') }}" alt="">
 						</div>
@@ -115,9 +115,9 @@
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
 								<span x-text="data?.[1]?.coin"></span>
 							</div>
-							<p>Наушники</p>
+							<p x-text="data?.[1]?.name"></p>
 						</div>
-						<a href="#" @click.prevent="showVoucherModal(data?.[1])">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[1])">{!! trans('front.home_header.participate') !!}</a>
 						<div class="image image-02">
 							<img src="{{ asset('assets/media/present_02.png') }}" alt="">
 						</div>
@@ -132,9 +132,9 @@
 								<img src="{{ asset('assets/media/icons/star_white.svg') }}" alt="">
 								<span x-text="data?.[2]?.coin"></span>
 							</div>
-							<p>Планшет</p>
+							<p x-text="data?.[2]?.name"></p>
 						</div>
-						<a href="#" @click.prevent="showVoucherModal(data?.[2])">УЧАСТВОВАТЬ</a>
+						<a href="#" @click.prevent="showVoucherModal(data?.[2])">{!! trans('front.home_header.participate') !!}</a>
 						<div class="image image-03">
 							<img src="{{ asset( region() == 'kz' ? 'assets/media/present_03.png' : 'assets/media/present_03_uz.png') }}" alt="">
 						</div>

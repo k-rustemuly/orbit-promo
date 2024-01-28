@@ -49,23 +49,18 @@
 			<div class="container-form">
 				<div class="head">
 					<img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
-					<h4 class="padding-top">Списать <span x-text="$store.modal.voucherData.coin"></span> коинов
-						для участия <br>
-						в розыгрыше <br>
-						<span x-text="$store.modal.voucherData.name"></span>?
+					<h4 class="padding-top">
 					</h4>
 					<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
 				</div>
 				<div class="body">
 					<img src="{{ asset('assets/media/icons/start_blue.svg') }}" alt="">
 					<form class="form">
-						<button type="button" class="button" @click="buyVouchers()" :disabled="loading">ПРОДОЛЖИТЬ</button>
+						<button type="button" class="button" @click="buyVouchers()" :disabled="loading">{!! trans('front.voucher.next') !!}</button>
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">Нажимая кнопку “Продолжить”, <br>
-						я подтверждаю, что согласен с <br>
-						Правилами Акции и Политикой Конфидициальности</a>
+					<a class="align-left">{!! trans('front.voucher.title') !!}</a>
 				</div>
 			</div>
 		</template>
@@ -73,19 +68,17 @@
 			<div class="container-form">
 				<div class="head">
 					<img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
-					<h4 class="padding-top">Отлично, коины списаны, теперь Ты — участник розыгрыша <span x-text="$store.modal.voucherData.name"></span>. <span>Удачи!<span></h4>
+					<h4 class="padding-top">{!! trans('front.voucher.success') !!}</h4>
 					<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
 				</div>
 				<div class="body">
 					<img src="{{ asset('assets/media/icons/start_blue.svg') }}" alt="">
 					<form class="form">
-						<a href="/{{ app()->getLocale() }}#game" class="button" @click="closeModal()">Играть ещё</a>
+						<a href="/{{ app()->getLocale() }}#game" class="button" @click="closeModal()">{!! trans('front.voucher.play_more') !!}</a>
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">Нажимая кнопку "Играть",  <br>
-						Я подтверждаю, что согласен с Правилами Акции <br>
-						и Политикой Конфидициальности</a>
+					<a class="align-left">{!! trans('front.voucher.footer1') !!}</a>
 				</div>
 			</div>
 		</template>
@@ -94,23 +87,18 @@
 				<div class="head">
 					<img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
 					<h4 class="padding-top">
-						<span>УПС! <br>
-							немного не хватает <br>
-							для участия <br>
-							в розыгрыше</span>
+						<span>{!! trans('front.voucher.fail') !!}</span>
 					</h4>
 					<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
 				</div>
 				<div class="body">
 					<img src="{{ asset('assets/media/icons/smile.svg') }}" alt="">
 					<form class="form">
-						<a href="/{{ app()->getLocale() }}#game" class="button" @click="closeModal()">СОБРАТЬ КОИНЫ</a>
+						<a href="/{{ app()->getLocale() }}#game" class="button" @click="closeModal()">{!! trans('front.voucher.collect_coin') !!}</a>
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">Нажимая кнопку "Играть",  <br>
-						Я подтверждаю, что согласен с Правилами Акции <br>
-						и Политикой Конфидициальности</a>
+					<a class="align-left">{!! trans('front.voucher.footer2') !!}</a>
 				</div>
 			</div>
 
