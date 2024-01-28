@@ -48,8 +48,9 @@ class AuthService
             if ($sms && Carbon::now()->diffInSeconds($sms->created_at) < 60) {
                 return false;
             }
-
-            $user->password = Generate::code();
+            $code = Generate::code();
+            $user->password = $code;
+            $user->password = $code;
             $user->save();
             event(new ReSendSms($user));
 
