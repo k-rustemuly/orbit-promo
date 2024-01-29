@@ -19,6 +19,8 @@ use MoonShine\Fields\ID;
 use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
+use Illuminate\Contracts\Database\Query\Builder;
+use MoonShine\QueryTags\QueryTag;
 use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 class ReceiptResource extends ModelResource
@@ -112,5 +114,15 @@ class ReceiptResource extends ModelResource
         Route::post('/{receipt}/approve', [ReceiptController::class, 'approve'])->name('receipt.approve');
         Route::get('/{receipt}/reject', [ReceiptController::class, 'reject'])->name('receipt.reject');
 
+    }
+
+    public function queryTags(): array
+    {
+        return [
+            QueryTag::make(
+                __('ui.buttons.to_approve'),
+                fn(Builder $query) => $query->where('receipt_status_id', ReceiptStatus::CHECKING)
+            ),
+        ];
     }
 }
