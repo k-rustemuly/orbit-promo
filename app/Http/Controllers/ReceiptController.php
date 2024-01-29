@@ -40,9 +40,9 @@ class ReceiptController extends BaseController
 
     public function receipts()
     {
-        /** @var \App\Model\User */
+        /** @var \App\Models\User */
         $user = auth()->user();
-        $receipts = $user->receipts()->where('receipt_status_id', ReceiptStatus::ACCEPTED)->get();
+        $receipts = $user->receipts()->with('status');
         return $this->success(ReceiptsResource::collection($receipts));
 
     }
