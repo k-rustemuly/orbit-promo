@@ -6,7 +6,7 @@ use App\Models\Voucher;
 
 class PrizeService
 {
-    public function draw($prize_id){
+    public function draw($prize_id, $attemp = 1){
         $randomVoucher = Voucher::whereNull('winned_date')
             ->where('is_approved', false)
             ->where('prize_id', $prize_id)
@@ -19,7 +19,11 @@ class PrizeService
                 ->where('is_approved', true)
                 ->exists()
         ) {
-            return $this->draw($prize_id);
+            if($attemp <=4) {
+                return $this->draw($prize_id, $attemp++);
+            } else {
+                return false;
+            }
         }
         $randomVoucher->winned_date = now();
         $randomVoucher->save();

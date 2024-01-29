@@ -33,11 +33,13 @@ class PrizeDrawing extends Command
     public function handle()
     {
         $calendar = PrizeDrawingCalendar::where('drawing_at', '<=', now())->whereNull('started_at')->where('is_finished', 0)->first();
-        $calendar->started_at = now();
-        if($this->service->draw($calendar->prize_id)) {
-            $calendar->is_finished = 1;
+        if($calendar) {
+            $calendar->started_at = now();
+            if($this->service->draw($calendar->prize_id)) {
+                $calendar->is_finished = 1;
+            }
+            $calendar->save();
+            $this->info('Finished');
         }
-        $calendar->save();
-        $this->info('Finished');
     }
 }
