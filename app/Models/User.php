@@ -113,4 +113,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Game::class, 'user_id', 'id');
     }
+
+    public function instantPrizes(): HasMany
+    {
+        return $this->hasMany(InstantPrize::class, 'winner_id', 'id');
+    }
+
+    public function vouchers(): HasMany
+    {
+        return $this->hasMany(Voucher::class, 'user_id', 'id');
+    }
 }

@@ -29,7 +29,7 @@ class ReceiptResource extends ModelResource
 
     protected ?PageType $redirectAfterSave = PageType::INDEX;
 
-    protected array $with = ['user'];
+    protected array $with = ['user', 'media', 'status'];
 
     public function title(): string
     {

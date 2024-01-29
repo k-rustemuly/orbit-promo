@@ -6,11 +6,12 @@ namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-
+use App\Models\Voucher;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\ID;
+use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Switcher;
 use MoonShine\Fields\Text;
@@ -64,7 +65,22 @@ class UserResource extends ModelResource
                             ->withTime()
                             ->sortable(),
                     ])
-                    ->hideOnIndex()
+                    ->hideOnIndex(),
+                HasMany::make(__('ui.fields.invitations'), 'invitations', resource: new InvitationResource())
+                        ->fields([
+                            BelongsTo::make(__('ui.fields.friend'), 'friend', fn($item) => $item->name, new UserResource()),
+                            Date::make(__('ui.fields.created_at'), 'created_at')
+                                ->withTime()
+                                ->sortable(),
+                        ])
+                        ->hideOnIndex(),
+                HasMany::make(__('ui.fields.receipts'), 'receipts', resource: new ReceiptResource())
+                    ->hideOnIndex(),
+                HasMany::make(__('ui.fields.instant_prizes'), 'instantPrizes', resource: new InstantPrizeResource())
+                    ->hideOnIndex(),
+                HasMany::make(__('ui.fields.vouchers'), 'vouchers', resource: new VoucherResource())
+                    ->hideOnIndex(),
+                //
             ]),
         ];
     }
