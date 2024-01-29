@@ -24,4 +24,17 @@ final class ReceiptController extends MoonShineController
         }
         return back();
     }
+
+    public function reject(string $resourceUri, Receipt $receipt, MoonShineRequest $request): Response
+    {
+        if($receipt->receipt_status_id == ReceiptStatus::CHECKING) {
+            $receipt->receipt_status_id = ReceiptStatus::NOT_FOUND;
+            $receipt->save();
+            $this->toast(__('ui.messages.saved'));
+        }else {
+            $this->toast(__('ui.messages.error'), 'error');
+        }
+        return back();
+    }
+
 }
