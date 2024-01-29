@@ -146,7 +146,7 @@ return [
         в розыгрыше <br>
         <span x-text="$store.modal.voucherData.name"></span>?',
         'success' => 'Отлично, коины списаны, теперь Ты — участник розыгрыша <span x-text="$store.modal.voucherData.name"></span>. <span>Удачи!<span>',
-        'play_mode' => 'Играть ещё',
+        'play_more' => 'Играть ещё',
         'fail' => 'УПС! <br>
         немного не хватает <br>
         для участия <br>

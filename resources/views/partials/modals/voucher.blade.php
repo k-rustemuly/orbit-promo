@@ -61,7 +61,7 @@
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">{!! trans('front.voucher.title') !!}</a>
+					<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term align-left" target="_blank">{!! trans('front.voucher.title') !!}</a>
 				</div>
 			</div>
 		</template>

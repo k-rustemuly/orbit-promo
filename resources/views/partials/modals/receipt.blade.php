@@ -111,9 +111,10 @@
 						</template>
 					</div>
 					<div class="footer">
-						<p>Нажимая кнопку “Загрузить”, <br>
+						<p>
+						<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “Загрузить”, <br>
 							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидициальности
+							и Политикой Конфидициальности</a>
 						</p>
 					</div>
 				</div>
@@ -140,9 +141,9 @@
 						<a href="#" class="custom-button" @click.prevent="page = 4">ПРОДОЛЖИТЬ</a>
 					</div>
 					<div class="footer">
-						<p>Нажимая кнопку “Продолжить”, <br>
+						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “Продолжить”, <br>
 							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидециальности</p>
+							и Политикой Конфидециальности</a></p>
 					</div>
 				</div>
 			</template>
@@ -172,9 +173,9 @@
 						</template>
 					</div>
 					<div class="footer">
-						<p>Нажимая кнопку “ПРОДОЛЖИТЬ ИГРУ”, <br>
+						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “ПРОДОЛЖИТЬ ИГРУ”, <br>
 							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидециальности</p>
+							и Политикой Конфидециальности</a></p>
 					</div>
 				</div>
 			</template>
