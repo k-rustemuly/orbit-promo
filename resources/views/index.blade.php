@@ -4,7 +4,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Orbit - Главная')
+@section('title', 'Orbit - '.trans('front.string_1'))
 @section('bodyClass', 'landing')
 
 @section('headerContent')
@@ -198,14 +198,14 @@
                 <div class="table-head">
                     <h3 class="title">{!! trans('front.home_header.winners') !!}</h3>
                     <form class="table-form" @submit.prevent="getData()">
-                        <input x-model="search" type="text" x-mask="{{ $phoneMask }}" name="search-field" placeholder="Поиск по номеру телефона" class="input input-search">
+                        <input x-model="search" type="text" x-mask="{{ $phoneMask }}" name="search-field" placeholder="{!! trans('front.string_2') !!}" class="input input-search">
                     </form>
                 </div>
                 <div class="table-body">
 
                     <div class="table-tabs-buttons">
-                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'instant-prizes'}" @click.prevent="changeTab('instant-prizes')">Моментальные призы</a>
-                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'vouchers'}" @click.prevent="changeTab('vouchers')">Еженедельные призы</a>
+                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'instant-prizes'}" @click.prevent="changeTab('instant-prizes')">{!! trans('front.string_3') !!}</a>
+                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'vouchers'}" @click.prevent="changeTab('vouchers')">{!! trans('front.string_4') !!}</a>
                     </div>
                     <div class="table-tabs-content">
                         <template x-if="loading == true"><span class="spinner"></span></template>
@@ -214,7 +214,7 @@
                                 <div class="table-block__title" x-cloak x-show="data[activeTab].length == 0">
                                     <div class="row">
                                         <div>
-                                            <p>Нет данных</p>
+                                            <p>{!! trans('front.string_5') !!}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -223,29 +223,29 @@
                                     <template x-if="activeTab == 'instant-prizes'">
                                         <div class="row">
                                             <div>
-                                                <p>Дата</p>
+                                                <p>{!! trans('front.string_6') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Номер телефона</p>
+                                                <p>{!! trans('front.string_7') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Приз</p>
+                                                <p>{!! trans('front.string_8') !!}</p>
                                             </div>
                                         </div>
                                     </template>
                                     <template x-if="activeTab == 'vouchers'">
                                         <div class="row">
                                             <div>
-                                                <p>Дата</p>
+                                                <p>{!! trans('front.string_6') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Количество потраченных баллов</p>
+                                                <p>{!! trans('front.string_9') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Приз</p>
+                                                <p>{!! trans('front.string_8') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Статус</p>
+                                                <p>{!! trans('front.string_10') !!}</p>
                                             </div>
                                         </div>
                                     </template>
@@ -279,7 +279,7 @@
                                                     <p x-text="item.prize"></p>
                                                 </div>
                                                 <div>
-                                                    <p x-text="item.is_winned ? 'Победитель' : 'Продолжает участие в розыгрыше'"></p>
+                                                    <p x-text="item.is_winned ? '{!! trans('front.string_11') !!}' : '{!! trans('front.string_12') !!}'"></p>
                                                 </div>
                                             </div>
                                         </template>

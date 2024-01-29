@@ -185,6 +185,22 @@
                 display: none;
             }
         }
+
+        .change-lang {
+            text-transform: capitalize;
+            font-size: 12px;
+            font-family: 'Montserrat';
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            color: #fff;
+        }
+        .change-lang img {
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            z-index: -1;
+        }
     </style>
     <script defer src="{{ asset('assets/script/mask.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -196,7 +212,8 @@
                 receipt: false,
                 receiptPage: 0,
                 voucher: false,
-                voucherData: {}
+                voucherData: {},
+                modal: {}
             });
             Alpine.store('nav', {
                 play(e) {
@@ -275,6 +292,7 @@
 
     @include('partials.modals.receipt')
     @include('partials.modals.voucher')
+    @include('partials.modals.modal')
 
     @yield('content')
 

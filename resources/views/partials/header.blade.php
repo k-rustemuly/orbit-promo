@@ -36,16 +36,18 @@
                     </ul>
                 </nav>
             </div>
-            @if(Route::currentRouteName() == 'index')
-                <div class="container-navigation_column-02" x-data>
+            <div class="container-navigation_column-02" x-data>
+                <a href="/{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kz' ? 'ru' : (region() == 'kz' ? 'kk' : 'uz') }}" class="change-lang">
+                    <img src="{{ asset('assets/media/star.svg') }}" />
+                    {{ app()->getLocale() == 'uz' || app()->getLocale() == 'kz' ? 'ru' : region() }}
+                </a>
+                @if(Route::currentRouteName() == 'index')
                     <template x-if="$store.user.token"><a href="/{{ app()->getLocale() }}/profile" class="button button__outlined">{!! trans('front.header.profile') !!}</a></template>
                     <template x-if="!$store.user.token"><a href="#" class="button button__outlined" @click.prevent="$store.modal.signIn = true">{!! trans('front.header.sign_in') !!}</a></template>
-                </div>
-            @else
-                <div class="container-navigation_column-02">
-                    <a href="#" class="button button__outlined" x-data @click.prevent="$store.service.logOut()">{!! trans('front.header.sign_out') !!}</a>
-                </div>
-            @endif
+                @else
+                    <a href="#" class="button button__outlined" @click.prevent="$store.service.logOut()">{!! trans('front.header.sign_out') !!}</a>
+                @endif
+            </div>
         </div>
     </div>
     @yield('headerContent')

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Orbit - Профиль')
+@section('title', 'Orbit - '.trans('front.string_13'))
 @section('bodyClass', 'profile')
 
 @section('headerContent')
@@ -36,12 +36,12 @@
         <h2 class="title" x-text="$store.user.info?.name"></h2>
         <div class="block-profile">
             <div class="block-profile__column-01">
-                <p>Мои коины</p>
+                <p></p>
                 <div class="badge">
                     <img src="{{ asset('assets/media/icons/star_white.svg') }}">
                     <span x-text="$store.user.info?.coin"></span>
                 </div>
-                <a href="/game">В ИГРУ</a>
+                <a href="/game">{!! trans('front.string_15') !!}</a>
             </div>
             <div class="block-profile__column-02">
                 <div class="block-profile__card block-profile__card-01">
@@ -86,7 +86,7 @@
                             }
                         }">
                         <div class="head" @click="toggleContent()">
-                            <p>Мои чеки</p>
+                            <p>{!! trans('front.string_16') !!}</p>
                             <span>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" x-cloak x-show="showContent == false">
                                 <img src="{{ asset('assets/media/icons/arrow_up.svg') }}" x-cloak x-show="showContent == true" style="margin-top: -4px;">
@@ -94,17 +94,17 @@
                         </div>
                         <div class="body">
                             <template x-if="showContent == false">
-                                <p>Сохрани все зарегистрированные <br> чеки до конца акции</p>
+                                <p>{!! trans('front.string_17') !!}/p>
                             </template>
                             <template x-if="showContent == true">
                                 <div class="block">
-                                    <p>Каждый зарегистрированный чек дарит 5 дополнительных жизней</p>
+                                    <p>{!! trans('front.string_18') !!}</p>
                                     <template x-if="loading == true"><span class="spinner"></span></template>
                                     <template x-if="loading == false">
                                         <div class="table">
                                             <div class="row">
-                                                <div>Дата</div>
-                                                <div>Номер чека</div>
+                                                <div>{!! trans('front.string_19') !!}</div>
+                                                <div>{!! trans('front.string_20') !!}</div>
                                             </div>
                                             <template x-for="item in data">
                                                 <div class="row">
@@ -119,7 +119,7 @@
                         </div>
                         <div class="footer">
                             <img src="{{ asset('assets/media/profile_01.svg') }}" alt="">
-                            <a href="#" @click.prevent="showReceiptModal()">ЗАГРУЗИ ЧЕК</a>
+                            <a href="#" @click.prevent="showReceiptModal()">{!! trans('front.string_21') !!}</a>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                             }
                         }">
                         <div class="head" @click="toggleContent()">
-                            <p>Мои друзья</p>
+                            <p>{!! trans('front.string_22') !!}</p>
                             <span>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" x-cloak x-show="showContent == false">
                                 <img src="{{ asset('assets/media/icons/arrow_up.svg') }}" x-cloak x-show="showContent == true" style="margin-top: -4px;">
@@ -169,17 +169,17 @@
                         </div>
                         <div class="body">
                             <template x-if="showContent == false">
-                                <p>Приглашай друзей и получай <br> дополнительные жизни</p>
+                                <p>{!! trans('front.string_23') !!}</p>
                             </template>
                             <template x-if="showContent == true">
                                 <div class="block">
-                                    <p>Каждый зарегистрированный друг дарит дополнительную жизнь</p>
+                                    <p>{!! trans('front.string_24') !!}</p>
                                     <template x-if="loading == true"><span class="spinner"></span></template>
                                     <template x-if="loading == false">
                                         <div class="table">
                                             <div class="row">
-                                                <div>Дата</div>
-                                                <div>Имя друга</div>
+                                                <div>{!! trans('front.string_25') !!}</div>
+                                                <div>{!! trans('front.string_26') !!}</div>
                                             </div>
                                             <template x-for="item in data">
                                                 <div class="row">
@@ -194,7 +194,7 @@
                         </div>
                         <div class="footer">
                             <img src="{{ asset('assets/media/profile_02.svg') }}" alt="">
-                            <a href="#">ПРИГЛАСИ ДРУГА</a>
+                            <a href="#">{!! trans('front.string_27') !!}</a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
         </div>
         <div class="block-notification">
             <div class="notification">
-                <p>Ты уже на <span x-text="$store.user.info?.level"></span> уровне! Так держать! У тебя в запасе еще <span x-text="$store.user.info?.life"></span> жизни!</p>
+                <p>{!! trans('front.string_28') !!}</p>
             </div>
         </div>
     </div>
@@ -268,13 +268,13 @@
                 }
             }">
                 <div class="table-head">
-                    <h3 class="title">МОИ РОЗЫГРЫШИ</h3>
+                    <h3 class="title">{!! trans('front.string_29') !!}</h3>
                 </div>
                 <div class="table-body">
 
                     <div class="table-tabs-buttons">
-                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'my-instant-prizes'}" @click.prevent="changeTab('my-instant-prizes')">Моментальные призы</a>
-                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'my-vouchers'}" @click.prevent="changeTab('my-vouchers')">Еженедельные призы</a>
+                        <a href="#" name="tab1" class="tab-button" :class="{'active': activeTab == 'my-instant-prizes'}" @click.prevent="changeTab('my-instant-prizes')">{!! trans('front.string_30') !!}</a>
+                        <a href="#" name="tab2" class="tab-button" :class="{'active': activeTab == 'my-vouchers'}" @click.prevent="changeTab('my-vouchers')">{!! trans('front.string_31') !!}</a>
                     </div>
                     <div class="table-tabs-content">
                         <template x-if="loading == true"><span class="spinner"></span></template>
@@ -283,7 +283,7 @@
                                 <div class="table-block__title" x-cloak x-show="data[activeTab].length == 0">
                                     <div class="row">
                                         <div>
-                                            <p>Нет данных</p>
+                                            <p>{!! trans('front.string_32') !!}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -292,26 +292,26 @@
                                     <template x-if="activeTab == 'my-instant-prizes'">
                                         <div class="row">
                                             <div>
-                                                <p>Дата</p>
+                                                <p>{!! trans('front.string_33') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Приз</p>
+                                                <p>{!! trans('front.string_34') !!}</p>
                                             </div>
                                         </div>
                                     </template>
                                     <template x-if="activeTab == 'my-vouchers'">
                                         <div class="row">
                                             <div>
-                                                <p>Дата</p>
+                                                <p>{!! trans('front.string_33') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Количество потраченных баллов</p>
+                                                <p>{!! trans('front.string_35') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Приз</p>
+                                                <p>{!! trans('front.string_34') !!}</p>
                                             </div>
                                             <div>
-                                                <p>Статус</p>
+                                                <p>{!! trans('front.string_36') !!}</p>
                                             </div>
                                         </div>
                                     </template>
@@ -342,7 +342,7 @@
                                                     <p x-text="item.prize"></p>
                                                 </div>
                                                 <div>
-                                                    <p x-text="item.is_winned ? 'Ты победил!' : 'Продолжает участие в розыгрыше'"></p>
+                                                    <p x-text="item.is_winned ? '{!! trans('front.string_37') !!}' : '{!! trans('front.string_38') !!}'"></p>
                                                 </div>
                                             </div>
                                         </template>

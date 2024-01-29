@@ -61,21 +61,17 @@
 						<img src="{{ asset('assets/media/icons/stars_white.svg') }}" alt="" class="decoration">
 						<template x-if="page == 0">
 							<h4 class="color-white">
-								Упс, <br>
-								тебе не хватает жизней,  <br>
-								чтобы продолжить игру :(
+								{!! trans('front.string_39') !!}
 							</h4>
 						</template>
 						<template x-if="page == 1">
 							<h4 class="color-white">
-								Пополни жизни, <br>
-								чтобы продолжить <br>
-								игру!
+							{!! trans('front.string_40') !!}
 							</h4>
 						</template>
 						<template x-if="page == 4">
 							<h4 class="color-white">
-							Загрузи фото <br> всего чека
+							{!! trans('front.string_41') !!}
 							</h4>
 						</template>
 						<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon" @click="closeModal()">
@@ -84,14 +80,14 @@
 						<div class="table">
 							<div>
 								<template x-if="page == 0 || page == 1">
-									<h5>СКАНИРУЙ<br> QR ЧЕКА</h5>
+									<h5>{!! trans('front.string_42') !!}</h5>
 								</template>
 								<template x-if="page == 4">
-									<h5>ЗАГРУЗИ <br> ВЕСЬ ЧЕК</h5>
+									<h5>{!! trans('front.string_43') !!}</h5>
 								</template>
 								<img src="{{ asset('assets/media/arrows.svg') }}" alt="" class="arrows">
 								<img src="{{ asset('assets/media/form_02.svg') }}" alt="" class="image">
-								<p>1 чек = <span>5 жизней</span> <br>в игре</p>
+								<p>{!! trans('front.string_44') !!}</p>
 							</div>
 							<div>
 								<template x-if="page == 0 || page == 1">
@@ -102,19 +98,17 @@
 								</template>
 							</div>
 						</div>
-						<a href="#" class="button button_custom upload-btn" @click.prevent="$refs.fileInput.click()">ЗАГРУЗИТЬ<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
+						<a href="#" class="button button_custom upload-btn" @click.prevent="$refs.fileInput.click()">{!! trans('front.string_45') !!}<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
 						<input type="file" class="hidden" x-ref="fileInput" accept=".jpg, .jpeg, .png" @change="fileChanged" :disabled="loading" />
 						<template x-if="loading == true"><span class="spinner"></span></template>
 
 						<template x-if="page == 0 || page == 1">
-							<p class="color-white bold">или пригласить друга</p>
+							<p class="color-white bold">{!! trans('front.string_46') !!}</p>
 						</template>
 					</div>
 					<div class="footer">
 						<p>
-						<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “Загрузить”, <br>
-							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидициальности</a>
+						<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">{!! trans('front.string_47') !!}</a>
 						</p>
 					</div>
 				</div>
@@ -125,25 +119,20 @@
 					<div class="head">
 						<img src="{{ asset('assets/media/icons/stars_white.svg') }}" alt="" class="decoration">
 						<h4 class="color-blue">
-							Странно, <br>с твоим чеком <br>что-то не так ...
+							{!! trans('front.string_48') !!}
 						</h4>
 						<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon" @click="closeModal()">
 					</div>
 					<div class="body">
 						<p>
-						пожалуйста отсканируйте <br> весь чек
+							{!! trans('front.string_49') !!}
 						</p>
 						<img src="{{ asset('assets/media/warning.svg') }}" alt="" class="warning">
-						<p>Убедись, что твой чек <br>
-							соответствует примеру <br>
-							и попробуйзагрузить его ещё раз
-						</p>
-						<a href="#" class="custom-button" @click.prevent="page = 4">ПРОДОЛЖИТЬ</a>
+						<p>{!! trans('front.string_50') !!}</p>
+						<a href="#" class="custom-button" @click.prevent="page = 4">{!! trans('front.string_51') !!}</a>
 					</div>
 					<div class="footer">
-						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “Продолжить”, <br>
-							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидециальности</a></p>
+						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">{!! trans('front.string_52') !!}</a></p>
 					</div>
 				</div>
 			</template>
@@ -152,30 +141,26 @@
 					<div class="head">
 						<img src="{{ asset('assets/media/icons/stars_white.svg') }}" alt="" class="decoration">
 						<h4 class="color-white">
-							Твой Чек принят!
+							{!! trans('front.string_53') !!}
 						</h4>
 						<img src="{{ asset('assets/media/icons/close-icon_02.svg') }}" alt="" class="close-icon">
 					</div>
 					<div class="body">
 						<template x-if="page == 5">
 							<p>
-								Скорей отправляйся <br>
-								в <span>ИГРУ</span> для сбора <br>
-								предметов
+								{!! trans('front.string_54') !!}
 							</p>
 						</template>
 						<img src="{{ asset('assets/media/form_01.svg') }}" alt="" class="warning">
 						<template x-if="page == 5">
-							<a href="#" class="custom-button" @click.prevent="closeModal()">ПРОДОЛЖИТЬ ИГРУ</a>
+							<a href="#" class="custom-button" @click.prevent="closeModal()">{!! trans('front.string_55') !!}</a>
 						</template>
 						<template x-if="page == 6">
-							<a href="#" class="custom-button" @click.prevent="closeModal()">вернуться</a>
+							<a href="#" class="custom-button" @click.prevent="closeModal()">{!! trans('front.string_56') !!}</a>
 						</template>
 					</div>
 					<div class="footer">
-						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">Нажимая кнопку “ПРОДОЛЖИТЬ ИГРУ”, <br>
-							я подтверждаю, что согласен с Правилами Акции <br>
-							и Политикой Конфидециальности</a></p>
+						<p><a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">{!! trans('front.string_57') !!}</a></p>
 					</div>
 				</div>
 			</template>
