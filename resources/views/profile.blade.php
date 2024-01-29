@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-profile__card block-profile__card-02">
+                <div class="block-profile__card block-profile__card-02" x-cloak x-show="false">
                     <div class="card" x-data="{
                             loading: false,
                             showContent: false,

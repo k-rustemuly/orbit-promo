@@ -14,11 +14,11 @@
             <h2 class="title">
                 {!! trans('front.home_header.title') !!}
             </h2>
-            <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image mobile">
+            <img src="{{ asset('assets/media/image_01_'.region().'.png') }}" alt="" class="image mobile">
             <h1 class="title">
                 {!! trans('front.home_header.subtitle') !!}
             </h1>
-            <img src="{{ asset('assets/media/image_01.png') }}" alt="" class="image desktop">
+            <img src="{{ asset('assets/media/image_01_'.region().'.png') }}" alt="" class="image desktop">
             <div class="decorations">
                 <img src="{{ asset('assets/media/header_decoration_01.svg') }}" alt="" class="decoration_01">
                 <img src="{{ asset('assets/media/header_decoration_02.svg') }}" alt="" class="decoration_02">
@@ -133,7 +133,7 @@
                             <a href="/game" class="button filled" x-data @click="$store.nav.play">
                             {!! trans('front.home_header.play') !!}
                             </a>
-                            <a href="#" class="button link">{!! trans('front.home_header.rules') !!}</a>
+                            <a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="button link term" target="_blank">{!! trans('front.home_header.rules') !!}</a>
                         </div>
                     </div>
                 </div>
@@ -322,38 +322,38 @@
         <div class="container-logotype__row-02">
             <div class="wrapper-fix wrapper-logotype">
                 <div class="wrapper-logotype__container">
-                    <a href="#" class="block-logotype">
-                        <img src="{{ asset('assets/media/logotypes/logo_03.svg') }}" alt="SMALL logotype">
+                    <a href="https://arbuz.kz/{{ app()->getLocale() }}/almaty/search/show#/?%5B%7B%22component%22%3A%22search%22,%22slug%22%3A%22where%5Bname%5D%5Bc%5D%22,%22value%22%3A%22orbit%22%7D,%7B%22name%22%3A%22Orbit%22,%22slug%22%3A%22brands%22,%22type%22%3A%22check%22,%22component%22%3A%22filters%22%7D%5D " class="block-logotype" target="_blank">
+                        <img src="{{ asset('assets/media/logotypes/Arbuz.png') }}" style="width: 170px">
                     </a>
-                    <a href="#" class="block-logotype">
-                        <img src="{{ asset('assets/media/logotypes/logo_01.svg') }}" alt="SMALL logotype">
+                    <a href="https://magnum.kz/MagnumGo?city=almaty" class="block-logotype" target="_blank">
+                        <img src="{{ asset('assets/media/logotypes/Magnum.png') }}" style="width: 150px">
                     </a>
-                    <a href="#" class="block-logotype">
-                        <img src="{{ asset('assets/media/logotypes/logo_02.svg') }}" alt="SMALL logotype">
+                    <a href="https://glovoapp.com/kz/{{ app()->getLocale() }}/almaty/" class="block-logotype" target="_blank">
+                        <img src="{{ asset('assets/media/logotypes/Glovo.png') }}" style="width: 200px">
                     </a>
-                    <a href="#" class="block-logotype">
-                        <img src="{{ asset('assets/media/logotypes/logo_03.svg') }}" alt="SMALL logotype">
+                    <a href="https://wolt.com/ru/kaz" class="block-logotype" target="_blank">
+                        <img src="{{ asset('assets/media/logotypes/WOLT.png') }}" style="width: 150px">
                     </a>
-                    <a href="#" class="block-logotype">
-                        <img src="{{ asset('assets/media/logotypes/logo_01.svg') }}" alt="SMALL logotype">
+                    <a href="https://ryadom.kz/search?search=orbit" class="block-logotype" target="_blank">
+                        <img src="{{ asset('assets/media/logotypes/Рядом.png') }}" style="width: 150px">
                     </a>
                 </div>
                 <div class="wrapper-logotype-mobile__container">
                     <div class="logotype-slider owl-carousel owl-theme">
-                        <a href="#" class="block-logotype item">
-                            <img src="{{ asset('assets/media/logotypes/logo_03.svg') }}" alt="SMALL logotype">
+                        <a href="https://arbuz.kz/{{ app()->getLocale() }}/almaty/search/show#/?%5B%7B%22component%22%3A%22search%22,%22slug%22%3A%22where%5Bname%5D%5Bc%5D%22,%22value%22%3A%22orbit%22%7D,%7B%22name%22%3A%22Orbit%22,%22slug%22%3A%22brands%22,%22type%22%3A%22check%22,%22component%22%3A%22filters%22%7D%5D " class="block-logotype" target="_blank">
+                            <img src="{{ asset('assets/media/logotypes/Arbuz.png') }}">
                         </a>
-                        <a href="#" class="block-logotype item">
-                            <img src="{{ asset('assets/media/logotypes/logo_01.svg') }}" alt="SMALL logotype">
+                        <a href="https://magnum.kz/MagnumGo?city=almaty" class="block-logotype" target="_blank">
+                            <img src="{{ asset('assets/media/logotypes/Magnum.png') }}">
                         </a>
-                        <a href="#" class="block-logotype item">
-                            <img src="{{ asset('assets/media/logotypes/logo_02.svg') }}" alt="SMALL logotype">
+                        <a href="https://glovoapp.com/kz/{{ app()->getLocale() }}/almaty/" class="block-logotype" target="_blank">
+                            <img src="{{ asset('assets/media/logotypes/Glovo.png') }}">
                         </a>
-                        <a href="#" class="block-logotype item">
-                            <img src="{{ asset('assets/media/logotypes/logo_03.svg') }}" alt="SMALL logotype">
+                        <a href="https://wolt.com/ru/kaz" class="block-logotype" target="_blank">
+                            <img src="{{ asset('assets/media/logotypes/WOLT.png') }}">
                         </a>
-                        <a href="#" class="block-logotype item">
-                            <img src="{{ asset('assets/media/logotypes/logo_01.svg') }}" alt="SMALL logotype">
+                        <a href="https://ryadom.kz/search?search=orbit" class="block-logotype" target="_blank">
+                            <img src="{{ asset('assets/media/logotypes/Рядом.png') }}">
                         </a>
                     </div>
                 </div>
@@ -386,7 +386,7 @@
                                 <h4>{!! trans('front.faq.quest2') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans2') !!} </p>
+                            <p>{!! trans('front.faq.ans2'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">
@@ -418,7 +418,7 @@
                                 <h4>{!! trans('front.faq.quest6') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans6') !!} </p>
+                            <p>{!! trans('front.faq.ans6'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">

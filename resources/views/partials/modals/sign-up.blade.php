@@ -168,7 +168,7 @@
                     <button type="button" class="button" @click="signUp()" :disabled="loading">{!! trans('front.sign_up.reg') !!}</button>
 
                     <p class="caption">
-                        {!! trans('front.sign_up.bottom_text') !!}
+                        <a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">{!! trans('front.sign_up.bottom_text') !!}</a>
                     </p>
                 </form>
             </div>

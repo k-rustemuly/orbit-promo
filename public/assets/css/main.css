@@ -766,12 +766,14 @@ h3.title {
 }
 .wrapper-logotype .wrapper-logotype__container .block-logotype img,
 .wrapper-logotype .wrapper-logotype-mobile__container .block-logotype img {
-  height: 40px;
-  width: auto;
+  
 }
 .wrapper-logotype .wrapper-logotype__container .block-logotype:hover,
 .wrapper-logotype .wrapper-logotype-mobile__container .block-logotype:hover {
-  box-shadow: 7px 18px 30.4px -1px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 7px 18px 30.4px -1px rgba(0, 0, 0, 0.15); */
+}
+.wrapper-logotype .wrapper-logotype-mobile__container .owl-stage {
+  padding: 40px 0px;
 }
 .wrapper-logotype .wrapper-logotype-mobile__container {
   display: none;

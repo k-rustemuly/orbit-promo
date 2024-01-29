@@ -135,7 +135,7 @@
 						<img src="{{ asset('assets/media/warning.svg') }}" alt="" class="warning">
 						<p>Убедись, что твой чек <br>
 							соответствует примеру <br>
-							и попробуй загрузить его ещё раз
+							и попробуйзагрузить его ещё раз
 						</p>
 						<a href="#" class="custom-button" @click.prevent="page = 4">ПРОДОЛЖИТЬ</a>
 					</div>

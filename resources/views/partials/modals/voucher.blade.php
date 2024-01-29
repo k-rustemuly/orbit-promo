@@ -50,6 +50,7 @@
 				<div class="head">
 					<img src="{{ asset('assets/media/icons/stars_blue.svg') }}" alt="" class="decoration">
 					<h4 class="padding-top">
+						{!! trans('front.voucher.ask') !!}
 					</h4>
 					<img src="{{ asset('assets/media/icons/close-icon_01.svg') }}" alt="" class="close-icon" @click="closeModal()">
 				</div>
@@ -78,7 +79,7 @@
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">{!! trans('front.voucher.footer1') !!}</a>
+					<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="align-left term" target="_blank">{!! trans('front.voucher.footer1') !!}</a>
 				</div>
 			</div>
 		</template>
@@ -98,7 +99,7 @@
 					</form>
 				</div>
 				<div class="footer">
-					<a class="align-left">{!! trans('front.voucher.footer2') !!}</a>
+					<a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="align-left term" target="_blank">{!! trans('front.voucher.footer2') !!}</a>
 				</div>
 			</div>
 

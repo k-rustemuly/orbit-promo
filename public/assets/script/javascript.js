@@ -62,10 +62,10 @@ jQuery('.logotype-slider').owlCarousel({
     margin: 40,
     responsive : {
     	0 : {
-	        items : 2,
+	        items : 3,
 	    },
 	    800 : {
-	        items : 4,
+	        items : 5,
 	    }
     }
 })

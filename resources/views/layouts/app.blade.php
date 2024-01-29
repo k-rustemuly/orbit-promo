@@ -27,7 +27,7 @@
         }
 
         body.disabled *:not(.modal-form, .modal-form *) {
-            filter: grayscale(100%) blur(5px);
+            filter: blur(4px);
             pointer-events: none;
         }
 
