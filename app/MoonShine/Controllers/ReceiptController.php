@@ -15,10 +15,15 @@ final class ReceiptController extends MoonShineController
     public function approve(string $resourceUri, Receipt $receipt, MoonShineRequest $request): Response
     {
         if($receipt->receipt_status_id == ReceiptStatus::CHECKING) {
-            $receipt->url = $request->get('url');
-            $receipt->receipt_status_id = ReceiptStatus::ACCEPTED;
-            $receipt->save();
-            $this->toast(__('ui.messages.saved'));
+            $url = $request->get('url');
+            if(! Receipt::where('url', $url)->first()) {
+                $receipt->url = $url;
+                $receipt->receipt_status_id = ReceiptStatus::ACCEPTED;
+                $receipt->save();
+                $this->toast(__('ui.messages.saved'));
+            }else {
+                $this->toast(__('ui.messages.duplicate'), 'error');
+            }
         }else {
             $this->toast(__('ui.messages.error'), 'error');
         }
