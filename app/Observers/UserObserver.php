@@ -12,4 +12,10 @@ class UserObserver
         $user->referral = Hashids::encode($user->id);
         $user->save();
     }
+
+    public function deleting(User $user)
+    {
+        if($user->hasVerifiedPhoneNumber())
+            return false;
+    }
 }

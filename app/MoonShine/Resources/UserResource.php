@@ -11,10 +11,10 @@ use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\ID;
-use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Switcher;
 use MoonShine\Fields\Text;
+use MoonShine\Models\MoonshineUserRole;
 
 class UserResource extends ModelResource
 {
@@ -27,6 +27,9 @@ class UserResource extends ModelResource
 
     public function getActiveActions(): array
     {
+        if(auth('moonshine')->user()->moonshine_user_role_id === MoonshineUserRole::DEFAULT_ROLE_ID) {
+            return ['view', 'delete'];
+        }
         return ['view'];
     }
 
