@@ -17,7 +17,7 @@ class ReceiptsResource extends JsonResource
     {
         return [
             'date' => $this->created_at->format('Y-m-d'),
-            'number' => $this->receipt_status_id == ReceiptStatus::CHECKING ? $this->status->name : $this->id
+            'number' => $this->receipt_status_id != ReceiptStatus::ACCEPTED ? $this->status->name : $this->id
         ];
     }
 }
