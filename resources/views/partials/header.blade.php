@@ -37,9 +37,9 @@
                 </nav>
             </div>
             <div class="container-navigation_column-02" x-data>
-                <a href="/{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kz' ? 'ru' : (region() == 'kz' ? 'kk' : 'uz') }}" class="change-lang">
+                <a href="/{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : (region() == 'kz' ? 'kk' : 'uz') }}" class="change-lang">
                     <img src="{{ asset('assets/media/star.svg') }}" />
-                    {{ app()->getLocale() == 'uz' || app()->getLocale() == 'kz' ? 'ru' : region() }}
+                    {{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : region() }}
                 </a>
                 @if(Route::currentRouteName() == 'index')
                     <template x-if="$store.user.token"><a href="/{{ app()->getLocale() }}/profile" class="button button__outlined">{!! trans('front.header.profile') !!}</a></template>

@@ -34,7 +34,7 @@
     <div class="container-notes">
         <div class="container-notes_column-01">
             <a href="/game" class="block-notes block-01" x-data @click="$store.nav.play">
-                <img src="{{ asset('assets/media/note_01.svg') }}">
+                <img src="{{ asset('assets/media/note_01_'.app()->getLocale().'.svg') }}">
             </a>
         </div>
         <div class="container-notes_column-02">
@@ -48,17 +48,17 @@
                     }
                 }
             }" @click.prevent="showReceiptModal()">
-                <img src="{{ asset('assets/media/note_02.svg') }}">
+                <img src="{{ asset('assets/media/note_02_'.app()->getLocale().'.svg') }}">
             </a>
             <a href="#prizes" class="block-notes block-03">
-                <img src="{{ asset('assets/media/note_03.svg') }}">
+                <img src="{{ asset('assets/media/note_03_'.app()->getLocale().'.svg') }}">
             </a>
         </div>
     </div>
 
     <div class="container-notes-mobile">
         <a href="/game" class="block-notes block-01" x-data @click="$store.nav.play">
-            <img src="{{ asset('assets/media/note_01.svg') }}">
+            <img src="{{ asset('assets/media/note_01_'.app()->getLocale().'.svg') }}">
         </a>
         <a href="#" class="block-notes block-02" x-data="{
                 showReceiptModal() {
@@ -70,10 +70,10 @@
                     }
                 }
             }" @click.prevent="showReceiptModal()">
-            <img src="{{ asset('assets/media/note_02.svg') }}">
+            <img src="{{ asset('assets/media/note_02_'.app()->getLocale().'.svg') }}">
         </a>
         <a href="#prizes" class="block-notes block-03">
-            <img src="{{ asset('assets/media/note_03.svg') }}">
+            <img src="{{ asset('assets/media/note_03_'.app()->getLocale().'.svg') }}">
         </a>
     </div>
 
