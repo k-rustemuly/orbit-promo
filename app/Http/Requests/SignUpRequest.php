@@ -30,12 +30,12 @@ class SignUpRequest extends BaseFormRequest
             'email' => [
                 'required',
                 'email:rfc,dns',
-                'unique:users'
+                // 'unique:users'
             ],
             'phone_number' => [
                 'required',
                 'regex:/^7[0-9]{10}$|^998[0-9]{9}$/',
-                'unique:users'
+                // 'unique:users'
             ]
         ];
     }

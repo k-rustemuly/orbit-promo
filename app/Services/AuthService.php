@@ -24,7 +24,23 @@ class AuthService
         $code = Generate::code();
         $data['password'] = $code;
         $data['remember_token'] = $code;
-        if($user = User::create($data)) {
+        if($user = User::where('phone_number', $data['phone_number'])->first()) {
+            if(
+                $user->hasVerifiedPhoneNumber()
+                || ($user->email != $data['email']
+                        && User::where('email', $data['email'])->exists()
+                    )
+            ) {
+                return false;
+            }
+            $user->remember_token = $code;
+            $user->password = $code;
+            $user->save();
+            event(new ReSendSms($user));
+            return true;
+        }else if($user = User::where('email', $data['email'])->first()) {
+            return false;
+        } else if($user = User::create($data)) {
             event(new Registered($user));
             return true;
         }
