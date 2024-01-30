@@ -19,17 +19,17 @@
                 <nav class="navigation-menu">
                     <ul>
                         <li>
-                            <a href="#game">
+                            <a href="/{{ app()->getLocale() }}/#game">
                                 {!! trans('front.header.game') !!} 
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/{{ app()->getLocale() }}/#winners">
                                 {!! trans('front.header.winner') !!} 
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/{{ app()->getLocale() }}/#faq">
                                 {!! trans('front.header.faq') !!} 
                             </a>
                         </li>

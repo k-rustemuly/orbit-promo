@@ -144,7 +144,7 @@
     @include('partials.presents')
 </div>
 
-<section class="wrapper-full section-table">
+<section class="wrapper-full section-table" id="winners">
     <div class="wrapper-fix wrapper-small wrapper-table">
         <div class="container-table">
             <div class="table-block fix-width" x-data="{
@@ -366,7 +366,7 @@
 </section>
 @endif
 
-<section class="wrapper-full section-questions">
+<section class="wrapper-full section-questions" id="faq">
     <div class="wrapper-fix wrapper-middle wrapper-questions">
         <div class="container-questions">
             <h2 class="title">{!! trans('front.faq.title') !!}</h2>
