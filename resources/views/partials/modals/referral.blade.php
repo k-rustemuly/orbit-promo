@@ -12,8 +12,8 @@
 			share() {
 				if (navigator.share) {
 					navigator.share({
-						title: 'Share Title',
-						text: 'Share Text',
+						title: 'Orbit',
+						text: 'link ',
 						url: this.shareLink
 					})
 					.then(() => console.log('Successfully shared'))
