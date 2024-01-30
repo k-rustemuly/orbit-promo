@@ -81,8 +81,8 @@
 				</div>
 				<div x-cloak x-show="!isMobile" class="share-input">
 					<input type="text" :value="shareLink" readonly />
-					<div>
-						<img src="{{ asset('assets/media/social/link.svg') }}" @click.prevent="copyLink()"> 
+					<div @click.prevent="copyLink()">
+						<img src="{{ asset('assets/media/social/link.svg') }}"> 
 						{!! trans('front.string_73') !!}
 					</div>
 				</div>

@@ -44,6 +44,10 @@
 					this.loading = false;
 				}
 			},
+			showReferralModal() {
+				this.closeModal();
+				Alpine.store('modal').referral = true;
+			},
 			closeModal() {
 				this.page = 1;
 				Alpine.store('modal').receipt = false;
@@ -103,7 +107,7 @@
 						<template x-if="loading == true"><span class="spinner"></span></template>
 
 						<template x-if="page == 0 || page == 1">
-							<p class="color-white bold">{!! trans('front.string_46') !!}</p>
+							<p class="color-white bold" style="cursor: pointer;" @click="showReferralModal()">{!! trans('front.string_46') !!}</p>
 						</template>
 					</div>
 					<div class="footer">
