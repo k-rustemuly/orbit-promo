@@ -94,7 +94,7 @@
                         </div>
                         <div class="body">
                             <template x-if="showContent == false">
-                                <p>{!! trans('front.string_17') !!}/p>
+                                <p>{!! trans('front.string_17') !!}</p>
                             </template>
                             <template x-if="showContent == true">
                                 <div class="block">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-profile__card block-profile__card-02" x-cloak x-show="false">
+                <div class="block-profile__card block-profile__card-02">
                     <div class="card" x-data="{
                             loading: false,
                             showContent: false,
@@ -194,7 +194,7 @@
                         </div>
                         <div class="footer">
                             <img src="{{ asset('assets/media/profile_02.svg') }}" alt="">
-                            <a href="#">{!! trans('front.string_27') !!}</a>
+                            <a href="#" @click.prevent="$store.modal.referral = true">{!! trans('front.string_27') !!}</a>
                         </div>
                     </div>
                 </div>
@@ -217,6 +217,7 @@
 @section('content')
 
 @include('partials.presents')
+@include('partials.modals.referral')
 
 <section class="wrapper-full section-table" id="my-prizes">
     <div class="wrapper-fix wrapper-small wrapper-table">

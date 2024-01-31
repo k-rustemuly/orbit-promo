@@ -201,10 +201,40 @@
             top: -15px;
             z-index: -1;
         }
+        .share-input {
+            display: flex;
+            width: 90%;
+            gap: 12px;
+        }
+        .share-input input {
+            flex: 1;
+            border: 3px solid #E91E63;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+        .share-input div {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            color: #fff;
+            align-items: center;
+            cursor: pointer;
+        }
+        .share-input img {
+            width: 32px;
+        }
     </style>
     <script defer src="{{ asset('assets/script/mask.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script type="text/javascript">
+        localStorage.setItem('locale', '{{ app()->getLocale() }}');
+        const urlParams = new URLSearchParams(window.location.search);
+        const referralValue = urlParams.get('referral');
+
+        if(referralValue) {
+            sessionStorage.setItem('referral', referralValue);
+        }
+        
         document.addEventListener('alpine:init', () => {
             Alpine.store('modal', {
                 signIn: false,
@@ -212,6 +242,7 @@
                 receipt: false,
                 receiptPage: 0,
                 voucher: false,
+                referral: false,
                 voucherData: {},
                 modal: {}
             });
