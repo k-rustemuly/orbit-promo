@@ -37,8 +37,8 @@ class GetSmsApi
         try{
             $sms = $this->client->sendSms($phone_number, $message);
             return true;
-        } catch (\Zadarma_API\ApiException) {
-            Log::error("Zadarma Api error: ($phone_number, $message) - ". json_encode($sms->toArray()));
+        } catch (\Zadarma_API\ApiException $sms) {
+            Log::error("Zadarma Api error: ($phone_number, $message) - ". $sms->getMessage());
         }
         return false;
     }
