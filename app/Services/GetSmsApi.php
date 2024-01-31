@@ -35,6 +35,7 @@ class GetSmsApi
     public function send(string $phone_number, string $message): bool
     {
         try{
+            $message = str_replace('orbit-promo.kz', '', $message);
             $sms = $this->client->sendSms($phone_number, $message);
             return true;
         } catch (\Zadarma_API\ApiException $sms) {
