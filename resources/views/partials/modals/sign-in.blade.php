@@ -122,12 +122,12 @@
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="phone_number" x-mask="{{ $phoneMask }}" type="text" class="input" placeholder="{!! trans('front.sign_in.login') !!}" autocomplete="username">
+                        <input x-model="phone_number" x-mask="{{ $phoneMask }}" type="tel" class="input" placeholder="{!! trans('front.sign_in.login') !!}" autocomplete="username">
                         <span x-cloak x-show="messages?.phone_number?.[0]" x-text="messages?.phone_number?.[0]"></span>
                     </div>
 
                     <div class="input-row" x-show="forgotPassword == false">
-                        <input x-model="password" type="password" class="input" placeholder="{!! trans('front.sign_in.password') !!}" autocomplete="current-password">
+                        <input x-model="password" type="number" class="input" placeholder="{!! trans('front.sign_in.password') !!}" autocomplete="current-password">
                         <span x-cloak x-show="messages?.password?.[0]" x-text="messages?.password?.[0]"></span>
                     </div>
 
@@ -161,7 +161,7 @@
             <div class="body">
                 <form class="form">
                     <div class="input-row">
-                        <input x-model="password" type="text" name="code" class="input" placeholder="{!! trans('front.sign_in.code') !!}">
+                        <input x-model="password" type="number" name="code" class="input" placeholder="{!! trans('front.sign_in.code') !!}">
                         <span x-cloak x-show="messages?.password?.[0]" x-text="messages?.password?.[0]"></span>
                     </div>
                     <button type="button" class="button" @click="signIn()" :disabled="loading">{!! trans('front.sign_in.approve') !!}</button>

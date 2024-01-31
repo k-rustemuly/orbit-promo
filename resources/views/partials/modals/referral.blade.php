@@ -2,7 +2,6 @@
 	document.addEventListener('alpine:init', () => {
 		Alpine.data('referral', () => ({
 			linkCopied: false,
-			shareLink: window.location.protocol + "//" + window.location.hostname + '/{{ app()->getLocale() }}/?referral=' + Alpine.store('user').info?.referral,
 			canNaviveShare: navigator.share ? true : false,
 			isMobile: /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
 			closeModal() {
@@ -14,15 +13,19 @@
 					navigator.share({
 						title: 'Orbit',
 						text: 'link ',
-						url: this.shareLink
+						url: this.shareLink()
 					})
 					.then(() => console.log('Successfully shared'))
 					.catch((error) => console.log('Error sharing:', error));
 				}
 			},
+
+			shareLink() {
+				return window.location.protocol + "//" + window.location.hostname + '/{{ app()->getLocale() }}/?referral=' + Alpine.store('user').info?.referral;
+			} ,
 			copyLink() {
 				let textarea = document.createElement("textarea");
-				textarea.value = this.shareLink;
+				textarea.value = this.shareLink();
 
 				document.body.appendChild(textarea);
 
@@ -58,15 +61,15 @@
 					<p class="bold">{!! trans('front.string_71') !!}</p>
 				</div>
 				<div class="social-media">
-					<a :href="'whatsapp://send?text='+shareLink" x-cloak x-show="isMobile">
+					<a :href="'whatsapp://send?text='+shareLink()" x-cloak x-show="isMobile">
 						<img src="{{ asset('assets/media/social/wh.svg') }}">
 						<p>WhatsApp</p>
 					</a>
-					<a :href="'tg://msg?text='+shareLink" x-cloak x-show="isMobile">
+					<a :href="'tg://msg?text='+shareLink()" x-cloak x-show="isMobile">
 						<img src="{{ asset('assets/media/social/tg.svg') }}">
 						<p>Telegram</p>
 					</a>
-					<a :href="'sms:?body=text='+shareLink" x-cloak x-show="isMobile">
+					<a :href="'sms:?body=text='+shareLink()" x-cloak x-show="isMobile">
 						<img src="{{ asset('assets/media/social/mm.svg') }}">
 						<p>{!! trans('front.string_72') !!}</p>
 					</a>
@@ -80,7 +83,7 @@
 					</a>
 				</div>
 				<div x-cloak x-show="!isMobile" class="share-input">
-					<input type="text" :value="shareLink" readonly />
+					<input type="text" :value="shareLink()" readonly />
 					<div @click.prevent="copyLink()">
 						<img src="{{ asset('assets/media/social/link.svg') }}"> 
 						{!! trans('front.string_73') !!}
