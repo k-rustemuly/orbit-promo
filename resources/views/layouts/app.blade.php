@@ -223,6 +223,11 @@
         .share-input img {
             width: 32px;
         }
+        input[type=number] {
+            -webkit-appearance: none;
+               -moz-appearance: none;
+                    appearance: none;
+        }
     </style>
     <script defer src="{{ asset('assets/script/mask.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
