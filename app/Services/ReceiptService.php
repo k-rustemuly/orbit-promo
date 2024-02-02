@@ -50,7 +50,16 @@ class ReceiptService
 
     public function isUnique(): bool
     {
-        return !Receipt::where('url', $this->url)->exists();
+        return !Receipt::where('url', $this->getFiscalSign())->where('receipt_status_id', ReceiptStatus::ACCEPTED)->exists();
+    }
+
+    public function getFiscalSign()
+    {
+        $queryParams = [];
+        parse_str(parse_url($this->url, PHP_URL_QUERY), $queryParams);
+
+        $iValue = isset($queryParams['i']) ? $queryParams['i'] : $this->url;
+        return $iValue;
     }
 
     public function isOfd(string $url): bool
@@ -79,7 +88,7 @@ class ReceiptService
         $receipt = Receipt::create([
             'user_id' => $user->id,
             'receipt_status_id' => $this->receipt_status_id,
-            'url' => $this->url
+            'url' => $this->getFiscalSign()
         ]);
         $receipt->addMedia($this->file)->toMediaCollection('images');
     }
