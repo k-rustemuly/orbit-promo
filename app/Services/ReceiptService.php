@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Zxing\QrReader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ReceiptService
 {
@@ -23,7 +24,9 @@ class ReceiptService
     {
         if($result = $this->recognize($file)) {
             if($this->isOfd($result)) {
-                if($this->isUnique() && $this->isHavePosition($result, 'banan')) {
+                Log::debug($result);
+
+                if($this->isUnique() && $this->isHavePosition($result, 'orbit')) {
                     $this->receipt_status_id = ReceiptStatus::ACCEPTED;
                     return true;
                 }
@@ -41,6 +44,7 @@ class ReceiptService
         $this->file = $file;
         $qrCodeReader = new QrReader($file->getPathname());
         $result = $qrCodeReader->text();
+        Log::debug($qrCodeReader->text());
 
         if($result != "") {
             return $result;
