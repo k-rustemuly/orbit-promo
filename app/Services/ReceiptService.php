@@ -94,6 +94,8 @@ class ReceiptService
             'receipt_status_id' => $this->receipt_status_id,
             'url' => $this->getFiscalSign()
         ]);
-        $receipt->addMedia($this->file)->toMediaCollection('images');
+        if($this->file) {
+            $receipt->addMedia($this->file)->toMediaCollection('images');
+        }
     }
 }

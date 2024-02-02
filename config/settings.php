@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Ofd\Jusan;
 use App\Services\Ofd\Kazakhtelecom;
 use App\Services\Ofd\Soliq;
 use App\Services\Ofd\Transtelecom;
@@ -11,6 +12,7 @@ return [
         'ofd1.kz' => Transtelecom::class,
         'consumer.oofd.kz' => Kazakhtelecom::class,
         'ofd.soliq.uz' => Soliq::class,
+        'cabinet.kofd.kz' => Jusan::class
     ],
 
     'work_mail' => env('WORK_MAIL'),
