@@ -4,16 +4,18 @@ namespace App\Broadcasting;
 
 use App\Exceptions\CouldNotSendNotification;
 use App\Models\Sms;
+use App\Services\GetSmsApi;
 use App\Services\IsmsApi;
 use App\Services\SmsMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 
 class IsmsChannel
 {
     /**
      * Create a new channel instance.
      */
-    public function __construct(protected IsmsApi $isms){}
+    public function __construct(protected IsmsApi $isms, protected GetSmsApi $getSmsApi){}
 
     /**
      * Send the given notification.
@@ -64,7 +66,15 @@ class IsmsChannel
         if (\mb_strlen($message->content) > 1000) {
             throw CouldNotSendNotification::contentLengthLimitExceeded();
         }
-
+        $kcell = [
+            '7701',
+            '7702',
+            '7778',
+            '7775'
+        ];
+        if(in_array(Str::substr($recipient, 0, 4), $kcell)) {
+            return $this->getSmsApi->send($recipient, $message->content);
+        }
         return $this->isms->send($recipient, $message->content);
     }
 }

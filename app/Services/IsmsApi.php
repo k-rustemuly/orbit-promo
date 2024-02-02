@@ -5,6 +5,7 @@ namespace App\Services;
 use Exception;
 use SoapClient;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class IsmsApi
 {
@@ -67,6 +68,7 @@ class IsmsApi
     public function send(string $phone_number, string $message): bool
     {
         $phone_number = preg_replace('/[^\d]/', '', $phone_number);
+        // $message = str_replace('orbit-promo.kz', 'prgm.kz', $message);
 
         $data = [
             'login' => $this->login,
@@ -81,6 +83,7 @@ class IsmsApi
                 'prioritet' => self::PRIORITY['high'],
             ]
         ];
+        // Log::error(json_encode($data));
 
         if (app()->isLocal()) {
             logger()->debug('Send message', $data);
@@ -88,6 +91,7 @@ class IsmsApi
         }
 
         $result = $this->client->SendMessage($data)->Result;
+
         if ($result->Status !== 'Ok') {
             throw new Exception($result->Status);
         }

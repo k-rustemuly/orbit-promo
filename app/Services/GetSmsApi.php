@@ -36,6 +36,7 @@ class GetSmsApi
     {
         try{
             $message = str_replace('orbit-promo.kz', '', $message);
+            // $message = 'Спасибо, ваша заявка на регистрацию в базе потребителей ИП «Pragma» успешно принята. Вводя код, Вы предоставляете свое согласие на сбор, обработку/поручение обработки Ваших персональных данных, включая передачу 3м лицам в целях регистрации в базе и допуска к участию в активности. Код подтверждения: 7107';
             $sms = $this->client->sendSms($phone_number, $message);
             return true;
         } catch (\Zadarma_API\ApiException $sms) {
