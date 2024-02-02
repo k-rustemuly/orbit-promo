@@ -42,7 +42,7 @@ class ReceiptController extends BaseController
     {
         /** @var \App\Models\User */
         $user = auth()->user();
-        $receipts = $user->receipts()->with('status');
+        $receipts = $user->receipts()->with('status')->get();
         return $this->success(ReceiptsResource::collection($receipts));
 
     }
