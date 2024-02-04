@@ -4,6 +4,15 @@
 			page: 0,
 			file: null,
 			loading: false,
+
+			video: null,
+			canvasElement: null,
+			loadingMessage: null,
+			canvas: null,
+
+		 	qrCodeDetected: false,
+			videoStream: undefined,
+
 			fileChanged(event) {
 				const fileInput = event.target;
 				if (fileInput.files.length > 0) {
@@ -17,7 +26,7 @@
 				const isManual = qrUrl ? 0 : 1;
 				const formData = new FormData();
 				formData.append('is_manual', isManual);
-				
+
 				if (isManual) {
 					formData.append('file', this.file);
 				} else {
@@ -56,54 +65,59 @@
 			async startScanning() {
 				this.page = 7;
 				await this.$nextTick();
-				video = document.createElement("video");
-				canvasElement = document.getElementById("canvas");
-				canvas = canvasElement.getContext("2d");
-				loadingMessage = document.getElementById("loadingMessage");
-				qrUrl = null;
 
 				navigator.mediaDevices.getUserMedia({
 					video: {
 						facingMode: "environment"
 					}
 				}).then((stream) => {
-					videoStream = stream; // Store the video stream
-					video.srcObject = stream;
-					video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-					video.play();
+					this.video = document.createElement("video");
+					this.canvasElement = document.getElementById("canvas");
+					this.loadingMessage = document.getElementById("loadingMessage");
+
+					this.canvas = this.canvasElement.getContext("2d");
+
+					this.videoStream = stream; // Store the video stream
+					this.video.srcObject = stream;
+					this.video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+					this.video.play();
 					
 					requestAnimationFrame(this.tick.bind(this));
 				});
 			},
 
 			stopScanning() {
-				qrCodeDetected = true; // Set the flag to true to stop further scanning
+				this.qrCodeDetected = true; // Set the flag to true to stop further scanning
 
 				// Close the camera stream
-				if (videoStream) {
-					const tracks = videoStream.getTracks();
+				if (this.videoStream) {
+					const tracks = this.videoStream.getTracks();
 					tracks.forEach(track => track.stop());
 				}
+				setTimeout(() => {
+					this.qrCodeDetected = false; 
+				}, 1000);
 			},
 
 			tick() {
-				loadingMessage.innerText = "⌛ Loading video..."
-				if (video.readyState === video.HAVE_ENOUGH_DATA && !qrCodeDetected) {
-					loadingMessage.hidden = true;
-					canvasElement.hidden = false;
+				console.log(123);
+				// this.loadingMessage.innerText = "⌛ Loading video..."
+				if (this.video.readyState === this.video.HAVE_ENOUGH_DATA && !this.qrCodeDetected) {
+					this.loadingMessage.hidden = true;
+					this.canvasElement.hidden = false;
 
-					canvasElement.height = video.videoHeight;
-					canvasElement.width = video.videoWidth;
-					canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-					var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+					this.canvasElement.height = this.video.videoHeight;
+					this.canvasElement.width = this.video.videoWidth;
+					this.canvas.drawImage(this.video, 0, 0, this.canvasElement.width, this.canvasElement.height);
+					var imageData = this.canvas.getImageData(0, 0, this.canvasElement.width, this.canvasElement.height);
 					var code = jsQR(imageData.data, imageData.width, imageData.height, {
 						inversionAttempts: "dontInvert",
 					});
 					if (code && code.data) {
-						drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-						drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-						drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-						drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
+						drawLine(this.canvas, code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
+						drawLine(this.canvas, code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
+						drawLine(this.canvas, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
+						drawLine(this.canvas, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
 						this.page = 1;
 						this.uploadFile(code.data);
@@ -111,7 +125,7 @@
 						this.stopScanning(); // Call the function to stop scanning and close the camera
 					}
 				}
-				if (!qrCodeDetected) {
+				if (!this.qrCodeDetected) {
 					requestAnimationFrame(this.tick.bind(this));
 				}
 			},
@@ -280,7 +294,7 @@
 	<script src="{{ asset('assets/script/jsQR.js') }}"></script>
 
 	<script>
-		function drawLine(begin, end, color) {
+		function drawLine(canvas, begin, end, color) {
 			canvas.beginPath();
 			canvas.moveTo(begin.x, begin.y);
 			canvas.lineTo(end.x, end.y);
@@ -288,10 +302,5 @@
 			canvas.strokeStyle = color;
 			canvas.stroke();
 		}
-
-		var video, canvasElement, canvas, loadingMessage, qrUrl;
-
-		var qrCodeDetected = false;
-		var videoStream = undefined;
 	</script>
 </div>
