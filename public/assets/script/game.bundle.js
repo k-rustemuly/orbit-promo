@@ -857,20 +857,7 @@ function modifyColorFrequency(colors, level, tiles, targetCandies) {
 
     colorFrequencies['candy5'] = energy;
 
-    // // Пример: увеличиваем частоту редких цветов
-    // console.log('energy: ' + energy);
-    // console.log('count2: ' + count2);
-    // console.log('colors: ' + colors.length);
-    // console.log('candyNames: ' + candyNames.length);
-
-    // console.log('candy1: ' + colorFrequencies['candy1']);
-    // console.log('candy2: ' + colorFrequencies['candy2']);
-    // console.log('candy3: ' + colorFrequencies['candy3']);
-    // console.log('candy4: ' + colorFrequencies['candy4']);
-    // console.log('candy5: ' + colorFrequencies['candy5']);
-
-    // Можно добавить больше условий для разных уровней
-
+  
     // Создаем массив с учетом новых частот
     let modifiedColors = [];
     for (let color in colorFrequencies) {
@@ -1416,7 +1403,8 @@ class LevelScene extends Phaser.Scene {
         this.userEnergy = data.userEnergy;
         this.levelNumber = data.levelNumber;
         this.coinWin = data.coinWin;
-        this.lang = data.lang;
+        this.lang = localStorage.getItem('locale');
+
         this.instantGift = data.instantGift;
         this.langdata;
         this.totalSteps = 0;
@@ -1748,7 +1736,7 @@ headers: {
 }
 
 function startOrRestartGame() {
-    fetch('/api/ru/games/start', {
+    fetch('/api/' + localStorage.getItem('locale') + '/games/start', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -1795,7 +1783,7 @@ function startOrRestartGame() {
 }
 
 function endGame(data) {
-    fetch('/api/ru/games/finish', {
+    fetch('/api/' + localStorage.getItem('locale') + '/games/finish', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -2408,7 +2396,7 @@ class ModalEnergy extends Phaser.GameObjects.Container {
         this.animatedElements.push(subtitle);
 
         var button = new Button(scene, scene.cameras.main.width / 2, subtitle.y + 180, textButton, () => {
-            window.location.href = '/ru/profile';
+            window.location.href = '/' + localStorage.getItem('locale') + '/profile';
         }, 'normal');
         button.elementId = 'button'; // Добавляем пользовательское свойство
         button.setScale(.9);
@@ -2417,7 +2405,7 @@ class ModalEnergy extends Phaser.GameObjects.Container {
         this.animatedElements.push(button);
 
         const button2 = new ButtonBorder(scene, scene.cameras.main.width / 2, button.y + 120, scene.langdata.btn_friend, () => {
-            window.location.href = '/ru/profile';
+            window.location.href = '/' + localStorage.getItem('locale') + '/profile';
         }, 'border');
         button2.elementId = 'button'; // Добавляем пользовательское свойство
         button2.setScale(.9);
@@ -3177,7 +3165,7 @@ function updateScoreUI(scene) {
 
 function saveGameState(newState) {
 
-    var savedState = localStorage.getItem('locale');
+    var savedState = localStorage.getItem('localeData');
 
     if (savedState !== null) {
         savedState = CryptoJS.AES.decrypt(savedState, gk);
@@ -3192,12 +3180,12 @@ function saveGameState(newState) {
     const data = JSON.stringify(gameState);
 
     const encryptedData = CryptoJS.AES.encrypt(data, gk).toString();
-    localStorage.setItem('locale', encryptedData);
+    localStorage.setItem('localeData', encryptedData);
 
 }
 
 function loadGameState() {
-    const encryptedData = localStorage.getItem('locale');
+    const encryptedData = localStorage.getItem('localeData');
 
     if (!encryptedData) {
         return null;
@@ -3238,7 +3226,7 @@ function updateMovesUI(scene, type) {
 // Функция для удаления определенного свойства из состояния игры
 function removePropertyFromGameState(property) {
     // Загружаем текущее сохраненное состояние
-    var savedState = localStorage.getItem('locale');
+    var savedState = localStorage.getItem('localeData');
     if (savedState !== null) {
         savedState = CryptoJS.AES.decrypt(savedState, gk);
         savedState = savedState.toString(CryptoJS.enc.Utf8);
@@ -3253,7 +3241,7 @@ function removePropertyFromGameState(property) {
         // Сохраняем обновленное состояние обратно в localStorage
         const data = JSON.stringify(gameState);
         const encryptedData = CryptoJS.AES.encrypt(data, gk).toString();
-        localStorage.setItem('locale', encryptedData);
+        localStorage.setItem('localeData', encryptedData);
     }
 }
 
