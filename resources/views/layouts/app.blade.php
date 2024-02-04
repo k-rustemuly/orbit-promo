@@ -285,6 +285,7 @@
         document.addEventListener('alpine:init', () => {
             Alpine.store('modal', {
                 signIn: false,
+                feedback: false,
                 registration: false,
                 receipt: false,
                 receiptPage: 0,

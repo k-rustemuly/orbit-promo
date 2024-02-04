@@ -457,13 +457,13 @@
 
                     </div>
                 </div>
-                <!-- <div class="block-questions__column-02">
+                <div class="block-questions__column-02">
                     <div class="question-form">
                         <img src="{{ asset('assets/media/questions.svg') }}" alt="">
                         <p>{!! trans('front.faq.no_answer') !!}</p>
-                        <a href="#">{!! trans('front.faq.ask') !!}</a>
+                        <a href="#" x-data @click.prevent="$store.modal.feedback = true">{!! trans('front.faq.ask') !!}</a>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -475,5 +475,7 @@
 @include('partials.modals.sign-in')
 
 @include('partials.modals.sign-up')
+
+@include('partials.modals.feedback')
 
 @endsection
