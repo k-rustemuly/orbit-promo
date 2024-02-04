@@ -22,7 +22,7 @@ return [
         'play' => 'Oʼynash',
         'rules' => 'Aksiya qoidalari',
         'prizes' => 'Sovrinlar javoni',
-        'participate' => 'Участвовать',
+        'participate' => 'Ishtirok etish',
         'winners' => 'Gʼoliblar',
         'buy_online' => 'Onlayn xarid qiling'
     ],
@@ -83,15 +83,26 @@ return [
         - Promo-mahsulotni xarid qilish chekini yuklab olish orqali oʼyindagi hayotingizni uzaytiring;<br>
         - Haftalik sovrinlar oʼyinida ishtirok etish uchun koinlarni almashtirish.<br>
         Batafsil maʼlumot Aksiya qoidalarida keltirilgan"',
+        'ans3_uz' => '"2.1-bandda ko`rsatilgan aksiya mahsulotining kamida 1 (bir) birligi miqdorida aksiya mahsulotini sotib olish;<br>
+        www.orbit-promo.uz saytida qisqa ro`yxatdan o`tish; <br>
+        - darajalarni muvaffaqiyatli yakunlab, oʼyinda koinlarni toʼplang;<br>
+        - Promo-mahsulotni xarid qilish chekini yuklab olish orqali oʼyindagi hayotingizni uzaytiring;<br>
+        - Haftalik sovrinlar oʼyinida ishtirok etish uchun koinlarni almashtirish.<br>
+        Batafsil maʼlumot Aksiya qoidalarida keltirilgan"',
         
         'quest4' => 'Aksiyada qaysi mahsulotlar qatnashadi?',
         'ans4' => 'Aksiya shakarsiz orbit® saqichiga nisbatan o`tkaziladi:<br><br>
 
         Sof og`irligi 14 gramm bo`lgan qadoqda;<br>
         Sof og`irligi 16,4 gramm bo`lgan qadoqda',
+        'ans4_uz' => 'Aksiya shakarsiz orbit® saqichiga nisbatan o`tkaziladi:<br><br>
+
+        Sof og`irligi 14 gramm bo`lgan qadoqda;<br>
+        Sof og`irligi 16,4 gramm bo`lgan qadoqda',
         
         'quest5' => 'Aksiyaning batafsil qoidalarini qayerdan bilsam bo`ladi?',
-        'ans5' => 'Aksiyaning toʻliq shartlarini havola orqali oʻqishingiz mumkin.',
+        'ans5' => 'Aksiyaning toʻliq shartlarini <a href="https://orbit-promo.kz/assets/files/terms_uz.pdf" target="_blank">havola</a> orqali oʻqishingiz mumkin.',
+        'ans5_uz' => 'Aksiyaning toʻliq shartlarini <a href="https://orbit-promo.uz/assets/files/terms_uz.pdf" target="_blank">havola</a> orqali oʻqishingiz mumkin.',
         
         'quest6' => 'Qanday sovrunlar o`ynaladi?',
         'ans6' => 'Momental sovrinlar:<br>
@@ -115,13 +126,15 @@ return [
         'ans7' => 'Har bir ishtirokchi butun aksiya muddati davomida bir nafr momental sovrinning bir turidan koʼp boʼlmagan va haftalik bir martadan koʼp boʼlmagan sovrin yutib olishi mumkin.',
         
         'quest8' => 'Har haftalik sovrinlar o`yini qachon va qanday o`tkaziladi?',
-        'ans8' => 'Haftalik sovrinlarni olishga daʼvogarlarni aniqlash har bir aksiya haftasi tugagandan keyingi ikkinchi kuni (jami 12 hafta) Aksiya shartlarini bajargan www.orbit-promo.kz veb-saytida roʼyxatdan oʼtgan ishtirokchilar orasida amalga oshiriladi. Haftalik sovrinlarga daʼvogarlarni aniqlash maxsus dastur (randomizer) yordamida raqamlarni tasodifiy aniqlash orqali amalga oshiriladi. Ariza beruvchilarni aniqlashda Aksiya tashkilotchisi har bir haftalik sovrin uchun asosiy va 2 (ikki) zaxira arizachini tanlaydi. Batafsil maʼlumot uchun toʼliq qoidalarni oʼqing.',
+        'ans8' => 'Haftalik sovrinlarni olishga daʼvogarlarni aniqlash har bir aksiya haftasi tugagandan keyingi ikkinchi kuni (jami 12 hafta) Aksiya shartlarini bajargan www.orbit-promo.uz veb-saytida roʼyxatdan oʼtgan ishtirokchilar orasida amalga oshiriladi. Haftalik sovrinlarga daʼvogarlarni aniqlash maxsus dastur (randomizer) yordamida raqamlarni tasodifiy aniqlash orqali amalga oshiriladi. Ariza beruvchilarni aniqlashda Aksiya tashkilotchisi har bir haftalik sovrin uchun asosiy va 2 (ikki) zaxira arizachini tanlaydi. Batafsil maʼlumot uchun toʼliq qoidalarni oʼqing.',
+        'ans8' => 'Haftalik sovrinlarni olishga daʼvogarlarni aniqlash har bir aksiya haftasi tugagandan keyingi ikkinchi kuni (jami 12 hafta) Aksiya shartlarini bajargan www.orbit-promo.uz veb-saytida roʼyxatdan oʼtgan ishtirokchilar orasida amalga oshiriladi. Haftalik sovrinlarga daʼvogarlarni aniqlash maxsus dastur (randomizer) yordamida raqamlarni tasodifiy aniqlash orqali amalga oshiriladi. Ariza beruvchilarni aniqlashda Aksiya tashkilotchisi har bir haftalik sovrin uchun asosiy va 2 (ikki) zaxira arizachini tanlaydi. Batafsil maʼlumot uchun toʼliq qoidalarni oʼqing.',
         
         'quest9' => 'Oʼram va cheklarni saqlash kerakmi?',
         'ans9' => 'Barcha yuklab olingan cheklar aksiya tugaguniga qadar saqlanishi kerak. Agar siz Sovrin yutib olsangiz va chek boʼlmasa, Sovrin zaxira gʼolibiga oʼtadi. Mahsulotin oʼramini saqlashning hojati yoʼq.',
         
         'quest10' => 'Men har haftalik sovrinlar o`yinlari natijalarini qayerda ko`rishim mumkin?',
         'ans10' => 'Har haftalik sovrinlar g`oliblari ro`yxati www.orbit-promo.uz saytining “g`oliblar” bo`limida har hafta g`oliblari aniqlangan paytdan boshlab 7 (yetti) ish kuni ichida joylashtiriladi.',
+        'ans10_uz' => 'Har haftalik sovrinlar g`oliblari ro`yxati www.orbit-promo.uz saytining “g`oliblar” bo`limida har hafta g`oliblari aniqlangan paytdan boshlab 7 (yetti) ish kuni ichida joylashtiriladi.',
 
         'no_answer' => 'SAVOLINGIZGA JAVOB TOPMADINGIZMI?',
         'ask' => 'SAVOL BERING',
@@ -230,6 +243,8 @@ return [
     'string_74' => 'Boshqa <br>ilovalar',
     'string_75' => 'Havolani nushalandi!',
     'string_76' => '"Taklif qilish" tugmasini bosish orqali men aksiya qoidalari va Maxfiylik siyosatiga rozi ekanligimni tasdiqlayman',
-    'string_77' => '*taklif qilingan do’stlarning maksimal soni - 5ta'
+    'string_77' => '*taklif qilingan do’stlarning maksimal soni - 5ta',
+    'string_78' => 'Qo’lda yuklash',
+    'string_79' => 'Skanlash',
 		
 ];

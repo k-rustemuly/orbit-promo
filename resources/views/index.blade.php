@@ -394,7 +394,7 @@
                                 <h4>{!! trans('front.faq.quest3') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans3') !!} </p>
+                            <p>{!! trans('front.faq.ans3'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">
@@ -402,7 +402,7 @@
                                 <h4>{!! trans('front.faq.quest4') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans4') !!} </p>
+                            <p>{!! trans('front.faq.ans4'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">
@@ -410,7 +410,7 @@
                                 <h4>{!! trans('front.faq.quest5') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans5') !!} </p>
+                            <p>{!! trans('front.faq.ans5'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">
@@ -434,7 +434,7 @@
                                 <h4>{!! trans('front.faq.quest8') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans8') !!} </p>
+                            <p>{!! trans('front.faq.ans8'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         <div class="question-item">
@@ -450,7 +450,7 @@
                                 <h4>{!! trans('front.faq.quest10') !!}</h4>
                                 <img src="{{ asset('assets/media/icons/arrow_bottom.svg') }}" class="">
                             </div>
-                            <p>{!! trans('front.faq.ans10') !!} </p>
+                            <p>{!! trans('front.faq.ans10'.(region() == 'uz' ? '_uz' : '')) !!} </p>
                         </div>
 
                         
