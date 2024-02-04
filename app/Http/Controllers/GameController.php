@@ -39,6 +39,6 @@ class GameController extends BaseController
 
     public function gamePage()
     {
-            return view('game.index'); 
+            return view('game.index');
     }
 }

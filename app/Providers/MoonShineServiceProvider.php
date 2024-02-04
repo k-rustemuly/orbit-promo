@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Receipt;
 use App\Models\Voucher;
+use App\MoonShine\Pages\RegistrationPage;
 use App\MoonShine\Pages\SettingsPage;
 use App\MoonShine\Resources\InstantPrizeResource;
 use App\MoonShine\Resources\PrizeDrawingCalendarResource;
@@ -39,6 +40,11 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
+            MenuGroup::make(__('ui.menu.charts'), [
+                MenuItem::make(__('ui.menu.registration'), new RegistrationPage()),
+            ],
+            'heroicons.chart-bar'),
+
             MenuItem::make(__('moonshine::ui.resource.admins_title'), new MoonShineUserResource())
                 ->canSee(fn(Request $request) => $request->user('moonshine')?->moonshine_user_role_id == 1),
 

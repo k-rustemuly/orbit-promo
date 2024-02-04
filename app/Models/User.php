@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -122,5 +123,15 @@ class User extends Authenticatable
     public function vouchers(): HasMany
     {
         return $this->hasMany(Voucher::class, 'user_id', 'id');
+    }
+
+    public function scopeVerified(Builder $query): void
+    {
+        $query->whereNotNull('phone_number_verified_at');
+    }
+
+    public function scopeNextLevel(Builder $query): void
+    {
+        $query->where('level', '>', 1);
     }
 }

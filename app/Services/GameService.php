@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Game;
 use App\Models\InstantPrize;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Str;
 
@@ -81,4 +82,30 @@ class GameService
         }
         return false;
     }
+
+    public static function getTotalReturningPlayers()
+    {
+        return DB::table('games as g1')
+        ->select(DB::raw('COUNT(DISTINCT g1.user_id) as returning_players'))
+        ->whereExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('games as g2')
+                ->whereRaw('g2.user_id = g1.user_id')
+                ->whereRaw('DATEDIFF(g1.created_at, g2.created_at) = 1');
+        })
+        ->first()
+        ->returning_players;
+    }
+
+    public static function uniquePlayersFirstLevelCount()
+    {
+        return Game::whereIn('user_id', function ($query) {
+            $query->select('id')
+                ->from('users')
+                ->whereNotNull('phone_number_verified_at')
+                ->where('level', 1);
+        })
+        ->count();
+    }
+
 }
