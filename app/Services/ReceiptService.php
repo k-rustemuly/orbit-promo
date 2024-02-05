@@ -62,7 +62,14 @@ class ReceiptService
         $queryParams = [];
         parse_str(parse_url($this->url, PHP_URL_QUERY), $queryParams);
 
-        $iValue = isset($queryParams['i']) ? $queryParams['i'] : $this->url;
+        $iValue = $this->url;
+
+        if(isset($queryParams['i'])) {
+            $iValue = $queryParams['i'];
+        } else if(isset($queryParams['s'])) {
+            $iValue = $queryParams['s'];
+        }
+
         return $iValue;
     }
 
