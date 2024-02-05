@@ -213,6 +213,12 @@
                 top: 75px;
                 left: 20px;
             }
+            .date-container .body h4 {
+                font-size: 30px;
+            }
+            .date-container .body p {
+                font-size: 20px;
+            }
         }
 
         @media only screen and (min-width: 722px) {
@@ -269,6 +275,27 @@
 
         .questions-accordeons a {
             color: white;
+        }
+        .change-lang.mobile {
+            position: absolute;
+            top: 84px;
+            right: 70px;
+            z-index: 11;
+        }
+        .change-lang-modal {
+            text-transform: capitalize;
+            font-size: 18px;
+            font-family: 'Montserrat';
+            font-weight: 700;
+            text-decoration: none;
+            position: relative;
+            color: #fff;
+        }
+        .change-lang-modal span {
+            position: absolute;
+            inset: 0;
+            text-align: center;
+            padding-top: 19px;
         }
     </style>
     <script defer src="{{ asset('assets/script/mask.js') }}"></script>

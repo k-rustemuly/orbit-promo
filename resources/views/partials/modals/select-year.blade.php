@@ -35,7 +35,11 @@
 			</div>
 			<div class="body">
 				<h4>{!! trans('front.modal_select_year.title') !!}</h4>
-				<img src="{{ asset('assets/media/icons/star_purple.svg') }}" alt="" class="decoration">
+				<a href="/{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : (region() == 'kz' ? 'kk' : 'uz') }}" class="change-lang-modal">
+					<img src="{{ asset('assets/media/icons/star_purple.svg') }}" alt="" class="decoration">
+					<span>{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : region() }}</span>
+				</a>
+				
 				<p>{!! trans('front.modal_select_year.description') !!}</p>
 				<div style="color: white; margin-bottom: -20px">{!! trans('front.modal_select_year.select_date') !!}</div>
 				<div style="display: flex;">

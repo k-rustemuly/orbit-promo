@@ -3,6 +3,11 @@
         <div class="container-navigation-mobile" @click="showMenu = !showMenu">
             <img src="{{ asset('assets/media/icons/menu.svg') }}" />
         </div>
+
+        <a href="/{{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : (region() == 'kz' ? 'kk' : 'uz') }}" class="change-lang mobile md-hide">
+            <img src="{{ asset('assets/media/star.svg') }}" />
+            {{ app()->getLocale() == 'uz' || app()->getLocale() == 'kk' ? 'ru' : region() }}
+        </a>
         <div class="container-navigation">
             <div class="container-navigation_column-01">
                 <a href="/" class="navigation-logotype">
