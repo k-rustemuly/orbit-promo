@@ -81,7 +81,7 @@
 					this.video.srcObject = stream;
 					this.video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
 					this.video.play();
-					
+
 					requestAnimationFrame(this.tick.bind(this));
 				});
 			},
@@ -95,7 +95,7 @@
 					tracks.forEach(track => track.stop());
 				}
 				setTimeout(() => {
-					this.qrCodeDetected = false; 
+					this.qrCodeDetected = false;
 				}, 1000);
 			},
 
@@ -194,8 +194,10 @@
 						</template>
 
 						<template x-if="page == 4">
-							<a href="#" class="button button_custom upload-btn" @click.prevent="$refs.fileInput.click()">{!! trans('front.string_45') !!}<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
-							<input type="file" class="hidden" x-ref="fileInput" accept=".jpg, .jpeg, .png" @change="fileChanged" :disabled="loading" />
+                            <div>
+                                <a href="#" class="button button_custom upload-btn" @click.prevent="$refs.fileInput.click()">{!! trans('front.string_45') !!}<img src="{{ asset('assets/media/icons/camera.svg') }}"></a>
+                                <input type="file" class="hidden" x-ref="fileInput" accept=".jpg, .jpeg, .png" @change="fileChanged" :disabled="loading" />
+                            </div>
 						</template>
 						<template x-if="loading == true"><span class="spinner"></span></template>
 
