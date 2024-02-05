@@ -246,5 +246,6 @@ return [
     'string_77' => '*taklif qilingan do’stlarning maksimal soni - 5ta',
     'string_78' => 'Qo’lda yuklash',
     'string_79' => 'Skanlash',
+    'string_80' => 'Yuborildi',
 		
 ];

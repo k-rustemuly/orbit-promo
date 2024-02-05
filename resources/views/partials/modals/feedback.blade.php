@@ -78,8 +78,8 @@
 					</div>
 					<button type="button" class="button" @click="submit()">{!! trans('front.faq.send') !!}</button>
 				</form>
-				<div class="form" x-show="success">
-					success!
+				<div class="form" x-show="success" style="font-size: 20px; padding-top: 35px;">
+                {!! trans('front.string_80') !!}
 				</div>
 			</div>
 		</div>

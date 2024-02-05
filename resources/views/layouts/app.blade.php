@@ -18,15 +18,28 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/media.css') }}">
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H5BT4SRKNN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    @if(region() == 'kz')
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5BT4SRKNN"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-H5BT4SRKNN');
-</script>
+        gtag('config', 'G-H5BT4SRKNN');
+        </script>
+    @else
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z6F875E2N4"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z6F875E2N4');
+        </script>
+    @endif
+
     <style>
         html {
             scroll-behavior: smooth;
@@ -306,6 +319,13 @@
             inset: 0;
             text-align: center;
             padding-top: 19px;
+        }
+        .date-container .body .decorations {
+            margin-top: -60px;
+        }
+        .section-header .container-notes .container-notes_column-01 .block-notes.block-01 {
+            top: 70px !important;
+            left: 0 !important;
         }
     </style>
     <script defer src="{{ asset('assets/script/mask.js') }}"></script>
