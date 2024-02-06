@@ -9,6 +9,7 @@ use App\Models\Receipt;
 use App\Models\ReceiptStatus;
 use App\Models\User;
 use App\Services\GameService;
+use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Decorations\Divider;
 use MoonShine\Decorations\Grid;
 use MoonShine\Metrics\ValueMetric;
@@ -40,6 +41,11 @@ class Dashboard extends Page
         $rejectedCount = Receipt::where('receipt_status_id', ReceiptStatus::NOT_FOUND)->count();
         $uniqueScannedUsersCount = Receipt::distinct('user_id')->count();
 		return [
+            ActionButton::make(
+                __('ui.buttons.total_report'),
+                route('moonshine.report.total', ['resourceUri' => $this->uriKey()])
+            ),
+            Divider::make(),
             Grid::make([
                 ValueMetric::make(__('ui.messages.unique_users'))
                     ->value($uniqueUsersCount)

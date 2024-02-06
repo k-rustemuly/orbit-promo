@@ -86,7 +86,8 @@ return [
         'export' => 'Экспорт',
         'approve' => 'Подтвердить',
         'reject' => 'Отклонить',
-        'to_approve' => 'Ждет подтверждение'
+        'to_approve' => 'Ждет подтверждение',
+        'total_report' => 'Отчет'
     ],
     'messages' => [
         'added' => 'Добавлено',

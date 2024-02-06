@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\InstantPrize;
 use App\MoonShine\Controllers\InstantPrizeController;
+use App\MoonShine\Controllers\ReportController;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Support\Facades\Route;
 use MoonShine\ActionButtons\ActionButton;
@@ -183,6 +184,7 @@ class InstantPrizeResource extends ModelResource
 
         Route::post('/showbox/store', [InstantPrizeController::class, 'showboxStore'])->name('showbox.store');
         Route::post('/balance/store', [InstantPrizeController::class, 'balanceStore'])->name('balance.store');
+        Route::get('/report/total', [ReportController::class, 'total'])->name('report.total');
 
     }
 
