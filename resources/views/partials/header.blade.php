@@ -79,7 +79,7 @@
                                 <template x-if="$store.user.token"><a href="/{{ app()->getLocale() }}/profile">{!! trans('front.header.profile') !!}</a></template>
                                 <template x-if="!$store.user.token"><a href="#" @click.prevent="($store.modal.signIn = true) && (showMenu = false)">{!! trans('front.header.sign_in') !!}</a></template>
                             @else
-                                <a href="#" @click.prevent="(showMenu = false) && $store.service.logOut()">{!! trans('front.header.sign_out') !!}</a>
+                                <a href="#" @click.prevent="$store.service.logOut()">{!! trans('front.header.sign_out') !!}</a>
                             @endif
                         </li>
                     </ul>
