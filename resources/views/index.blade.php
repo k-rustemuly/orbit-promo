@@ -239,13 +239,10 @@
                                                 <p>{!! trans('front.string_6') !!}</p>
                                             </div>
                                             <div>
-                                                <p>{!! trans('front.string_9') !!}</p>
+                                                <p>{!! trans('front.string_7') !!}</p>
                                             </div>
                                             <div>
                                                 <p>{!! trans('front.string_8') !!}</p>
-                                            </div>
-                                            <div>
-                                                <p>{!! trans('front.string_10') !!}</p>
                                             </div>
                                         </div>
                                     </template>
@@ -273,13 +270,10 @@
                                                     <p x-text="item.date"></p>
                                                 </div>
                                                 <div>
-                                                    <p x-text="item.spent_bal"></p>
+                                                    <p x-text="item.phone_number"></p>
                                                 </div>
                                                 <div>
                                                     <p x-text="item.prize"></p>
-                                                </div>
-                                                <div>
-                                                    <p x-text="item.is_winned ? '{!! trans('front.string_11') !!}' : '{!! trans('front.string_12') !!}'"></p>
                                                 </div>
                                             </div>
                                         </template>
