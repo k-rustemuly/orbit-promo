@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Game;
+use App\Models\Invitation;
 use App\Models\Receipt;
 use App\Models\ReceiptStatus;
 use App\Models\User;
@@ -45,6 +46,15 @@ class ReportImport implements WithEvents
         $acceptedCount = Receipt::where('receipt_status_id', ReceiptStatus::ACCEPTED)->count();
         $rejectedCount = Receipt::where('receipt_status_id', ReceiptStatus::NOT_FOUND)->count();
         $uniqueScannedUsersCount = Receipt::distinct('user_id')->count();
+        $invitationCount = Invitation::count();
+        $uniqueInvitationCount = Invitation::distinct('owner_id')->count();
+        $activeUsersCount =  DB::table('receipts')
+            ->join('games', 'receipts.user_id', '=', 'games.user_id')
+            ->select('receipts.user_id')
+            ->groupBy('receipts.user_id')
+            ->havingRaw('COUNT(DISTINCT receipts.id) >= 1')
+            ->havingRaw('COUNT(DISTINCT games.id) >= 3')
+            ->count();
 
         $sheet->setCellValue('B14', $uniqueUsersCount);
         $sheet->setCellValue('B15', $gamesCount);
@@ -57,11 +67,14 @@ class ReportImport implements WithEvents
         $sheet->setCellValue('B22', $this->percentage($gamesCount - $gamesFirstLevel, $gamesCount));
         $sheet->setCellValue('B23', $uniqueGamersNextLevel);
         $sheet->setCellValue('B24', round(($gamesCount - $gamesFirstLevel)/$uniqueGamers));
-        $sheet->setCellValue('B31', $scanCount);
-        $sheet->setCellValue('B32', $acceptedCount);
-        $sheet->setCellValue('B33', $rejectedCount);
-        $sheet->setCellValue('B34', $this->percentage($uniqueScannedUsersCount, $uniqueUsersCount));
-        $sheet->setCellValue('B35', round($scanCount/$uniqueScannedUsersCount));
+        $sheet->setCellValue('B25', $invitationCount);
+        $sheet->setCellValue('B26', $activeUsersCount);
+        $sheet->setCellValue('B27', round($invitationCount/$uniqueInvitationCount));
+        $sheet->setCellValue('B34', $scanCount);
+        $sheet->setCellValue('B35', $acceptedCount);
+        $sheet->setCellValue('B36', $rejectedCount);
+        $sheet->setCellValue('B37', $this->percentage($uniqueScannedUsersCount, $uniqueUsersCount));
+        $sheet->setCellValue('B38', round($scanCount/$uniqueScannedUsersCount));
     }
 
     private function lastSheet($sheet)
