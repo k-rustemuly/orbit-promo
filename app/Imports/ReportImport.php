@@ -130,22 +130,6 @@ class ReportImport implements WithEvents
             $sheet->setCellValue([$rowIndexs[$date], 5], $value);
         }
 
-        $firstLevelUserCounts = collect($allMondays)
-            ->merge(User::selectRaw('WEEK(created_at, 1) as week, COUNT(*) as count')
-                    ->whereNotNull('phone_number_verified_at')
-                    ->where('level', 2)
-                    ->groupBy(DB::raw('WEEK(created_at, 1)'))
-                    ->get()
-                    ->mapWithKeys(function ($item) {
-                        return [
-                            \Carbon\Carbon::now()->startOfYear()->addWeeks($item->week -1)->format('d.m.Y') => $item->count
-                        ];
-                    })
-            )
-            ->toArray();
-        foreach($firstLevelUserCounts as $date => $value) {
-            $sheet->setCellValue([$rowIndexs[$date], 7], $value);
-        }
 
         $otherLevelUserCounts = collect($allMondays)
             ->merge(User::selectRaw('WEEK(created_at, 1) as week, COUNT(*) as count')
@@ -168,7 +152,7 @@ class ReportImport implements WithEvents
             ->merge(User::selectRaw('WEEK(created_at, 1) as week, COUNT(*) as count')
                     ->whereNotNull('phone_number_verified_at')
                     ->where('level', 1)
-                    ->where('life', 3)
+                    ->where('life', '>=', 3)
                     ->groupBy(DB::raw('WEEK(created_at, 1)'))
                     ->get()
                     ->mapWithKeys(function ($item) {
@@ -180,8 +164,26 @@ class ReportImport implements WithEvents
             ->toArray();
         foreach($ghostUserCounts as $date => $value) {
             $sheet->setCellValue([$rowIndexs[$date], 9], $value);
+            $sheet->setCellValue([$rowIndexs[$date], 7], $verifiedUserCounts[$date] - ($otherLevelUserCounts[$date]+$value));
         }
 
+        // $firstLevelUserCounts = collect($allMondays)
+        //     ->merge(User::selectRaw('WEEK(created_at, 1) as week, COUNT(*) as count')
+        //             ->whereNotNull('phone_number_verified_at')
+        //             ->where('level', '<=', 2)
+        //             ->where('life', '<=', 2)
+        //             ->groupBy(DB::raw('WEEK(created_at, 1)'))
+        //             ->get()
+        //             ->mapWithKeys(function ($item) {
+        //                 return [
+        //                     \Carbon\Carbon::now()->startOfYear()->addWeeks($item->week -1)->format('d.m.Y') => $item->count
+        //                 ];
+        //             })
+        //     )
+        //     ->toArray();
+        // foreach($firstLevelUserCounts as $date => $value) {
+        //     $sheet->setCellValue([$rowIndexs[$date], 7], $value);
+        // }
         $playedGamesCounts = collect($allMondays)
             ->merge(Game::selectRaw('WEEK(created_at, 1) as week, COUNT(*) as count')
                     ->where('is_finished', 1)
