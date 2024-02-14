@@ -163,8 +163,10 @@ class ReportImport implements WithEvents
             )
             ->toArray();
         foreach($ghostUserCounts as $date => $value) {
+            $f = $verifiedUserCounts[$date] - ($otherLevelUserCounts[$date]+$value);
             $sheet->setCellValue([$rowIndexs[$date], 9], $value);
-            $sheet->setCellValue([$rowIndexs[$date], 7], $verifiedUserCounts[$date] - ($otherLevelUserCounts[$date]+$value));
+            $sheet->setCellValue([$rowIndexs[$date], 7], $f);
+            $sheet->setCellValue([$rowIndexs[$date], 10], $f + $otherLevelUserCounts[$date]);
         }
 
         // $firstLevelUserCounts = collect($allMondays)
