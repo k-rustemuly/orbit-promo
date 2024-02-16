@@ -168,7 +168,7 @@
                     <div class="input-row">
                         <span x-cloak x-show="messages?.message?.[0]" x-text="messages?.message?.[0]"></span>
                     </div>
-                    <button type="button" class="button" @click="signUp()" :disabled="loading">{!! trans('front.sign_up.reg') !!}</button>
+                    <button type="button" class="button reg" @click="signUp()" :disabled="loading">{!! trans('front.sign_up.reg') !!}</button>
 
                     <p class="caption">
                         <a href="{{ asset('assets/files/terms_'.region().'.pdf') }}" class="term" target="_blank">{!! trans('front.sign_up.bottom_text') !!}</a>
