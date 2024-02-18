@@ -37,7 +37,9 @@ class VoucherService
             $voucher->where('user_id', $user->id);
         }
         else{
-            $voucher->whereNotNull('winned_date')->where('is_approved', true);
+            $voucher->whereNotNull('winned_date')
+                ->where('is_approved', true)
+                ->orderBy('winned_date', 'desc');
         }
         return VouchersResource::collection(
                 $voucher
