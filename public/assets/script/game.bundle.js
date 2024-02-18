@@ -1890,7 +1890,10 @@ class Modal extends Phaser.GameObjects.Container {
         }
         if (callbackButton === 'start') {
             var container = scene.add.sprite(scene.cameras.main.width / 2, 200, 'popup');
+            
         } else if (callbackButton === 'end') {
+
+
             var container = scene.add.sprite(scene.cameras.main.width / 2, 105, 'modal_end');
         } else if (callbackButton === 'err') {
             var container = scene.add.sprite(scene.cameras.main.width / 2, 200, 'modal_err');
@@ -1935,6 +1938,30 @@ class Modal extends Phaser.GameObjects.Container {
 
         }
 
+        if (callbackButton === 'start') {
+            const btnClose = scene.add.sprite(scene.cameras.main.width / 1.21, 160, 'btnClose')
+            btnClose.setDepth(103);
+            btnClose.setOrigin(0, 0);
+            btnClose.setInteractive(); // делаем кнопку интерактивной
+            btnClose.on('pointerdown', function () {
+                window.location.href = '/' + localStorage.getItem('locale') + '/profile';
+            });
+            this.add(btnClose);
+            this.animatedElements.push(btnClose);
+    
+        } else if (callbackButton === 'end') {
+            const btnClose = scene.add.sprite(scene.cameras.main.width / 1.21, 220, 'btnClose')
+            btnClose.setDepth(103);
+            btnClose.setOrigin(0, 0);
+            btnClose.setInteractive(); // делаем кнопку интерактивной
+            btnClose.on('pointerdown', function () {
+                window.location.href = '/' + localStorage.getItem('locale') + '/profile';
+            });
+            this.add(btnClose);
+            this.animatedElements.push(btnClose);
+    
+        }
+     
         let title = scene.add.text((scene.cameras.main.width / 2), callbackButton === 'end' ? 300 : 240, title_, style_textLevel);
         title.setOrigin(0.5, 0); // Устанавливаем начало координат текста в его центр по горизонтали
         title.setShadow(2, 2, 'rgba(0,0,0,0.4)', 2);
@@ -2403,6 +2430,16 @@ class ModalEnergy extends Phaser.GameObjects.Container {
         button.setDepth(102);
         this.add(button);
         this.animatedElements.push(button);
+
+        const btnClose = scene.add.sprite(scene.cameras.main.width / 1.21, 90, 'btnClose')
+        btnClose.setDepth(103);
+        btnClose.setOrigin(0, 0);
+        btnClose.setInteractive(); // делаем кнопку интерактивной
+        btnClose.on('pointerdown', function () {
+            window.location.href = '/' + localStorage.getItem('locale') + '/profile';
+        });
+        this.add(btnClose);
+        this.animatedElements.push(btnClose);
 
         const button2 = new ButtonBorder(scene, scene.cameras.main.width / 2, button.y + 120, scene.langdata.btn_friend, () => {
             window.location.href = '/' + localStorage.getItem('locale') + '/profile';
