@@ -93,7 +93,7 @@ class IsmsApi
         $result = $this->client->SendMessage($data)->Result;
 
         if ($result->Status !== 'Ok') {
-            throw new Exception($result->Status);
+            throw new Exception($phone_number. ' => ' .$result->Status);
         }
 
         return true;
