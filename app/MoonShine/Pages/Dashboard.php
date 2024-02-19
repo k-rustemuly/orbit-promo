@@ -40,6 +40,8 @@ class Dashboard extends Page
         $acceptedCount = Receipt::where('receipt_status_id', ReceiptStatus::ACCEPTED)->count();
         $rejectedCount = Receipt::where('receipt_status_id', ReceiptStatus::NOT_FOUND)->count();
         $uniqueScannedUsersCount = Receipt::distinct('user_id')->count();
+        $receiptsWithoutImages = Receipt::doesntHave('media')->count();
+
 		return [
             ActionButton::make(
                 __('ui.buttons.total_report'),
@@ -101,6 +103,9 @@ class Dashboard extends Page
                     ->columnSpan(3),
                 ValueMetric::make(__('ui.messages.avg_scanned_users_count'))
                     ->value(round($scanCount/$uniqueScannedUsersCount))
+                    ->columnSpan(3),
+                ValueMetric::make('Автораспознований')
+                    ->value($receiptsWithoutImages)
                     ->columnSpan(3),
 
             ])
