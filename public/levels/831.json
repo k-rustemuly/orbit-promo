@@ -1,0 +1,70 @@
+{
+    "levelNumber": 831,
+    "targetScore": 0,
+    "movesLeft": 95,
+    "timeLeft": 0,
+    "tiles": [
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ],
+        [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+        ]
+    ],
+    "colors": [
+        "candy2",
+        "candy4",
+        "candy6",
+        "candy1",
+        "candy3"
+    ],
+    "targetCandies": {
+        "candy3": 90,
+        "candy1": 90,
+        "candy6": 90,
+        "candy4": 90,
+        "candy2": 90
+    }
+}

@@ -1,26 +1,17 @@
 {
     "levelNumber": 56,
     "targetScore": 0,
-    "movesLeft": 24,
+    "movesLeft": 29,
     "timeLeft": 0,
     "tiles": [
         [
+            0,
             1,
             1,
+            0,
             1,
             1,
-            1,
-            1,
-            1
-        ],
-        [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
+            0
         ],
         [
             1,
@@ -42,11 +33,11 @@
         ],
         [
             0,
-            0,
             1,
             1,
             1,
-            0,
+            1,
+            1,
             0
         ],
         [
@@ -55,15 +46,6 @@
             1,
             1,
             1,
-            0,
-            0
-        ],
-        [
-            0,
-            0,
-            0,
-            1,
-            0,
             0,
             0
         ],
@@ -79,14 +61,16 @@
     ],
     "colors": [
         "candy4",
-        "candy3",
-        "candy6",
         "candy2",
-        "candy1"
+        "candy6",
+        "candy1",
+        "candy3"
     ],
     "targetCandies": {
-        "candy6": 23,
-        "candy3": 23,
-        "candy2": 23
+        "candy1": 27,
+        "candy2": 27,
+        "candy6": 27,
+        "candy3": 27,
+        "candy4": 27
     }
 }
