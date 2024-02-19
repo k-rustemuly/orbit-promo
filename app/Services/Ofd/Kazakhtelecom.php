@@ -50,7 +50,9 @@ class Kazakhtelecom
         $items = Arr::get($result, 'ticket.items');
         foreach($items as $item)
         {
-            $positions[] = str($item['commodity']['name'])->lower()->squish()->value();
+            if(isset($item['commodity']) && isset($item['commodity']['name'])) {
+                $positions[] = str($item['commodity']['name'])->lower()->squish()->value();
+            }
         }
         return $positions;
     }
