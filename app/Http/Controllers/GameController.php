@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GameFinishRequest;
+use App\Http\Requests\GamePrizeSendRequest;
 use App\Http\Resources\GameResource;
 use App\Models\Game;
 use App\Services\GameService;
@@ -31,6 +32,18 @@ class GameController extends BaseController
         $game = Game::find($id);
         if($game && $game->user_id == auth()->id()) {
             if($service->finished($game, $level, $score, $time, $finish)) {
+                return $this->success();
+            }
+        }
+        return $this->error(__('ui.messages.error_finished_game'));
+    }
+
+    public function prize(GamePrizeSendRequest $request, GameService $service)
+    {
+        $data = $request->validated();
+        $game = Game::find($data['userId']);
+        if($game && $game->user_id == auth()->id()) {
+            if($service->prize($game)) {
                 return $this->success();
             }
         }

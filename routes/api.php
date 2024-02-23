@@ -62,6 +62,7 @@ Route::prefix('{locale}')
                     ->group(function () {
                         Route::get('start', [GameController::class, 'start'])->name('start');
                         Route::post('finish', [GameController::class, 'finish'])->name('finish');
+                        Route::post('prize', [GameController::class, 'prize'])->name('prize');
                     });
 
                 Route::get('logout', [ProfileController::class, 'logout'])->name('logout');

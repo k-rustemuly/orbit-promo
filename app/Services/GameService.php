@@ -83,6 +83,27 @@ class GameService
         return false;
     }
 
+    /**
+     * @param Game $game
+     *
+     * @return bool
+     */
+    public function prize(Game $game): bool
+    {
+        if(!$game->finish) {
+            $user = $game->user;
+            if($instantPrize = $game->instantPrize) {
+                if(! is_null($instantPrize->code) && is_null($instantPrize->winning_date)) {
+                    $this->rgl->send($user->phone_number, $instantPrize->code);
+                    $instantPrize->winning_date = now();
+                    $instantPrize->save();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static function getTotalReturningPlayers()
     {
         return DB::table('games as g1')
