@@ -54,28 +54,28 @@ class GameService
      */
     public function finished(Game $game, int $level = 0, int $score = 0, int $time = 0, bool $finish = false): bool
     {
-        if(! $game->finish) {
+        if(! $game->is_finished) {
             $coin = app(GeneralSettings::class)->game_max_coins;
             $user = $game->user;
             $game->after_life = $user->life;
             $game->coins = $coin;
             $game->score = $score;
-            if($finish) {
-                $user->coin+=$coin;
-                $user->level+= 1;
-                $user->save();
 
-                if($instantPrize = $game->instantPrize) {
-                    if(! is_null($instantPrize->code) && is_null($instantPrize->winning_date)) {
-                        $this->rgl->send($user->phone_number, $instantPrize->code);
-                    }
-                    $instantPrize->winning_date = now();
-                    $instantPrize->save();
+            $user->coin+=$coin;
+            $user->level+= 1;
+            $user->save();
+
+            if($instantPrize = $game->instantPrize) {
+                if(! is_null($instantPrize->code) && is_null($instantPrize->winning_date)) {
+                    $this->rgl->send($user->phone_number, $instantPrize->code);
                 }
+                $instantPrize->winning_date = now();
+                $instantPrize->save();
             }
+
             $game->after_coins = $user->coin;
             $game->after_level = $user->level;
-            $game->is_finished = $finish;
+            $game->is_finished = 1;
             $game->time = $time;
             $game->save();
             return true;
