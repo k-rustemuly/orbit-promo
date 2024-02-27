@@ -883,15 +883,21 @@ class CandyUI extends Phaser.GameObjects.Container {
     constructor(scene, x, y, targetCandies) {
         super(scene, x, y);
 
+       
         this.scene = scene;
         this.targetCandies = targetCandies;
         this.candyUIWidth = 170; // Ширина одного элемента UI
         this.screenWidth = scene.sys.game.config.width; // Ширина экрана/игрового поля
-        this.uiOffsetX = (this.screenWidth - this.candyUIWidth * Object.keys(this.targetCandies).length) / 2 + this.candyUIWidth / 1.3;
+        if (Object.keys(this.targetCandies).length >= 3) {
+            length = 3
+        } else {
+            length = Object.keys(this.targetCandies).length
+        }
+        this.uiOffsetX = (this.screenWidth - this.candyUIWidth * length) / 2 + this.candyUIWidth / 1.3;
 
         // Стиль для текста
         const style_targetCandies = {
-            fontSize: '48px',
+            fontSize: '40px',
             fontFamily: 'AVENGEANCE',
             fill: '#fff',
             align: 'left'
@@ -910,8 +916,11 @@ class CandyUI extends Phaser.GameObjects.Container {
         title.setShadow(1, 1, 'rgba(0,0,0,0.4)', 2);
         this.add(title); // Добавляем иконку в контейнер
 
+        let count = 0; // Инициализируем счетчик
 
         for (let candyType in this.targetCandies) {
+            if (count >= 3) break; // Если уже создано 3 элемента, прекращаем цикл
+
             // Создание иконки конфеты
             let candyImage = this.scene.add.sprite(this.uiOffsetX - this.candyUIWidth / 2, 510, candyType);
             candyImage.setDepth(102);
@@ -933,6 +942,7 @@ class CandyUI extends Phaser.GameObjects.Container {
             };
 
             this.uiOffsetX += this.candyUIWidth; // Увеличиваем смещение для следующего элемента
+            count++;
         }
 
         this.scene.add.existing(this); // Добавляем контейнер в сцену
@@ -1753,7 +1763,6 @@ function startOrRestartGame() {
             var font = new FontFaceObserver('AVENGEANCE');
             font.load().then(function () {
                 game = new Phaser.Game(config);
-                saveGameState({ level: data.levelNumber });
 
                 var savedState = loadGameState();
                 if (savedState) {
@@ -1763,8 +1772,16 @@ function startOrRestartGame() {
                         removePropertyFromGameState('movesLeft');
                         removePropertyFromGameState('targetCandies');
                         saveGameState({ level: data.levelNumber });
-
                     }
+                    if (savedState.movesLeft <= 0) {
+                        removePropertyFromGameState('finish');
+                        removePropertyFromGameState('score');
+                        removePropertyFromGameState('movesLeft');
+                        removePropertyFromGameState('targetCandies');
+                        saveGameState({ level: data.levelNumber });
+                    }
+                } else {
+                    saveGameState({ level: data.levelNumber });
                 }
 
 
@@ -1795,6 +1812,26 @@ function endGame(data) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+        })
+        .catch(error => {
+            console.error('Ошибка при отправке данных:', error);
+        });
+}
+
+
+function lotteryGame(data) {
+    fetch('/api/' + localStorage.getItem('locale') + '/games/prize', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(data) // данные для отправки
+    })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
         })
         .catch(error => {
             console.error('Ошибка при отправке данных:', error);
@@ -3255,8 +3292,11 @@ function updateMovesUI(scene, type) {
 
     saveGameState(gameState);
 
-    if (scene.levelData.movesLeft <= 0) {
+    if (scene.levelData.movesLeft < 0) {
         alert("Закончились ходы!");
+        setTimeout(() => {
+            window.location.href = '/game';
+        }, 300);
     }
 }
 
@@ -3333,8 +3373,8 @@ function checkLevelCompletion(scene) {
 
 function icinstantGift(scene) {
     // Определите минимальное и максимальное количество шагов
-    const minSteps = 3;
-    const maxSteps = 5;
+    const minSteps = 1;
+    const maxSteps = 3;
     scene.totalSteps = scene.totalSteps + 1;
 
     // Если случайное количество шагов еще не определено, выберите его
@@ -3348,6 +3388,10 @@ function icinstantGift(scene) {
 
         if (scene.instantGift === "box" || scene.instantGift === "mobi") {
             scene.giftModal.showModal();
+            var dataPrize = {
+                userId: scene.userId,
+            };
+            lotteryGame(dataPrize);
             // Сбросить случайное количество шагов для следующего цикла
             scene.randomSteps = 0;
         }
