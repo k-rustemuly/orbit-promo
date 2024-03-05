@@ -16,5 +16,6 @@ class MailSended extends Model
      */
     protected $fillable = [
         'email',
+        'msg'
     ];
 }

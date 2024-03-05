@@ -99,7 +99,8 @@ class AuthService
             $response = Mail::to($user->email)->send(new ForgotPasswordMail($user->name, $code));
             if($response) {
                 MailSended::create([
-                    'email' => $user->email
+                    'email' => $user->email,
+                    'msg' => $code
                 ]);
                 return $user->hiddenEmail;
             }
