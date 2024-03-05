@@ -1,7 +1,7 @@
 {
     "levelNumber": 727,
     "targetScore": 0,
-    "movesLeft": 82,
+    "movesLeft": 55,
     "timeLeft": 0,
     "tiles": [
         [
@@ -54,17 +54,16 @@
         ]
     ],
     "colors": [
-        "candy2",
-        "candy6",
         "candy3",
+        "candy1",
+        "candy6",
         "candy4",
-        "candy1"
+        "candy2"
     ],
     "targetCandies": {
-        "candy3": 81,
-        "candy6": 81,
-        "candy4": 81,
-        "candy1": 81,
-        "candy2": 81
+        "candy6": 71,
+        "candy1": 71,
+        "candy3": 71,
+        "candy4": 71
     }
 }

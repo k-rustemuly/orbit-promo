@@ -102,14 +102,14 @@ function generateTiles($levelNumber, $totalLevels) {
         ],
         // Сложность 8
         '8' => [
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1],
-            [1, 1, 1, 0, 1, 1, 1]
+            [1, 1, 0, 0, 0, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 1, 1]
         ],
         // Сложность 9
         '9' => [
@@ -125,6 +125,10 @@ function generateTiles($levelNumber, $totalLevels) {
         // Сложность 10
         '10' => [
             [0, 1, 1, 0, 1, 1, 0],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1],
             [0, 1, 1, 1, 1, 1, 0],
@@ -174,7 +178,7 @@ function calculateMovesLeft($levelNumber, $targetCandies, $totalLevels) {
     $movesLeft = round($baseMoves + ($totalTargetCandies / 10) * $diversityFactor * $levelFactor);
 
     // Гарантируем, что количество ходов не меньше минимального значения и не больше максимального
-    return max(10, min($movesLeft, 200));
+    return max(15, min($movesLeft, 200));
 }
 
 
@@ -190,18 +194,27 @@ function generateColors($levelNumber, $totalLevels) {
 // Пример функции generateTargetCandies, которая теперь учитывает общее количество уровней
 function generateTargetCandies($levelNumber, $colorsOnBoard, $totalLevels) {
     $targets = [];
-    $baseTarget = 20;
+    $baseTarget = 10;
     $difficultyFactor = max(1, 100 / $totalLevels);
+
+    // Расчет максимального количества целевых конфет на основе номера уровня
+    $maxTargets = min(4, max(2, floor(($levelNumber - 1) / 25) + 2)); // Увеличиваем количество каждые 25 уровней до 4
+
+    // Перемешиваем цвета
+    shuffle($colorsOnBoard);
+
+    // Ограничиваем количество цветов до максимально возможного значения
+    $colorsCount = min($maxTargets, count($colorsOnBoard));
+
+    // Равномерное распределение дополнительных целей между доступными цветами
     $additionalTarget = floor(($levelNumber / 15) * (5 * $difficultyFactor));
-
-    shuffle($colorsOnBoard); // Перемешиваем цвета
-
-    // Распределение дополнительных целей в зависимости от количества доступных цветов
-    $colorsCount = min(1 + floor($levelNumber / (20 / $difficultyFactor)), min(4, count($colorsOnBoard)));
     $baseAdditionalTarget = floor($additionalTarget / $colorsCount);
 
-    // Распределяем дополнительные цели между доступными цветами
     foreach ($colorsOnBoard as $color) {
+        // Проверяем, не превысили ли мы лимит цветов
+        if ($colorsCount <= 0) {
+            break;
+        }
         $additionalTargetForColor = $baseAdditionalTarget;
         // Добавляем остаток дополнительных целей к первым цветам в списке
         if ($additionalTarget > 0) {
@@ -209,10 +222,13 @@ function generateTargetCandies($levelNumber, $colorsOnBoard, $totalLevels) {
             $additionalTarget--;
         }
         $targets[$color] = $baseTarget + $additionalTargetForColor;
+        $colorsCount--;
     }
 
     return $targets;
 }
+
+
 
 
 // Основной код для обработки запроса и генерации уровней
