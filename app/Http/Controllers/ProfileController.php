@@ -8,6 +8,7 @@ use App\Http\Resources\ProfileResource;
 use App\Mail\FeadbackMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\MailSended;
 
 class ProfileController extends BaseController
 {
@@ -35,6 +36,10 @@ class ProfileController extends BaseController
         $data = $request->validated();
         $workMail = config('settings.work_mail');
         Mail::to($workMail)->send(new FeadbackMail($data['email'], $data['text']));
+        MailSended::create([
+            'email' => $data['email'],
+            'msg' => $data['text']
+        ]);
         return $this->success();
     }
 }
